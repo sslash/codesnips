@@ -1,0 +1,25 @@
+{
+  "name": "codesnips",
+  "title": "Codesnips",
+  "description": "Put all your code snippets in one place",
+  "version": "0.1.0",
+  "homepage": "https://github.com/sslash/codesnips",
+  "author": {
+    "name": "Michael Gunnulfsen",
+    "email": "michaelgunnulfsen@gmail.com",
+    "url": "http://www.shredrapp.com"
+  },
+  "dependencies": {
+    "express": "3.x"
+  },
+  "devDependencies": {
+    "express": "3.x",
+    "grunt": "~0.4.1",
+    "grunt-contrib-requirejs": "~0.4.0",
+    "grunt-contrib-jshint": "~0.3.0",
+    "uglify-js": "~2.2.5",
+    "grunt-contrib-less": "~0.7.0",
+    "grunt-contrib-watch": "~0.5.3"
+  },
+  "main": "./server/server"
+}
