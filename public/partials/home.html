@@ -1,5 +1,28 @@
-<section id="auth">
-    <button class="btn btn-success">Log In</button>
+<section id="addButton">
+	<input ng-click="addClicked()" class="btn btn-large btn-primary" type="submit" value="Add">
+</section>
+
+<section id="addCodesnip">
+	<form>
+		<p>X</p>
+		<input type="text" placeholder="Title">
+		<div id="codeEditor"><h2>&#60;Code&#62;</h2></div>
+		<input type="text" placeholder="Description">
+		<div class="twoColumn">
+			<div class="tagsBox">
+				<input type="text" placeholder="Tags">
+				<div>Tag boks</div>
+			</div>
+
+			<div class="categoryDropdown">
+				<input type="text" placeholder="Category">
+			</div>
+		</div>
+		<input type="text" placeholder="Stack Overflow URL">
+
+		<button class="btn btn-large btn-primary">Add</button>
+	</form>
+
 </section>
 
 <section id="banner">

@@ -2,15 +2,22 @@
 
 /* Controllers */
 
-angular.module('myApp.controllers', []).
-  controller('HomeCtrl', [function() {
-  	console.log("SAP YO");
-  }])
+var appControllers = angular.module('myApp.controllers', []);
 
-  .controller('LibraryCtrl', [function() {
+appControllers.controller('HomeCtrl', ['$scope', '$http',
+
+	function HomeController($scope, $http) {
+	  	$scope.addClicked = function(){
+	  		console.log("SAAAAAAP : ");
+	  		$('#main-overlay').show();
+	  		$('#addCodesnip').animate({ "top": "+=500px" }, "slow");
+	  	}
+  }]);
+
+  appControllers.controller('LibraryCtrl', [function() {
   	console.log("Hey, lib!");
-  }])
+  }]);
 
-  .controller('AddCtrl', [function() {
+  appControllers.controller('AddCtrl', [function() {
   	console.log("SAP YO2");
   }]);
