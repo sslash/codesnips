@@ -2,7 +2,8 @@
 	"folders":
 	[
 		{
-			"path": "/Users/michaelgunnulfsen/code/codesnips"
+			"path": "/Users/michaelgunnulfsen/code/codesnips",
+			"folder_exclude_patterns": ["./node_modules"]
 		}
 	]
 }
