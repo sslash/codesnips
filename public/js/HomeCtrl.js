@@ -39,6 +39,13 @@ appControllers.controller('HomeCtrl', function($scope) {
 		$($event.currentTarget).css('background-color', 'white');
 		$scope.codeEditorClicked = true;
 	};
+        $scope.AddFormUp = function($event) {
+            if ( $event.keyCode === 27 ) {
+                $scope.closeOnClick();
+            }
+
+
+        }
 
 });
 
