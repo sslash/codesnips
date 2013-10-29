@@ -20,6 +20,8 @@ appControllers.controller('HomeCtrl', function($scope) {
 		$('#main-overlay').hide();
 		if($scope.codeEditorClicked) {
 			$('#codeEditor').append('<h2>&#60;Code&#62;</h2>')
+                        $scope.codeEditorClicked = false;
+
 		}
 	};
 
@@ -41,7 +43,9 @@ appControllers.controller('HomeCtrl', function($scope) {
 	};
         $scope.AddFormUp = function($event) {
             if ( $event.keyCode === 27 ) {
+                if ( $('#addCodesnip').position().top === 60) {
                 $scope.closeOnClick();
+                }
             }
 
 
