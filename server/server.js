@@ -32,7 +32,12 @@ console.log('Welcome to Codesnips!\n\nPlease go to http://localhost:' + port);
 mongoConfig.connectToMongo();
 
 var Snippet = mongoose.model('snippets', new mongoose.Schema({
-  name: String,
+  title: String,
+  code: String,
+  tags: [],
+  category: String,
+  description: String,
+  stackOverflowUrl: String,
   timeCreated : Date,
 }),'snippets');
 
@@ -56,8 +61,20 @@ server.get('/snippets/:id', function(req, res) {
         });
 });
 
+server.get('/snippets/', function(req, res) {
+
+    return Snippet.find(function (err, snippets) {
+            if (err) // TODO handle err
+              console.log(err);
+          else
+            res.send(snippets);
+        });
+});
+
 server.post('/snippets/', function(req, res) {
     var snippet = new Snippet(req.body);
+    snippet.timeCreated = new Date();
+
     snippet.save(function(err, doc){
         if (err){
             console.log(err);

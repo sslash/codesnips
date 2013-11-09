@@ -2,9 +2,13 @@
 // Declare app level module which depends on filters, and services
 var appControllers = angular.module('myApp.controllers', []);
 
-appControllers.controller('HomeCtrl', function($scope) {
+appControllers.controller('HomeCtrl', function($scope, $http) {
+
+	$scope.title = '';
 	$scope.codeEditorClicked;
 	$scope.tagsArray = ['#test','#test2k'];
+
+
 	$scope.init = function() {
 		$('#categorySelect').chosen({"width":"126px"});
 		$scope.codeEditorClicked = false;
@@ -34,34 +38,31 @@ appControllers.controller('HomeCtrl', function($scope) {
 
 	$scope.tagClick = function($event, index){
 		$scope.tagsArray.splice(index, 1);
-	}
+	};
 
 	$scope.codeEditorOnClick = function($event) {
 		$($event.currentTarget).find('h2').remove();
 		$($event.currentTarget).css('background-color', 'white');
 		$scope.codeEditorClicked = true;
 	};
-        $scope.AddFormUp = function($event) {
-            if ( $event.keyCode === 27 ) {
-                if ( $('#addCodesnip').position().top === 60) {
-                $scope.closeOnClick();
-                }
+
+    $scope.AddFormUp = function($event) {
+        if ( $event.keyCode === 27 ) {
+            if ( $('#addCodesnip').position().top === 60) {
+            $scope.closeOnClick();
             }
-
-
         }
+    };
 
-     $scope.createCodeSnip = function() {
-     	console.log("FETT");
+     $scope.createCodeSnippet = function() {
      	$http({
 			method: 'POST',
-			url: REST_API_URL + '/management/team/add',
-			data: "Data",
+			url: '/snippets/',
+			data: {'title' : $scope.title},
 		}).success(function(data, status){
-			console.log("success");
+			console.log("success: " + JSON.stringify(data));
 		}).error(function(data, status) {
-			console.log("error : createTeamWithPlayers");
-			console.log(data);
+			console.log("error : " + data);
 		});
 	}
 

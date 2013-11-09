@@ -1,3 +1,9 @@
 <div ng-init ="init()">
 	<p>Snippets Library</p> 
+
+	<ul>
+		<li ng-repeat = "snippet in snippetsCollection">
+		<span> {{snippet.title}} </span>
+		</li>	
+	</ul>
 </div>
