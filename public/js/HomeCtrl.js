@@ -51,6 +51,22 @@ appControllers.controller('HomeCtrl', function($scope) {
 
         }
 
+     $scope.createCodeSnip = function() {
+     	console.log("FETT");
+     	$http({
+			method: 'POST',
+			url: REST_API_URL + '/management/team/add',
+			data: "Data",
+		}).success(function(data, status){
+			console.log("success");
+		}).error(function(data, status) {
+			console.log("error : createTeamWithPlayers");
+			console.log(data);
+		});
+	}
+
+
+
 });
 
 
