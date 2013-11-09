@@ -3,8 +3,8 @@
 var appControllers = angular.module('myApp');
 
 appControllers.controller('AddCtrl', function($scope) {
-  	
-  		$scope.init = function() {
-                    console.log ("init");
-                };
+	
+	$scope.init = function() {
+		console.log ("init");
+	};
 });

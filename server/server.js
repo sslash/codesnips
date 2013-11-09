@@ -1,12 +1,15 @@
 // DEPENDENCIES
-// ============
+// ======================================
 var express = require("express"),
-    http = require("http"),
-    port = (process.env.PORT || 8001),
-    server = module.exports = express();
+http = require("http"),
+port = (process.env.PORT || 8001),
+mongoConfig = require('./mongoConfig'),
+mongoose = mongoose || require('mongoose'),
+schema = mongoose.Schema,
+server = module.exports = express();
 
 // SERVER CONFIGURATION
-// ====================
+// =======================================
 server.configure(function () {
 
     server.use(express["static"](__dirname + "/../public"));
@@ -20,8 +23,48 @@ server.configure(function () {
     }));
 
     server.use(express.bodyParser());
-
     server.use(server.router);
+});
+
+console.log('Welcome to Codesnips!\n\nPlease go to http://localhost:' + port);
+
+/* Mongoose */
+mongoConfig.connectToMongo();
+
+var Snippet = mongoose.model('snippets', new mongoose.Schema({
+  name: String,
+  timeCreated : Date,
+}),'snippets');
+
+
+
+
+// Basic REST API
+// ==============
+server.get('/', function(req, res) {
+  res.send('Hello.');
+});
+
+server.get('/snippets/:id', function(req, res) {
+
+    return Snippet.findById(req.params.id, 
+        function (err, snippet) {
+            if (err) // TODO handle err
+              console.log(err);
+          else
+            res.send(snippet.toJSON());
+        });
+});
+
+server.post('/snippets/', function(req, res) {
+    var snippet = new Snippet(req.body);
+    snippet.save(function(err, doc){
+        if (err){
+            console.log(err);
+        }else{
+           res.send(doc);
+        }
+    });
 });
 
 // SERVER
@@ -29,5 +72,3 @@ server.configure(function () {
 
 // Start Node.js Server
 http.createServer(server).listen(port);
-
-console.log('Welcome to Codesnips!\n\nPlease go to http://localhost:' + port);

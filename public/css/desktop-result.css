@@ -116,6 +116,7 @@ footer {
   background-color: white;
   width: 100%;
   height: 80px;
+  border-radius: 10px;
 }
 #main #addCodesnip form .twoColumn .tagsBox #tags-list-box ul {
   list-style: none;

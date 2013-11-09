@@ -23,12 +23,12 @@ module.exports = function(grunt) {
         },
 
         watch: {
-            files: "public/css/*",
-            tasks: ["less"]
+            files: ["public/css/*", "server/*.js"],
+            tasks: ["less", "jshint"]
         },
 
         jshint: {
-            files: ['Gruntfile.js', 'public/js/app/**/*.js', '!public/js/app/**/*min.js'],
+            files: ['Gruntfile.js', 'public/js/app/**/*.js', '!public/js/app/**/*min.js', 'server/*.js'],
             options: {
                 globals: {
                     jQuery: true,
@@ -45,5 +45,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
 
     grunt.registerTask('test', ['jshint']);
+    grunt.registerTask('watch', ['watch']);
     grunt.registerTask('default', ['test']);
 };
