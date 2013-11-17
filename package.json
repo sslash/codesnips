@@ -10,7 +10,7 @@
     "url": "http://www.shredrapp.com"
   },
    "engines": {
-    "node": "0.10.22",
+    "node": "0.10.21",
     "npm": "1.4.13"
   },
   "dependencies": {
