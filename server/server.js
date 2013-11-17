@@ -42,8 +42,6 @@ var Snippet = mongoose.model('snippets', new mongoose.Schema({
 }),'snippets');
 
 
-
-
 // Basic REST API
 // ==============
 server.get('/', function(req, res) {
