@@ -1,16 +1,15 @@
 'use strict';
-// Declare app level module which depends on filters, and services
-var appControllers = angular.module('myApp.controllers', []);
 
-appControllers.controller('HomeCtrl', function($scope, $http) {
+angular.module('codesnipzApp')
+.controller('HomeCtrl', function ($scope, $http) {
 
 	$scope.title = '';
-	$scope.codeEditorClicked;
+	$scope.codeEditorClicked = false;
 	$scope.tagsArray = ['#test','#test2k'];
 
 
 	$scope.init = function() {
-		$('#categorySelect').chosen({"width":"126px"});
+		$('#categorySelect').chosen({'width':'126px'});
 		$scope.codeEditorClicked = false;
 	};
 
@@ -24,7 +23,7 @@ appControllers.controller('HomeCtrl', function($scope, $http) {
 		$('#main-overlay').hide();
 		if($scope.codeEditorClicked) {
 			$('#codeEditor').append('<h2>&#60;Code&#62;</h2>')
-                        $scope.codeEditorClicked = false;
+			$scope.codeEditorClicked = false;
 
 		}
 	};
@@ -46,16 +45,16 @@ appControllers.controller('HomeCtrl', function($scope, $http) {
 		$scope.codeEditorClicked = true;
 	};
 
-    $scope.AddFormUp = function($event) {
-        if ( $event.keyCode === 27 ) {
-            if ( $('#addCodesnip').position().top === 60) {
-            $scope.closeOnClick();
-            }
-        }
-    };
+	$scope.AddFormUp = function($event) {
+		if ( $event.keyCode === 27 ) {
+			if ( $('#addCodesnip').position().top === 60) {
+				$scope.closeOnClick();
+			}
+		}
+	};
 
-     $scope.createCodeSnippet = function() {
-     	$http({
+	$scope.createCodeSnippet = function() {
+		$http({
 			method: 'POST',
 			url: '/snippets/',
 			data: {'title' : $scope.title},
@@ -65,9 +64,6 @@ appControllers.controller('HomeCtrl', function($scope, $http) {
 			console.log("error : " + data);
 		});
 	}
-
-
-
 });
 
 
