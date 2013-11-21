@@ -9,14 +9,21 @@
     "email": "michaelgunnulfsen@gmail.com",
     "url": "http://www.shredrapp.com"
   },
+  "scripts": {
+    "start": "app.js"
+  },
    "engines": {
     "node": "0.10.21",
     "npm": "1.3.11"
   },
   "dependencies": {
-    "express": "3.x",
-    "mongodb" : "1.1.11",
-    "mongoose": "3.5.7"
+    "express": "~3.3.4",
+    "jade": "~0.34.0",
+    "mongoose": "latest",
+    "mongoose-user": "latest",
+    "connect-mongo": "latest",
+    "passport": "latest",
+    "passport-local": "latest"
   },
   "devDependencies": {
     "express": "3.x",
@@ -24,12 +31,16 @@
     "grunt-contrib-jshint": "~0.3.0",
     "uglify-js": "~2.2.5",
     "grunt-contrib-less": "~0.7.0",
-    "grunt-contrib-watch": "~0.5.3",
     "phantomjs" : "*",
     "karma" : "*",
     "karma-junit-reporter" : "*",    
     "karma-jasmine" : "*",
-    "karma-ng-scenario" : "*"
-  },
-  "main": "./server/server"
+    "karma-ng-scenario" : "*",
+    "grunt-develop": "~0.2.2",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-compass": "~0.6.0",
+    "request": "~2.27.0",
+    "time-grunt": "~0.1.1",
+    "load-grunt-tasks": "~0.2.0"
+  }
 }
