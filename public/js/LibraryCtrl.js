@@ -1,8 +1,5 @@
 'use strict';
 
-
-'use strict';
-
 angular.module('codesnipzApp')
   .controller('LibraryCtrl', function ($scope, $http) {
 

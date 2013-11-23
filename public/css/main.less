@@ -43,121 +43,141 @@
 			padding: 12px;
 			height: 100%;
 			margin: 0 20px 0 20px;
+
 			input{
 				width: 100%;
 				margin-bottom: 10px;
 				margin-top:10px;
 			}
 
-			#codeEditor{
+			#codeEditor {
 				background-color: white;
 				height: 160px;
 				cursor:pointer;
 				-webkit-border-radius: 10px;
 				-moz-border-radius: 10px;
 				border-radius: 10px;
-				width:100%;				
+				width:100%;		
 
-				h2 {
-					padding-top: 14%;
-					color: rgb(89, 101, 105);
-				}
-			}
-			input {
-				-webkit-border-radius:5px;
-				-moz-border-radius:5px;
-				border-radius:5px; 
-				border: 2px solid #072431;
-				height: 33px;
-				padding: 8px;
-			}
+        textarea {
+          width: 100%;
+          height: 100%;
+          border : none;
+          resize: none;
+        }
 
-			button {
-				display: block;
-				margin: auto;
-			}
 
-			.twoColumn{
-				.tagsBox{
-					float:left;
-					display: inline;
-					width: 50%;
-                                        
 
-					#tags-list-box {
-						background-color: white;
-						width: 100%;
-						height: 80px;
-                                                border-radius: 10px;
-						ul {
-							list-style: none;
-							li{
-								margin: 4px 2px 4px 2px;
-								float:left;
+				.ng-hide {
 
-								span {
-									background-color: #2ABBFF;
-									color: white;
-									padding: 5px;
-									border-radius: 7px;
-									cursor: pointer;
+					display:block!important;
 
-									&:hover {
-										opacity:.7;
-									}
-								}
-							}
-						}
+  					//this is just another form of hiding an element
+  					position:absolute;
+  					top:-9999px;
+  					left:-9999px;
+  				}		
 
-					}
-				}
-				.categoryDropdown {
-					display: inline;
-					label[for="categorySelect"] {
-						display:block;
-						padding-top: 10px
-					}
-				}
-			}
-		}
+  				h2 {
+  					padding-top: 14%;
+  					color: rgb(89, 101, 105);
+  				}
+  			}
+  			input {
+  				-webkit-border-radius:5px;
+  				-moz-border-radius:5px;
+  				border-radius:5px; 
+  				border: 2px solid #072431;
+  				height: 33px;
+  				padding: 8px;
+  			}
 
-		p {
-			display: inline-block;
-			position: absolute;
-			right: -14px;
-			font-size: 15px;
-			background-color: rgb(15, 31, 37);
-			padding: 4px 10px 4px 10px;
-			color: rgb(196, 212, 218);
-			-webkit-border-radius: 47px;
-			-moz-border-radius: 47px;
-			border-radius: 47px;
-			top: -12px;
-			cursor: pointer;
-			-webkit-box-shadow: -1px 1px 6px rgb(115, 119, 122);
-			-moz-box-shadow: -1px 1px 6px rgb(115, 119, 122);
-			box-shadow: -1px 1px 6px rgb(115, 119, 122);
-		}
-	}
+  			button {
+  				display: block;
+  				margin: auto;
+  			}
 
-	#banner {
-		text-align: center;
-		margin-top: 20%;
-		h1 {
-			text-transform: uppercase;
-			font-size:110px;
-		}
-		.lead{
-			font-style: italic;
-		}
+  			.twoColumn{
+  				.tagsBox{
+  					float:left;
+  					display: inline;
+  					width: 50%;
 
-		input {
-			box-shadow: 0px 0px 6px #000;
-			-webkit-box-shadow: 0px 0px 6px #000;
-			-moz-box-shadow: 0px 0px 6px #000;
-			width: 250px;
-			margin:auto;
-			margin-top:10%;
-		}
-	}
-}
+
+  					#tags-list-box {
+  						background-color: white;
+  						width: 100%;
+  						height: 80px;
+  						border-radius: 10px;
+  						ul {
+  							list-style: none;
+  							li{
+  								margin: 4px 2px 4px 2px;
+  								float:left;
+
+  								span {
+  									background-color: #2ABBFF;
+  									color: white;
+  									padding: 5px;
+  									border-radius: 7px;
+  									cursor: pointer;
+
+  									&:hover {
+  										opacity:.7;
+  									}
+  								}
+  							}
+  						}
+
+  					}
+  				}
+  				.categoryDropdown {
+  					display: inline;
+  					label[for="categorySelect"] {
+  						display:block;
+  						padding-top: 10px
+  					}
+  				}
+  			}
+  		}
+
+  		p {
+  			display: inline-block;
+  			position: absolute;
+  			right: -14px;
+  			font-size: 15px;
+  			background-color: rgb(15, 31, 37);
+  			padding: 4px 10px 4px 10px;
+  			color: rgb(196, 212, 218);
+  			-webkit-border-radius: 47px;
+  			-moz-border-radius: 47px;
+  			border-radius: 47px;
+  			top: -12px;
+  			cursor: pointer;
+  			-webkit-box-shadow: -1px 1px 6px rgb(115, 119, 122);
+  			-moz-box-shadow: -1px 1px 6px rgb(115, 119, 122);
+  			box-shadow: -1px 1px 6px rgb(115, 119, 122);
+  		}
+  	}
+
+  	#banner {
+  		text-align: center;
+  		margin-top: 20%;
+  		h1 {
+  			text-transform: uppercase;
+  			font-size:110px;
+  		}
+  		.lead{
+  			font-style: italic;
+  		}
+
+  		input {
+  			box-shadow: 0px 0px 6px #000;
+  			-webkit-box-shadow: 0px 0px 6px #000;
+  			-moz-box-shadow: 0px 0px 6px #000;
+  			width: 250px;
+  			margin:auto;
+  			margin-top:10%;
+  		}
+  	}
+  }

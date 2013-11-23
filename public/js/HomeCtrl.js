@@ -4,6 +4,9 @@ angular.module('codesnipzApp')
 .controller('HomeCtrl', function ($scope, $http) {
 
 	$scope.title = '';
+	$scope.description = '';
+	$scope.stackOverflowUrl = '';
+	$scope.codeSnippet = '';
 	$scope.codeEditorClicked = false;
 	$scope.tagsArray = ['#test','#test2k'];
 
@@ -22,9 +25,8 @@ angular.module('codesnipzApp')
 		$('#addCodesnip').animate({ "top": "-=600px" }, "fast");
 		$('#main-overlay').hide();
 		if($scope.codeEditorClicked) {
-			$('#codeEditor').append('<h2>&#60;Code&#62;</h2>')
 			$scope.codeEditorClicked = false;
-
+			$scope.codeSnippet = '';
 		}
 	};
 
@@ -40,7 +42,6 @@ angular.module('codesnipzApp')
 	};
 
 	$scope.codeEditorOnClick = function($event) {
-		$($event.currentTarget).find('h2').remove();
 		$($event.currentTarget).css('background-color', 'white');
 		$scope.codeEditorClicked = true;
 	};
@@ -54,10 +55,18 @@ angular.module('codesnipzApp')
 	};
 
 	$scope.createCodeSnippet = function() {
+		var snippet = {
+			title : $scope.title,
+			description : $scope.description,
+			category : $('#categorySelect').val(),
+			stackOverflowUrl : $scope.stackOverflowUrl,
+			code : $scope.codeSnippet,
+			tags : $scope.tagsArray
+		};
 		$http({
 			method: 'POST',
 			url: '/snippets/',
-			data: {'title' : $scope.title},
+			data: snippet,
 		}).success(function(data, status){
 			console.log("success: " + JSON.stringify(data));
 		}).error(function(data, status) {

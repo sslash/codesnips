@@ -2,9 +2,9 @@ var mongoose = require('mongoose'),
   Snippet = mongoose.model('snippets');
 
 exports.index = function(req, res) {
-	console.log('hei');
+
   Snippet.find(function(err, snippets){
-	console.log('lol' + snippets);
+
     if(err) throw new Error(err);
 
     res.send(snippets);
