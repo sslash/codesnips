@@ -3,9 +3,9 @@
 'use strict';
 
 angular.module('codesnipzApp')
-  .controller('AddCtrl', function ($scope) {
-   
-	$scope.init = function() {
-		console.log ("init");
-	};
-});
+	.controller('AddCtrl', function($scope) {
+
+		$scope.init = function() {
+			console.log("init");
+		};
+	});

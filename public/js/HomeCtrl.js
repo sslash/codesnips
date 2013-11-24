@@ -11,9 +11,15 @@ angular.module('codesnipzApp')
 	$scope.tagsArray = ['#test','#test2k'];
 
 
+  $scope.templates =
+    [ { name: 'submitForm.html', url: 'partials/submitForm.html'}
+    , { name: 'modal.html', url: 'partials/modal.html'} ];
+  $scope.template = $scope.templates[0];
+
 	$scope.init = function() {
 		$('#categorySelect').chosen({'width':'126px'});
 		$scope.codeEditorClicked = false;
+		$scope.modalDisplayed = false;
 	};
 
 	$scope.addClicked = function(){
@@ -69,6 +75,7 @@ angular.module('codesnipzApp')
 			data: snippet,
 		}).success(function(data, status){
 			console.log("success: " + JSON.stringify(data));
+			$scope.modalDisplayed = true;
 		}).error(function(data, status) {
 			console.log("error : " + data);
 		});
