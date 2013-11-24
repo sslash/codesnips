@@ -18,6 +18,10 @@
     
 </head>
 <body>
+    <div ng-controller="MainCtrl">
+    <section id="modal-area" ng-include src="'partials/loginModal.html'" ng-show="showLogin">
+    </section>
+
     <header data-role="header">
         <nav>
             <ul>
@@ -28,6 +32,11 @@
                 <li><a href="#">About</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
+
+            <section id="login-area">
+                <i class="fa fa-user fa-5x" ng-click="loginClicked()"></i>
+                <p ng-click="loginClicked()">Login</p>
+            </section>
         </nav>
 
         <footer id="footer">
@@ -40,7 +49,7 @@
     <section id="main" class="container" data-role="content">        
             <div ng-view></div>
     </section>
-
+</div>
 
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/jquery/jquery.js"></script>
@@ -56,8 +65,8 @@
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
 <script src="js/app.js"></script>
 <script src="js/LibraryCtrl.js"></script>
-<script src="js/AddCtrl.js"></script>
 <script src="js/HomeCtrl.js"></script>
+<script src="js/MainCtrl.js"></script>
 <!-- endbuild -->
 </body>
 </html>

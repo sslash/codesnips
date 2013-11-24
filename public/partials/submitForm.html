@@ -1,41 +1,39 @@
-			<div 
-			ng-show="modalDisplayed" ng-include="" src=" 'partials/modal.html' ">
+<div ng-show="modalDisplayed" data-ng-include data-src="'partials/modal.html'" >
+</div>
+
+<form ng-hide="modalDisplayed">
+	<p ng-click="closeOnClick()"> X </p> 
+	<input type="text" placeholder="Title" ng-model="title">
+
+	<div id="codeEditor" ng-click="codeEditorOnClick($event)">
+		<textarea ng-model="codeSnippet" class="ng-hide" ng-show="codeEditorClicked"></textarea>
+		<h2 ng-hide="codeEditorClicked">&#60;Code&#62;</h2>
+	</div>
+
+	<input type="text" placeholder="Description" ng-model="description" >
+
+	<div class="twoColumn">
+		<div class="tagsBox">
+			<input type="text" ng-keyup="tagKeyUp($event)" placeholder="Tags" ng-model="tagText">
+
+			<div id="tags-list-box">
+				<ul>
+					<li ng-repeat = "tag in tagsArray">
+						<span ng-click="tagClick($event, $index)"> {{tag}} </span>
+					</li>	
+				</ul>
 			</div>
+		</div>
 
-			<form ng-hide="modalDisplayed">
-				<p ng-click="closeOnClick()"> X </p> 
-				<input type="text" placeholder="Title" ng-model="title">
-
-				<div id="codeEditor" ng-click="codeEditorOnClick($event)">
-					<textarea ng-model="codeSnippet" class="ng-hide" ng-show="codeEditorClicked"></textarea>
-					<h2 ng-hide="codeEditorClicked">&#60;Code&#62;</h2>
-				</div>
-
-				<input type="text" placeholder="Description" ng-model="description" >
-
-				<div class="twoColumn">
-					<div class="tagsBox">
-						<input type="text" ng-keyup="tagKeyUp($event)" placeholder="Tags" ng-model="tagText">
-
-						<div id="tags-list-box">
-							<ul>
-								<li ng-repeat = "tag in tagsArray">
-									<span ng-click="tagClick($event, $index)"> {{tag}} </span>
-								</li>	
-							</ul>
-						</div>
-					</div>
-
-					<div class="categoryDropdown">
-						<label for="categorySelect"> Choose category: </label>
-						<select id="categorySelect" name"categorySelect"> 		
-							<option>Java</option>
-							<option>JavaScript</option>
-							<option>CSS</option>
-						</select>
-					</div>	
-				</div>
-				<input type="text" placeholder="Stack Overflow URL" ng-model="stackOverflowUrl">
-				<button class="btn btn-large btn-primary" ng-click="createCodeSnippet()">Add</button>
-				</form>
-		
+		<div class="categoryDropdown">
+			<label for="categorySelect"> Choose category: </label>
+			<select id="categorySelect" name"categorySelect"> 		
+				<option>Java</option>
+				<option>JavaScript</option>
+				<option>CSS</option>
+			</select>
+		</div>	
+	</div>
+	<input type="text" placeholder="Stack Overflow URL" ng-model="stackOverflowUrl">
+	<button class="btn btn-large btn-primary" ng-click="createCodeSnippet()">Add</button>
+</form>

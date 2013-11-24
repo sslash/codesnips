@@ -8,7 +8,7 @@ body {
 }
 header {
   width: 22%;
-  background-color: rgba(11, 50, 68, 0.76);
+  background-color: #155D7F;
   min-height: 600px;
   height: 100%;
   position: absolute;
@@ -28,6 +28,24 @@ header li a {
   text-transform: uppercase;
   font-weight: 200;
   line-height: 1.4;
+}
+header #login-area {
+  text-align: center;
+  margin-top: 36%;
+  color: rgba(255, 255, 255, 0.81);
+}
+header #login-area i,
+header #login-area p {
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+header #login-area i:hover,
+header #login-area p:hover {
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  -o-transform: scale(1.2);
+  transform: scale(1.2);
 }
 footer {
   position: absolute;
@@ -296,4 +314,31 @@ input[type="color"],
 }
 .well {
   border-width: 0;
+}
+#modal-area {
+  position: absolute;
+  background-color: #E1F2F8;
+  z-index: 69;
+  border-radius: 10px;
+  border: 2px solid #2ABBFF;
+  -webkit-box-shadow: 0px 0px 29px #050B0E;
+  -moz-box-shadow: 0px 0px 29px #050B0E;
+  box-shadow: 0px 0px 29px #050B0E;
+  left: 50%;
+  top: 32%;
+  width: 400px;
+  padding: 5px 20px;
+  text-align: center;
+}
+#modal-area .btn {
+  width: 82px;
+  margin: 0px 11px;
+}
+#modal-area ul {
+  list-style: none;
+}
+#modal-area ul li {
+  cursor: pointer;
+  display: inline-block;
+  margin: 0px 10px;
 }
