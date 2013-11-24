@@ -190,6 +190,15 @@ footer {
   margin: auto;
   margin-top: 10%;
 }
+#form .fa-5x {
+  padding: 70px;
+  font-size: 20em;
+  color: #07940C;
+}
+#form div {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-size: 2.5em;
+}
 .text-primary {
   color: #2c3e50;
 }
