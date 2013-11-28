@@ -1,8 +1,12 @@
 			<div 
-			ng-show="modalDisplayed" ng-include="" src=" 'partials/modal.html' ">
+			ng-show="modalDisplayed" ng-include=""src=" 'partials/modalTrue.html' ">
+			</div>
+			
+			<div 
+			ng-show="AddFunctionFailed" ng-include=""src=" 'partials/modalFail.html' ">
 			</div>
 
-			<form ng-hide="modalDisplayed">
+			<form ng-show="showForm">
 				<p ng-click="closeOnClick()"> X </p> 
 				<input type="text" placeholder="Title" ng-model="submit.title">
 

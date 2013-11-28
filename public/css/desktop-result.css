@@ -190,10 +190,15 @@ footer {
   margin: auto;
   margin-top: 10%;
 }
-#form .fa-5x {
+#form .fa-thumbs-up {
   padding: 70px;
   font-size: 20em;
   color: #07940C;
+}
+#form .fa-thumbs-down {
+  padding: 70px;
+  font-size: 20em;
+  color: red;
 }
 #form div {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -324,9 +329,17 @@ input[type="color"],
 .col-lg-4 p {
   text-align: center;
 }
-#library-ul .col-lg-4 {
+#library-ul {
+  width: 103%;
+}
+#library-ul .col-lg-3 {
   background-color: #95DDFF;
-  padding: 2px 0px 18px 0px;
+  padding: 2px 0px 18px 9px;
+  left: -38px;
+  height: 40px;
+}
+#library-ul .user {
+  padding-left: 255px;
 }
 #library-ul #library-draw {
   background-color: #c4d4da;

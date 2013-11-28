@@ -2,7 +2,7 @@
 	<nav id="library-nav">
 		<div class="row">
 		<div class="col-lg-4">
-		<i class="fa fa-align-justify fa-2x" ng-click="menu()"></i> 
+		<i class="fa fa-align-justify fa-2x" ng-click="menu()">   Menu</i> 
 		<ul id="library-menu-ul" ng-show="menuBoolean.showMenu">
 			<li >Swag </li>
 			<li > Lol </li>
@@ -28,9 +28,10 @@
 	<p>Snippets Library</p> 
 
 	<ul id="library-ul" ng-repeat = "snippet in snippetsCollection">
-		<div class="col-lg-4"> Title: {{snippet.title}} </div>
-		<div class="col-lg-4"> Category: {{snippet.category}} </div>
-		<div class="col-lg-4"> Description: {{snippet.description}} </div>	
+		<div class="col-lg-3"> Title: {{snippet.title}} </div>
+		<div class="col-lg-3"> Category: {{snippet.category}} </div>
+		<div class="col-lg-3"> Description: {{snippet.description}} </div>	
+		<div class="col-lg-3 user"><i class="fa fa-user fa-2x"></i></div>
 	</ul>
 
 </div>

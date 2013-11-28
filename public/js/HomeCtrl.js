@@ -21,6 +21,7 @@ angular.module('codesnipzApp')
 				});
 				$scope.codeEditorClicked = false;
 				$scope.modalDisplayed = false;
+				$scope.AddFunctionFailed = false;
 			};
 
 			$scope.addClicked = function() {
@@ -87,8 +88,12 @@ angular.module('codesnipzApp')
 				}).success(function(data, status) {
 					console.log("success: " + JSON.stringify(data));
 					$scope.modalDisplayed = true;
+					$scope.showForm = false;
 					$scope.closeModal();
 				}).error(function(data, status) {
+					$scope.AddFunctionFailed = true;
+					$scope.showForm = false;
+					$scope.closeModal();
 					console.log("error : " + data);
 				});
 			}
