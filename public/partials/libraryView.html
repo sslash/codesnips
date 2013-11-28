@@ -31,7 +31,9 @@
 		<div class="col-lg-3"> Title: {{snippet.title}} </div>
 		<div class="col-lg-3"> Category: {{snippet.category}} </div>
 		<div class="col-lg-3"> Description: {{snippet.description}} </div>	
-		<div class="col-lg-3 user"><i class="fa fa-user fa-2x"></i></div>
+		<div class="col-lg-3 user"><i class="fa fa-user fa-2x"></i> <p ng-click="closeOnClick($index)">x</p>
+		</div>
+		<div id="library-split"></div>
 	</ul>
 
 </div>

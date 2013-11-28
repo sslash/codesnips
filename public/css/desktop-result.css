@@ -326,6 +326,9 @@ input[type="color"],
   left: 5px;
   padding-left: 9px;
 }
+.col-lg-4 #library-menu-ul li {
+  cursor: pointer;
+}
 .col-lg-4 p {
   text-align: center;
 }
@@ -339,8 +342,28 @@ input[type="color"],
   height: 40px;
 }
 #library-ul .user {
-  padding-left: 255px;
+  padding-left: 230px;
 }
 #library-ul #library-draw {
   background-color: #c4d4da;
+}
+#library-ul #library-split {
+  padding-bottom: 38px;
+}
+#library-ul p {
+  display: inline-block;
+  position: absolute;
+  right: -14px;
+  font-size: 15px;
+  background-color: #0f1f25;
+  padding: 4px 10px 4px 10px;
+  color: #c4d4da;
+  -webkit-border-radius: 47px;
+  -moz-border-radius: 47px;
+  border-radius: 47px;
+  top: -12px;
+  cursor: pointer;
+  -webkit-box-shadow: -1px 1px 6px #73777a;
+  -moz-box-shadow: -1px 1px 6px #73777a;
+  box-shadow: -1px 1px 6px #73777a;
 }

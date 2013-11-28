@@ -22,5 +22,11 @@ angular.module('codesnipzApp')
     $scope.menu = function() {
         $scope.menuBoolean.showMenu = !$scope.menuBoolean.showMenu;
     };
+
+    $scope.closeOnClick = function(index) {
+        $scope.snippetsCollection.splice(index,1);
+        
+
+    };
 });
 
