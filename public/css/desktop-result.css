@@ -51,6 +51,23 @@ footer {
   position: absolute;
   bottom: 100px;
 }
+p.exitModal {
+  display: inline-block;
+  position: absolute;
+  right: -14px;
+  font-size: 15px;
+  background-color: #0f1f25;
+  padding: 4px 10px 4px 10px;
+  color: #c4d4da;
+  -webkit-border-radius: 47px;
+  -moz-border-radius: 47px;
+  border-radius: 47px;
+  top: -12px;
+  cursor: pointer;
+  -webkit-box-shadow: -1px 1px 6px #73777a;
+  -moz-box-shadow: -1px 1px 6px #73777a;
+  box-shadow: -1px 1px 6px #73777a;
+}
 #main-overlay {
   height: 100%;
   width: 100%;
@@ -171,23 +188,6 @@ footer {
 #main #addCodesnip form .twoColumn .categoryDropdown label[for="categorySelect"] {
   display: block;
   padding-top: 10px;
-}
-#main #addCodesnip p {
-  display: inline-block;
-  position: absolute;
-  right: -14px;
-  font-size: 15px;
-  background-color: #0f1f25;
-  padding: 4px 10px 4px 10px;
-  color: #c4d4da;
-  -webkit-border-radius: 47px;
-  -moz-border-radius: 47px;
-  border-radius: 47px;
-  top: -12px;
-  cursor: pointer;
-  -webkit-box-shadow: -1px 1px 6px #73777a;
-  -moz-box-shadow: -1px 1px 6px #73777a;
-  box-shadow: -1px 1px 6px #73777a;
 }
 #main #banner {
   text-align: center;
