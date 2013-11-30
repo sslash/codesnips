@@ -302,12 +302,22 @@ input[type="color"],
 .well {
   border-width: 0;
 }
+#library-sort {
+  cursor: pointer;
+  padding-bottom: 20px;
+}
+#library-sort #library-sort-list {
+  list-style-type: none;
+  padding-left: 0px;
+  padding-top: 5px;
+}
 #library-nav {
   width: 100%;
   background-color: #95DDFF;
   padding: 8px 10px 6px 10px;
   box-shadow: 0px 1px 20px 3px #155D7F;
   margin-bottom: 100px;
+  cursor: pointer;
 }
 #library-nav input {
   width: 250px;
@@ -335,14 +345,14 @@ input[type="color"],
 #library-ul {
   width: 103%;
 }
-#library-ul .col-lg-3 {
+#library-ul .col-lg-2 {
   background-color: #95DDFF;
-  padding: 2px 0px 18px 9px;
+  padding: 7px 0px 18px 9px;
   left: -38px;
-  height: 40px;
+  height: 50px;
 }
-#library-ul .user {
-  padding-left: 230px;
+#library-ul .picture {
+  padding-left: 150px;
 }
 #library-ul #library-draw {
   background-color: #c4d4da;
