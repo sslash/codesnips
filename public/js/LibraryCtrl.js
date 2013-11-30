@@ -6,7 +6,7 @@ angular.module('codesnipzApp')
     $scope.snippetsCollection = [];
 
     $scope.init = function() {
-        console.log ("init");
+        console.log ("init " + $scope.username);
         $scope.fetchSnippetsCollection();
     };
 

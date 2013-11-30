@@ -1,11 +1,13 @@
+<div>
 <form>
-<p class="exitModal" ng-click="closeOnClick()"> X </p> 
-<h1>Login</h2>
+<p class="exitModal" ng-click="closeClicked()"> X </p> 
+<h1>Login</h1>
+<p class="error" ng-show="modal.showerror">Wrong username or password!</p>
 	<div class="form-group">
-    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Username">
+    <input type="text" class="form-control" ng-model="modal.username" placeholder="Username">
   </div>
   <div class="form-group">
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    <input type="password" class="form-control" ng-model="modal.password" placeholder="Password">
   </div>
 <ul>
 	<li><i class="fa fa-twitter fa-2x"></i></li>
@@ -14,6 +16,7 @@
 	<li><i class="fa fa-google-plus fa-2x"></i></li>
 </ul>
 
-<input type="button" class="btn btn-primary" value="Login">
-<input type="button" class="btn btn-primary" value="Register">
+<input type="button" ng-click="loginClicked()" class="btn btn-primary" value="Login">
+<input type="button" ng-click="registerClicked()" class="btn btn-primary" value="Register">
 </form>
+</div>
