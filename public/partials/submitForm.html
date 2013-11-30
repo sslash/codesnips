@@ -1,25 +1,29 @@
 			<div 
-			ng-show="modalDisplayed" ng-include="" src=" 'partials/modal.html' ">
+			ng-show="modalDisplayed" ng-include=""src=" 'partials/modalTrue.html' ">
+			</div>
+			
+			<div 
+			ng-show="AddFunctionFailed" ng-include=""src=" 'partials/modalFail.html' ">
 			</div>
 
-			<form ng-hide="modalDisplayed">
+			<form ng-show="showForm">
 				<p ng-click="closeOnClick()"> X </p> 
-				<input type="text" placeholder="Title" ng-model="title">
+				<input type="text" placeholder="Title" ng-model="submit.title">
 
 				<div id="codeEditor" ng-click="codeEditorOnClick($event)">
-					<textarea ng-model="codeSnippet" class="ng-hide" ng-show="codeEditorClicked"></textarea>
+					<textarea ng-model="submit.codeSnippet" class="ng-hide" ng-show="codeEditorClicked"></textarea>
 					<h2 ng-hide="codeEditorClicked">&#60;Code&#62;</h2>
 				</div>
 
-				<input type="text" placeholder="Description" ng-model="description" >
+				<input type="text" placeholder="Description" ng-model="submit.description" >
 
 				<div class="twoColumn">
 					<div class="tagsBox">
-						<input type="text" ng-keyup="tagKeyUp($event)" placeholder="Tags" ng-model="tagText">
+						<input type="text" ng-keyup="tagKeyUp($event)" placeholder="Tags" ng-model="submit.tagText">
 
 						<div id="tags-list-box">
 							<ul>
-								<li ng-repeat = "tag in tagsArray">
+								<li ng-repeat = "tag in submit.tagsArray">
 									<span ng-click="tagClick($event, $index)"> {{tag}} </span>
 								</li>	
 							</ul>
@@ -35,7 +39,7 @@
 						</select>
 					</div>	
 				</div>
-				<input type="text" placeholder="Stack Overflow URL" ng-model="stackOverflowUrl">
+				<input type="text" placeholder="Stack Overflow URL" ng-model="submit.stackOverflowUrl">
 				<button class="btn btn-large btn-primary" ng-click="createCodeSnippet()">Add</button>
 				</form>
 		
