@@ -2,15 +2,16 @@
 
 angular.module('codesnipzApp')
 	.controller('HomeCtrl', function($scope, $http, $timeout) {
+		
+			$scope.submit = {title:"",category:"",
+			description:"",
+			stackOverflowUrl:"",
+			codeSnippet:"",
+			tagsArray:['#test', '#test2k']};
 
-			$scope.title = '';
-			$scope.description = '';
-			$scope.stackOverflowUrl = '';
-			$scope.codeSnippet = '';
 			$scope.codeEditorClicked = false;
-			$scope.tagsArray = ['#test', '#test2k'];
-			var timeOut;
-
+			var timeOut;			
+			
 
 			$scope.init = function() {
 				$('#categorySelect').chosen({
@@ -18,10 +19,13 @@ angular.module('codesnipzApp')
 				});
 				$scope.codeEditorClicked = false;
 				$scope.modalDisplayed = false;
+				$scope.AddFunctionFailed = false;
+				$scope.showForm =true;
 			};
 
 			$scope.addClicked = function() {
 				$('#main-overlay').show();
+				$scope.showForm =true;
 				$('#addCodesnip').animate({
 					"top": "+=600px"
 				}, "fast");
@@ -41,7 +45,6 @@ angular.module('codesnipzApp')
 					$timeout.cancel(timeOut);
 					$scope.modalDisplayed = false;
 				}
-
 			};
 
 			$scope.tagKeyUp = function($event) {
@@ -70,12 +73,12 @@ angular.module('codesnipzApp')
 
 			$scope.createCodeSnippet = function() {
 				var snippet = {
-					title: $scope.title,
-					description: $scope.description,
+					title: $scope.submit.title,
+					description: $scope.submit.description,
 					category: $('#categorySelect').val(),
-					stackOverflowUrl: $scope.stackOverflowUrl,
-					code: $scope.codeSnippet,
-					tags: $scope.tagsArray
+					stackOverflowUrl: $scope.submit.stackOverflowUrl,
+					code: $scope.submit.codeSnippet,
+					tags: $scope.submit.tagsArray
 				};
 				$http({
 					method: 'POST',
@@ -84,8 +87,12 @@ angular.module('codesnipzApp')
 				}).success(function(data, status) {
 					console.log("success: " + JSON.stringify(data));
 					$scope.modalDisplayed = true;
+					$scope.showForm = false;
 					$scope.closeModal();
 				}).error(function(data, status) {
+					$scope.AddFunctionFailed = true;
+					$scope.showForm = false;
+					$scope.closeModal();
 					console.log("error : " + data);
 				});
 			}
