@@ -9,7 +9,6 @@ angular.module('codesnipzApp')
             showSort: false
         }
         $scope.init = function() {
-            console.log("init");
             $scope.fetchSnippetsCollection();
         };
 

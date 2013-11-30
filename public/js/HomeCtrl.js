@@ -9,10 +9,8 @@ angular.module('codesnipzApp')
 			codeSnippet:"",
 			tagsArray:['#test', '#test2k']};
 
-
 			$scope.codeEditorClicked = false;
-			var timeOut;
-			
+			var timeOut;			
 			
 
 			$scope.init = function() {
@@ -22,10 +20,12 @@ angular.module('codesnipzApp')
 				$scope.codeEditorClicked = false;
 				$scope.modalDisplayed = false;
 				$scope.AddFunctionFailed = false;
+				$scope.showForm =true;
 			};
 
 			$scope.addClicked = function() {
 				$('#main-overlay').show();
+				$scope.showForm =true;
 				$('#addCodesnip').animate({
 					"top": "+=600px"
 				}, "fast");
@@ -45,7 +45,6 @@ angular.module('codesnipzApp')
 					$timeout.cancel(timeOut);
 					$scope.modalDisplayed = false;
 				}
-
 			};
 
 			$scope.tagKeyUp = function($event) {

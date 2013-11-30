@@ -23,6 +23,13 @@ var app = express();
 require('./config/express')(app, config, passport);
 require('./config/routes')(app, passport);
 
+
+// Logging
+app.use(function(req, res, next){
+  console.log('%s %s', req.method, req.url);
+  next();
+});
+
 app.listen(config.port);
 
 module.exports = app;
