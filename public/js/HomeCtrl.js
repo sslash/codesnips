@@ -3,12 +3,15 @@
 angular.module('codesnipzApp')
 	.controller('HomeCtrl', function($scope, $http, $timeout) {
 		
-			$scope.submit = {title:"",category:"",
-			description:"",
-			stackOverflowUrl:"",
-			codeSnippet:"",
-			tagsArray:['#test', '#test2k']};
+			$scope.submit = {
+				title:"",category:"",
+				description:"",
+				stackOverflowUrl:"",
+				codeSnippet:"",
+				tagsArray:['#test', '#test2k']
+			};
 
+			$scope.searchField = '';
 			$scope.codeEditorClicked = false;
 			var timeOut;			
 			
@@ -22,6 +25,12 @@ angular.module('codesnipzApp')
 				$scope.AddFunctionFailed = false;
 				$scope.showForm =true;
 			};
+
+			$scope.searchFieldKeyUp = function($event){
+				if($event.keyCode === 13){
+					console.log($scope.searchField);
+				}
+			},
 
 			$scope.addClicked = function() {
 				$('#main-overlay').show();

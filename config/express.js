@@ -14,7 +14,7 @@ module.exports = function (app, config, passport) {
 
   // views config
   app.set('views', config.root + '/app/views');
-  app.set('view engine', 'jade');
+  app.set('view engine', 'ejs');
 
   app.configure(function () {
     // bodyParser should be above methodOverride

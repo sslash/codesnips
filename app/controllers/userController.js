@@ -3,6 +3,22 @@ var mongoose = require('mongoose'),
 	utils = require('../../lib/utils');
 
 
+
+exports.index = function(req,res){
+	var user = {};
+	if ( req.session.passport.user ){
+		var userId = req.session.passport.user;
+		User.findOne({ _id: userId }, function (err, doc) {
+        	if (doc){
+        		user = doc;
+        	}
+    		res.render('index', {user: user});
+        });
+	}else{
+		res.render('index', {user: user});
+	}
+};
+
 exports.register = function(req, res){
 	console.log("register: " + JSON.stringify(req.body));
 	var user = new User(req.body)
@@ -14,11 +30,6 @@ exports.register = function(req, res){
 		}else{
 			res.send(user);
 		}
-		// manually login the user once successfully signed up
-		// req.logIn(user, function(err) {
-		// 	if (err) return next(err)
-		// 		return res.redirect('/')
-		// });
 	});
 };
 

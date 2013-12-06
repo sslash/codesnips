@@ -2,7 +2,6 @@ var mongoose = require('mongoose'),
   Snippet = mongoose.model('snippets');
 
 exports.index = function(req, res) {
-
   Snippet.find(function(err, snippets){
 
     if(err) throw new Error(err);
@@ -24,6 +23,7 @@ exports.getById = function(req, res) {
 exports.create = function(req, res) {
     var snippet = new Snippet(req.body);
     snippet.timeCreated = new Date();
+
 
     snippet.save(function(err, doc){
         if (err){

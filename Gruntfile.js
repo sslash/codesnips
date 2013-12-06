@@ -27,7 +27,9 @@ watch: {
       files: [
       'app.js',
       'app/**/*.js',
-      'config/*.js'
+      'config/*.js',
+      'public/js/*.js',
+      'public/partials/*.html'
       ],
       tasks: ['develop', 'delayed-livereload']
   },
