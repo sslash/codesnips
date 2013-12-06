@@ -19,6 +19,7 @@ angular.module('codesnipzApp', [
       .when('/library', {
         templateUrl: 'partials/libraryView.html',
         controller: 'LibraryCtrl'
+
       })
       .otherwise({
         redirectTo: '/'

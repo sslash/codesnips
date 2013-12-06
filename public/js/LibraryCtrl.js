@@ -1,24 +1,26 @@
 'use strict';
 
 angular.module('codesnipzApp')
-    .controller('LibraryCtrl', function($scope, $http) {
+    .controller('LibraryCtrl', function($scope, $http, $cookies) {
 
         $scope.snippetsCollection = [];
         $scope.libraryBoolean = {
             showMenu: false,
             showSort: false
         }
-        $scope.init = function() {
+        $scope.init = function() {               
             $scope.fetchSnippetsCollection();
         };
 
         $scope.fetchSnippetsCollection = function() {
             $http({
                 method: 'GET',
-                url: '/snippets/',
+                url: '/snippets',
             }).success(function(data, status) {
                 $scope.snippetsCollection = data;
-            });
+            }).error(function(data, status) {
+                console.log("Failed to retrive snippets! " + status);
+            });;
         };
 
         $scope.menu = function() {
@@ -30,5 +32,6 @@ angular.module('codesnipzApp')
         $scope.closeOnClick = function(index) {
             $scope.snippetsCollection.splice(index, 1);
         };
-      
+       
+
     });

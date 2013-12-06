@@ -395,6 +395,12 @@ input[type="color"],
   left: -38px;
   height: 50px;
 }
+#library-ul .col-lg-1 {
+  background-color: #95DDFF;
+  padding: 7px 0px 18px 9px;
+  left: -38px;
+  height: 50px;
+}
 #library-ul .picture {
   padding-left: 150px;
 }

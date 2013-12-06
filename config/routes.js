@@ -18,15 +18,15 @@ var auth = require('./middlewares/authorization');
 	// controllers
 	app.get('/snippets', snippetController.index);
 	app.get('/snippets/:id', snippetController.getById);
-	app.post('/snippets/', snippetController.create);
+	app.post('/snippets/', auth.requiresLogin, snippetController.create);
 
 
 	app.post('/users/', userController.register);
 
-	app.get('/login', userController.login)
-	app.get('/signup', userController.signup)
-	app.get('/logout', userController.logout)
-	app.post('/users', userController.register)
+	app.get('/login', userController.login);
+	app.get('/signup', userController.signup);
+	app.get('/logout', userController.logout);
+	app.post('/users', userController.register);
 	app.post('/users/session',
 		passport.authenticate('local', {
 			//failureRedirect: '/login',

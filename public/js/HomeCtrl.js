@@ -73,6 +73,7 @@ angular.module('codesnipzApp')
 
 			$scope.createCodeSnippet = function() {
 				var snippet = {
+					owner: $scope.modal.username,
 					title: $scope.submit.title,
 					description: $scope.submit.description,
 					category: $('#categorySelect').val(),
