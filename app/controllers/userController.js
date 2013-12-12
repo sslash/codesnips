@@ -2,6 +2,22 @@ var mongoose = require('mongoose'),
 	User = mongoose.model('User'),
 	utils = require('../../lib/utils');
 
+exports.index = function(req, res){
+	
+	if ( req.session.passport ){
+		var userId = req.session.passport.user;
+
+		User.findById(userId, function(err, user) {
+		      if (err) {
+		      	throw new Error(err);
+		      }else {
+		        res.render('index', {user : user});
+		      }
+	    });
+	}else{
+		res.render('index', {user : {}});
+	}
+};
 
 exports.register = function(req, res) {
 	console.log("register: " + JSON.stringify(req.body));

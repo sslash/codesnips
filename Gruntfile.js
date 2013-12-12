@@ -39,8 +39,8 @@ watch: {
       ],
       tasks: ['less']
   },
-  jade: {
-      files: ['app/views/**/*.jade'],
+  ejs: {
+      files: ['app/views/**/*.ejs'],
       options: { livereload: reloadPort }
   }
 },

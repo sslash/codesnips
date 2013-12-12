@@ -1,16 +1,15 @@
 'use strict';
 
 angular.module('codesnipzApp')
-	.controller('HomeCtrl', function($scope, $http, $timeout) {
-
-		$scope.submit = {
-			title: "",
-			category: "",
-			description: "",
-			stackOverflowUrl: "",
-			codeSnippet: "",
-			tagsArray: ['#test', '#test2k']
-		};
+	.controller('HomeCtrl', function($scope, $http, $timeout, $location) {
+		
+			$scope.submit = {
+				title:"",category:"",
+				description:"",
+				stackOverflowUrl:"",
+				codeSnippet:"",
+				tagsArray:['#test', '#test2k']
+			};
 
 		$scope.codeEditorClicked = false;
 		var timeOut;
@@ -20,7 +19,6 @@ angular.module('codesnipzApp')
 			$('#categorySelect').chosen({
 				'width': '126px'
 			});
-			$scope.codeEditorClicked = false;
 			$scope.modalDisplayed = false;
 			$scope.AddFunctionFailed = false;
 			$scope.showForm = true;
@@ -49,9 +47,13 @@ angular.module('codesnipzApp')
 				$timeout.cancel(timeOut);
 				$scope.modalDisplayed = false;
 				$scope.AddFunctionFailed = false;
-				$scope.showForm =true;
+				$scope.showForm =true;				
+			}
+		};
 
-				
+		$scope.searchFieldKeyUp = function($event){
+			if($event.keyCode === 13){
+				 $location.path('/library').search( {'q' : $scope.searchField});
 			}
 		};
 

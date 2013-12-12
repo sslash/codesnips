@@ -2,15 +2,29 @@ var mongoose = require('mongoose'),
   Snippet = mongoose.model('snippets'),
   User = mongoose.model('User');
 
+
+/*
+* Searching for snippets
+*
+* TODO: add support for searching for tags,
+* desription, codesnip, user 
+*
+*/
 exports.index = function(req, res) {
-  var userId = req.session.passport.user;
+  var query = {};
+
+  if (req.query.q){
+      query.title = new RegExp(req.query.q, 'ig');
+  };
+
   Snippet
-    .find()
+    .find(query)
     .populate('owner')
     .exec(function(err, snippets) {
       if (err) {
         throw new Error(err);
       }
+      console.log("snips: " + snippets);
       return res.send(snippets);
     });
 };

@@ -1,28 +1,41 @@
 'use strict';
 
 angular.module('codesnipzApp')
-    .controller('LibraryCtrl', function($scope, $http, $cookies) {
-
+    .controller('LibraryCtrl', function($scope, $http, $routeParams, $location, CodeSnippet) {
         $scope.snippetsCollection = [];
         $scope.snippetUser = [];
         $scope.test = [];
         $scope.libraryBoolean = {
             showMenu: false,
             showSort: false
-        }
-        $scope.init = function() {               
+        };
+
+        $scope.searchField = '';
+
+        $scope.init = function() {
+            $scope.params = $routeParams;
+            if ( $routeParams && $routeParams.q ){
+                $scope.searchField = $routeParams.q;
+            }
             $scope.fetchSnippetsCollection();
         };
 
+        $scope.searchFieldKeyUp = function($event){
+            if($event.keyCode === 13){
+                 $location.path('/library').search( {'q' : $scope.searchField});
+            }
+        };
+
         $scope.fetchSnippetsCollection = function() {
-            $http({
-                method: 'GET',
-                url: '/snippets',
-            }).success(function(data, status) {
-                $scope.snippetsCollection = data;
-            }).error(function(data, status) {
-                console.log("Failed to retrive snippets! " + status);
-            });;
+            var query = {};
+
+            if ( $scope.searchField && $scope.searchField.length > 0){
+                query.q = $scope.searchField;
+            }
+
+            CodeSnippet.query(query, function(snips){
+                $scope.snippetsCollection = snips;
+            });
         };
 
         $scope.menu = function() {
@@ -34,6 +47,4 @@ angular.module('codesnipzApp')
         $scope.closeOnClick = function(index) {
             $scope.snippetsCollection.splice(index, 1);
         };
-       
-
     }); 
