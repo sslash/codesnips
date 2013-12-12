@@ -2,8 +2,9 @@
 
 angular.module('codesnipzApp')
     .controller('LibraryCtrl', function($scope, $http, $routeParams, $location, CodeSnippet) {
-
         $scope.snippetsCollection = [];
+        $scope.snippetUser = [];
+        $scope.test = [];
         $scope.libraryBoolean = {
             showMenu: false,
             showSort: false
@@ -23,7 +24,7 @@ angular.module('codesnipzApp')
             if($event.keyCode === 13){
                  $location.path('/library').search( {'q' : $scope.searchField});
             }
-        },
+        };
 
         $scope.fetchSnippetsCollection = function() {
             var query = {};
@@ -46,5 +47,4 @@ angular.module('codesnipzApp')
         $scope.closeOnClick = function(index) {
             $scope.snippetsCollection.splice(index, 1);
         };
-      
-    });
+    }); 

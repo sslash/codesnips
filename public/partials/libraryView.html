@@ -30,16 +30,20 @@
 	</ul>
 	</div>
 	<ul id="library-ul" ng-repeat = "snippet in snippetsCollection">
-		<div class="col-lg-2"> Title: {{snippet.title}} </div>
-		<div class="col-lg-2"> Code: {{snippet.description}} </div>	
-		<div class="col-lg-2"> Created: {{snippet.timeCreated | date:'MM/dd/yyyy @ h:mma'}} 
-		</div>
-		<div class="col-lg-2"> Category: {{snippet.category}}</div>
-		<div class="col-lg-2">	<i class="fa fa-user fa-2x picture"></i></div>
-		<div class="col-lg-2">  <p ng-click="closeOnClick($index)">x</p></div>
-		
-		<div id="library-split"></div>
-		<div id="library-split"></div>
+			<div class="col-lg-2"> Title: {{snippet.title}} </div>
+			<div class="col-lg-2"> Code: {{snippet.code}} </div>	
+			<div class="col-lg-2"> Created: {{snippet.timeCreated | date:'MM/dd/yyyy @ h:mma'}} 
+			</div>
+			<div class="col-lg-1"> Category: {{snippet.category}}</div>
+			<div class="col-lg-2">	<i class="fa fa-user fa-2x picture"> </i></div>
+			
+
+			<div class="col-lg-1"> User: {{snippet.owner.username}} </div>
+
+			<div class="col-lg-2">  <p ng-click="closeOnClick($index)">x</p></div>
+			
+			<div id="library-split"></div>
+			<div id="library-split"></div>
 	</ul>
 
 </div>
