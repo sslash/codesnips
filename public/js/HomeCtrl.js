@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('codesnipzApp')
-	.controller('HomeCtrl', function($scope, $http, $timeout) {
+	.controller('HomeCtrl', function($scope, $http, $timeout, $location) {
 		
 			$scope.submit = {
 				title:"",category:"",
@@ -14,7 +14,6 @@ angular.module('codesnipzApp')
 			$scope.searchField = '';
 			$scope.codeEditorClicked = false;
 			var timeOut;			
-			
 
 			$scope.init = function() {
 				$('#categorySelect').chosen({
@@ -28,7 +27,7 @@ angular.module('codesnipzApp')
 
 			$scope.searchFieldKeyUp = function($event){
 				if($event.keyCode === 13){
-					console.log($scope.searchField);
+					 $location.path('/library').search( {'q' : $scope.searchField});
 				}
 			},
 

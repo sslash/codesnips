@@ -1,10 +1,24 @@
 var mongoose = require('mongoose'),
   Snippet = mongoose.model('snippets');
 
-exports.index = function(req, res) {
-  Snippet.find(function(err, snippets){
 
-    if(err) throw new Error(err);
+/*
+* Searching for snippets
+*
+* TODO: add support for searching for tags,
+* desription, codesnip, user 
+*
+*/
+exports.index = function(req, res) {
+  var query = {};
+
+  if (req.query.q){
+      query.title = new RegExp(req.query.q, 'ig');
+  };
+
+  Snippet.find(query, function(err, snippets){
+
+    if(err) { throw new Error(err) };
 
     res.send(snippets);
   });
