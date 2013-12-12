@@ -3,7 +3,6 @@ var mongoose = require('mongoose'),
 	utils = require('../../lib/utils');
 
 
-
 exports.register = function(req, res) {
 	console.log("register: " + JSON.stringify(req.body));
 	var user = new User(req.body)
@@ -18,11 +17,6 @@ exports.register = function(req, res) {
 			console.log(user);
 			res.send(user);
 		}
-		// manually login the user once successfully signed up
-		// req.logIn(user, function(err) {
-		// 	if (err) return next(err)
-		// 		return res.redirect('/')
-		// });
 	});
 };
 

@@ -16,6 +16,7 @@ var auth = require('./middlewares/authorization');
  module.exports = function(app, passport){
 
 	// controllers
+	app.get('/', userController.index);
 	app.get('/snippets', snippetController.index);
 	app.get('/snippets/:id', snippetController.getById);
 	app.post('/snippets/', auth.requiresLogin, snippetController.create);

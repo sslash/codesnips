@@ -49,8 +49,9 @@ angular.module('codesnipzApp')
 				$timeout.cancel(timeOut);
 				$scope.modalDisplayed = false;
 				$scope.AddFunctionFailed = false;
+				$scope.showForm =true;
 
-
+				
 			}
 		};
 
