@@ -5,15 +5,34 @@ var mongoose = require('mongoose'),
 exports.index = function(req, res) {
   //debugger;
   var userId = req.session.passport.user;
-  var user = findUser(userId, function(user) {
+  
+    Snippet
+    .find()
+    .populate('owner')
+    .exec(function(err, snippets) {
+      if (err) throw new Error(err);
+      console.log(snippets);
+      return res.send(snippets);
+    });
+  };
+
+
+
+/*
+  var user = findUser(userId), function(user) {
     Snippet.find(function(err, snippets) {
       if (err) throw new Error(err);
 
-      res.send(snippets);
+      returnObject = {
+        username:user.username,
+        snippet:snippets
+      }
+      
+      res.send(returnObject);
     });
   });
 };
-
+*/
 exports.getById = function(req, res) {
   Snippet.findById(req.params.id,
     function(err, snippet) {
@@ -28,10 +47,8 @@ exports.create = function(req, res) {
   var u = findUser(userId, function(user) {
     var snipData = req.body;
     snipData.owner = user;
-    snipData.username = user.username;
     snipData.timeCreated = new Date();
     var snippet = new Snippet(snipData);
-    console.log(snippet);
     snippet.save(function(err, doc) {
       if (err) {
         throw new Error(err);

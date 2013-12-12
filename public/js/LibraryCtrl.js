@@ -4,6 +4,8 @@ angular.module('codesnipzApp')
     .controller('LibraryCtrl', function($scope, $http, $cookies) {
 
         $scope.snippetsCollection = [];
+        $scope.snippetUser = [];
+        $scope.test = [];
         $scope.libraryBoolean = {
             showMenu: false,
             showSort: false
@@ -34,4 +36,4 @@ angular.module('codesnipzApp')
         };
        
 
-    });
+    }); 

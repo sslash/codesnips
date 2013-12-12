@@ -5,7 +5,6 @@ var mongoose = require('mongoose'),
 
 var Snippet = mongoose.model('snippets', new mongoose.Schema({
 	owner: [{type: Schema.Types.ObjectId, ref: 'User'}],
-	username: String,
 	title: String,
 	code: String,
 	tags: [],

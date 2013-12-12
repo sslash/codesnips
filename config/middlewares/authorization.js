@@ -6,7 +6,9 @@
 exports.requiresLogin = function (req, res, next) {
   if (!req.isAuthenticated()) {
     req.session.returnTo = req.originalUrl
-    return res.redirect('/login')
+    res.statusCode = 401;
+    return res.render();
+    
   }
   next()
 }
@@ -39,12 +41,3 @@ exports.snippet = {
   }
 }
 
-exports.sap = function (req, res, next) {
-  if (req.profile.id != req.user.id) {
-      req.flash('info', 'You are not authorized')
-      return res.redirect('/users/'+req.profile.id)
-    }
-    next()
-  
-
-}
