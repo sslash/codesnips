@@ -10,6 +10,7 @@ angular.module('codesnipzApp')
 				codeSnippet:"",
 				tagsArray:['#test', '#test2k']
 			};
+	
 
 		$scope.codeEditorClicked = false;
 		var timeOut;

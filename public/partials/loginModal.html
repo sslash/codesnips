@@ -1,5 +1,4 @@
-<div>
-<form>
+<form name="loginForm" novalidate>
 <p class="exitModal" ng-click="closeClicked()"> X </p> 
 <h1>Login</h1>
 <p class="error" ng-show="modal.showerror">Wrong username or password!</p>
@@ -9,6 +8,16 @@
   <div class="form-group">
     <input type="password" class="form-control" ng-model="modal.password" placeholder="Password">
   </div>
+  <div class="form-group">
+  	<input type="email" name ="email" class="form-control" ng-model="modal.email" placeholder="E-mail" ng-show="modal.showRegister" id="submitMail" ng-class="{mailError:loginForm.email.$error.email}"required>
+     <span class="error" ng-show="loginForm.email.$error.email && modal.showRegister" ng-model="error">Invalid email</span>
+
+
+  
+  	<!--
+    <input name="email" id = "submitMail" type="email" class="form-control" ng-model="modal.email" placeholder="E-mail" ng-show="modal.showRegister" required ng-pattern="/^id_[0-9]+$/"required>
+-->
+  </div>
 <ul>
 	<li><i class="fa fa-twitter fa-2x"></i></li>
 	<li><i class="fa fa-github-alt fa-2x"></i></li>
@@ -17,6 +26,9 @@
 </ul>
 
 <input type="button" ng-click="loginClicked()" class="btn btn-primary" value="Login">
-<input type="button" ng-click="registerClicked()" class="btn btn-primary" value="Register">
+<input type="submit" ng-click="registerClicked(loginForm.email.$error)" class="btn btn-primary" value="Register"> 
+
+
 </form>
-</div>
+
+

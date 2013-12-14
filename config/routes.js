@@ -26,7 +26,7 @@ var auth = require('./middlewares/authorization');
 
 	app.get('/login', userController.login);
 	app.get('/signup', userController.signup);
-	app.get('/logout', userController.logout);
+	app.get('/logout', auth.requiresLogin, userController.logout);
 	app.post('/users', userController.register);
 	app.post('/users/session',
 		passport.authenticate('local', {

@@ -35,12 +35,14 @@ header #login-area {
   color: rgba(255, 255, 255, 0.81);
 }
 header #login-area i,
-header #login-area p {
+header #login-area p,
+header #login-area #profil-picture {
+  border-radius: 50px;
   cursor: pointer;
-  margin-bottom: 12px;
 }
 header #login-area i:hover,
-header #login-area p:hover {
+header #login-area p:hover,
+header #login-area #profil-picture:hover {
   -webkit-transform: scale(1.2);
   -moz-transform: scale(1.2);
   -ms-transform: scale(1.2);
@@ -67,6 +69,12 @@ p.exitModal {
   -webkit-box-shadow: -1px 1px 6px #73777a;
   -moz-box-shadow: -1px 1px 6px #73777a;
   box-shadow: -1px 1px 6px #73777a;
+}
+.mailError {
+  border-color: red;
+}
+.mailVerified {
+  border-color: #4F8A10;
 }
 #main-overlay {
   height: 100%;
