@@ -12,7 +12,6 @@ exports.index = function(req, res) {
 			if (err) {
 				throw new Error(err);
 			} else {
-				console.log(user);
 				if (user) {
 					gravatar(user);
 				}
@@ -34,7 +33,6 @@ var gravatar = function(user) {
 		r: 'pg'
 		//d: '404'
 	});
-	console.log("url " + url);
 	user.gravatar = url;
 	user.save();
 
@@ -42,9 +40,7 @@ var gravatar = function(user) {
 };
 
 exports.register = function(req, res) {
-	console.log("register: " + JSON.stringify(req.body));
 	var user = new User(req.body)
-	console.log(user);
 	user.provider = 'local'
 	user.save(function(err) {
 		if (err) {
