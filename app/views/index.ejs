@@ -18,7 +18,7 @@
     
 </head>
 <body>
-    <div ng-controller="MainCtrl">
+    <div ng-controller="MainCtrl" ng-init="init()">
     <section id="modal-area" ng-include src="'partials/loginModal.html'" ng-show="showLogin">
     </section>
 
@@ -34,8 +34,10 @@
             </ul>
 
             <section id="login-area">
-                <i class="fa fa-user fa-5x" ng-click="openLoginClicked()"></i>
-                <p ng-click="openLoginClicked()">Login</p>
+                <i class="fa fa-user fa-5x" ng-click="openLoginClicked()" ng-hide="modal.showAvatar"></i>
+                <div ng-click="openLoginClicked()" ng-show="modal.showAvatar"> <img id = "profil-picture" ng-src="{{user.gravatar}}"> </div>
+                <p ng-click="openLoginClicked()" class="lead" ng-hide="modal.showAvatar">Login</p>
+                <p ng-click="logOff()" ng-show="modal.showAvatar" class="lead"> Log off </p>
             </section>
         </nav>
 
@@ -71,6 +73,7 @@
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
 <script src="js/app.js"></script>
 <script src="js/services/CodeSnippet.js"></script>
+<script src="js/services/User.js"></script>
 <script src="js/LibraryCtrl.js"></script>
 <script src="js/HomeCtrl.js"></script>
 <script src="js/MainCtrl.js"></script>

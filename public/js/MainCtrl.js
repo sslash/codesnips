@@ -1,17 +1,32 @@
 'use strict';
 
 angular.module('codesnipzApp')
-	.controller('MainCtrl', function($scope, $http, $cookies) {
+	.controller('MainCtrl', function($scope, $http, $cookies, $location, $route) {
+
 		$scope.showLogin = false;
 		$scope.modal = {
 			username: '',
 			password: '',
+			email: '',
 			sessionId: '',
-			showerror: false
+			gravatar: '',
+			showerror: false,
+			showRegister: false,
+			showAvatar: false
 		};
-		$scope.CheckAuth = function() {
-			auth($cookies['sessionID']);
+		$scope.user = {
+			username: ''
 		}
+
+		$scope.init = function() {
+			/* setting username on site*/
+			if (window.user !== null) {
+				$scope.modal.showAvatar = true;
+				$scope.user.username = window.user.username;
+				$scope.user.gravatar = window.user.gravatar;
+			}
+		};
+
 		$scope.openLoginClicked = function() {
 			show();
 		};
@@ -24,29 +39,47 @@ angular.module('codesnipzApp')
 
 		};
 
-		$scope.registerClicked = function() {
+		$scope.logOff = function() {
+			terminateUserSession();
+		};
+
+		var terminateUserSession = function() {
+			$http({
+				method: 'GET',
+				url: '/logout'
+			}).success(function(data, status) {
+				updateUserInfo();
+			}).error(function(data, status) {
+				console.log("Failed to end session! " + status);
+			});
+
+
+		}
+
+		$scope.registerClicked = function(formInfo) {
+			if (!$scope.modal.showRegister) {
+				$scope.modal.showRegister = true;
+				return;
+			}
+
+
+			if (formInfo.email) {
+				return;
+			}
+
+
 			registerUserToServer({
 				username: $scope.modal.username,
-				password: $scope.modal.password
+				password: $scope.modal.password,
+				email: $scope.modal.email
 			});
 		};
 
 		$scope.closeClicked = function() {
 			hide();
+			$scope.modal.showRegister = false;
 		};
 
-		var auth = function(authData) {
-			$http({
-				method: 'POST',
-				url: '/auth/' + authData
-			}).success(function(data, status) {
-				console.log("auth");
-			}).error(function(data, status) {
-				console.log("Failed to Auth! " + status);
-				return false;
-			});
-
-		};
 
 
 		var show = function() {
@@ -59,6 +92,7 @@ angular.module('codesnipzApp')
 			$scope.showLogin = false;
 		};
 
+
 		var authenticateToServer = function(authData) {
 			$http({
 				method: 'POST',
@@ -67,6 +101,7 @@ angular.module('codesnipzApp')
 			}).success(function(data, status) {
 				$scope.user = data;
 				$scope.modal.showerror = false;
+				$scope.modal.showAvatar = true;
 				hide();
 			}).error(function(data, status) {
 				$scope.modal.showerror = true;
@@ -84,4 +119,11 @@ angular.module('codesnipzApp')
 				hide();
 			}).error(function(data, status) {});
 		};
+		var updateUserInfo = function() {
+			$scope.modal.showAvatar = false;
+			$scope.user.username = "Login";
+
+		}
+
+
 	});

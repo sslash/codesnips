@@ -4,6 +4,7 @@
  */
 
 exports.requiresLogin = function (req, res, next) {
+  console.log(req);
   if (!req.isAuthenticated()) {
     req.session.returnTo = req.originalUrl
     res.statusCode = 401;

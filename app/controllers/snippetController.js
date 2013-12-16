@@ -24,7 +24,7 @@ exports.index = function(req, res) {
       if (err) {
         throw new Error(err);
       }
-      console.log("snips: " + snippets);
+      
       return res.send(snippets);
     });
 };
