@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('codesnipzApp')
-	.controller('MainCtrl', function($scope, $http, $cookies, $location, $route, LogOff) {
+	.controller('MainCtrl', function($scope, $http, $cookies, $location, $route) {
 
 		$scope.showLogin = false;
 		$scope.modal = {
@@ -20,9 +20,7 @@ angular.module('codesnipzApp')
 
 		$scope.init = function() {
 			/* setting username on site*/
-			if (window.user === null) {
-				$scope.user.username = 'Login';
-			} else {
+			if (window.user !== null) {
 				$scope.modal.showAvatar = true;
 				$scope.user.username = window.user.username;
 				$scope.user.gravatar = window.user.gravatar;
@@ -46,10 +44,15 @@ angular.module('codesnipzApp')
 		};
 
 		var terminateUserSession = function() {
-			LogOff.query(function(test) {
-				console.log(test);
+			$http({
+				method: 'GET',
+				url: '/logout'
+			}).success(function(data, status) {
 				updateUserInfo();
+			}).error(function(data, status) {
+				console.log("Failed to end session! " + status);
 			});
+
 
 		}
 
