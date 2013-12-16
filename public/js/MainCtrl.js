@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('codesnipzApp')
-	.controller('MainCtrl', function($scope, $http, $cookies, $location, $route) {
+	.controller('MainCtrl', function($scope, $http, $cookies, $location, $route, LogOff) {
 
 		$scope.showLogin = false;
 		$scope.modal = {
@@ -28,9 +28,7 @@ angular.module('codesnipzApp')
 				$scope.user.gravatar = window.user.gravatar;
 			}
 		};
-		$scope.CheckAuth = function() {
-			auth($cookies['sessionID']);
-		}
+
 		$scope.openLoginClicked = function() {
 			show();
 		};
@@ -44,20 +42,16 @@ angular.module('codesnipzApp')
 		};
 
 		$scope.logOff = function() {
-			$http({
-				method: 'GET',
-				url: '/logout'
-			}).success(function(data, status) {
+			terminateUserSession();
+		};
+
+		var terminateUserSession = function() {
+			LogOff.query(function(test) {
+				console.log(test);
 				updateUserInfo();
-				console.log("logged out");
-
-			}).error(function(data, status) {
-				console.log("failed: logged out");
-
 			});
 
-
-		};
+		}
 
 		$scope.registerClicked = function(formInfo) {
 			if (!$scope.modal.showRegister) {
@@ -84,19 +78,6 @@ angular.module('codesnipzApp')
 		};
 
 
-		var auth = function(authData) {
-			$http({
-				method: 'POST',
-				url: '/auth/' + authData
-			}).success(function(data, status) {
-				console.log("auth");
-			}).error(function(data, status) {
-				console.log("Failed to Auth! " + status);
-				return false;
-			});
-
-		};
-
 
 		var show = function() {
 			$('#main-overlay').show();
@@ -107,6 +88,7 @@ angular.module('codesnipzApp')
 			$('#main-overlay').hide();
 			$scope.showLogin = false;
 		};
+
 
 		var authenticateToServer = function(authData) {
 			$http({

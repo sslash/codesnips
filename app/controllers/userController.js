@@ -29,7 +29,7 @@ exports.index = function(req, res) {
 };
 var gravatar = function(user) {
 	var gravatar = require('gravatar');
-	var url = gravatar.url(user.email	, {
+	var url = gravatar.url(user.email, {
 		s: '100',
 		r: 'pg'
 		//d: '404'
@@ -101,7 +101,7 @@ exports.login = function(req, res) {
 
 exports.logout = function(req, res) {
 	req.session.destroy();
-	return res.send(200);
+	res.send({}, 200);
 }
 
 exports.signup = function(req, res) {

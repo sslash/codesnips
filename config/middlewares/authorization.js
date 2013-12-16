@@ -2,9 +2,7 @@
 /*
  *  Generic require login routing middleware
  */
-exports.removeSession = function(req, res,next) {
-  console.log("ok");
-}
+
 exports.requiresLogin = function (req, res, next) {
   console.log(req);
   if (!req.isAuthenticated()) {
