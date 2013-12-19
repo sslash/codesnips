@@ -140,9 +140,10 @@ angular.module('codesnipzApp')
 			}).error(function(data, status) {});
 		};
 		var updateUserInfo = function(login) {
+			console.log(login);
 			if (!login) {
 				$scope.modal.showAvatar = false;
-				$scope.user.username = "Login";
+				$scope.user.username = "";
 			} else {
 				$scope.user.username = login.username;
 				$scope.user.gravatar = login.gravatar;
