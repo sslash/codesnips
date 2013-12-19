@@ -24,9 +24,10 @@
 
         <header data-role="header">
             <nav>
-                <ul>
-                    <li><a href="#/add/">Add</a></li>
-                    <li><a href="#/library/">Library</a></li>
+
+                <ul class ="bar">
+                    <li><a href="#/add">Add</a></li>
+                    <li><a href="#/library">Library</a></li>
                     <li><a href="#">Search</a></li>
                     <li><a href="#">List</a></li>
                     <li><a href="#">About</a></li>
@@ -41,35 +42,32 @@
                     <p ng-click="logOff()" ng-show="modal.showAvatar" class="lead"> Log off </p>
                 </section>
             </nav>
+                  
+
             <footer id="footer">
                 <p>Michael. Truls.</p>
             </footer>
         </header>
 
-
         <nav id="library-nav">
-            <div class="row">
-                <div class="col-lg-2">
-                    <p><a href="#/"> Codesnippets</a></p>
-                </div>
-                <div class="col-lg-6">
-                    <i class="fa fa-align-justify fa-2x" ng-click="menu()" id="nav-menu-ul" ></i> 
-                    <ul  ng-show="libraryBoolean.showMenu">
-                        <li > Swag </li>
+            <div class="row">        
+                <div class="col-lg-4 bar"> <a href="#"> Codesnips</s> </div>
+                <div class="col-lg-4">
+                    <i class="fa fa-align-justify fa-2x" ng-click="menu()"></i> 
+                    <ul id="library-menu-ul" ng-show="libraryBoolean.showMenu">
+                        <li >Swag </li>
                         <li > Lol </li>
                         <li > Test </li>
                         <li > Test 2</li>       
                     </ul>
-                    <div id="nav-search">
-                        <input  type="search" placeholder="Search" ng-model="searchField" ng-keyup="searchFieldKeyUp($event)">
-                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <input type="search" placeholder="Search" ng-model="searchField" ng-keyup="searchFieldKeyUp($event)">
                 </div>
 
-                <div class="col-lg-4 add-button-settings">
-                    <input id ="add-button" ng-click="addClicked()" class="btn btn-primary" type="submit" value="Add">
-                </div>
             </div>
         </nav>
+
 
         <div id="main-overlay">
         </div>
@@ -78,7 +76,6 @@
             <div ng-view></div>
         </section>
     </div>
-
     <script>
     window.user = <%- JSON.stringify(user) %>;
     </script>
@@ -103,7 +100,6 @@
     <script src="js/HomeCtrl.js"></script>
     <script src="js/MainCtrl.js"></script>
     <script src="js/AddCtrl.js"></script>
-
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.3/angular.min.js"></script>
     <!-- endbuild -->
 </body>
