@@ -1,28 +1,26 @@
-<div ng-show="modalDisplayed" ng-include=""src=" 'partials/modalTrue.html' ">
+<div ng-show="modalDisplayed" ng-include="" src=" 'partials/modalTrue.html' ">
 </div>
 
-<div 
-ng-show="AddFunctionFailed" ng-include=""src=" 'partials/modalFail.html' ">
+<div ng-show="AddFunctionFailed" ng-include="" src=" 'partials/modalFail.html' ">
 </div>
 
 <form ng-show="showForm">
 	<p ng-click="closeOnClick()" class="exitModal">X</p> 
-	<input type="text" placeholder="Title" ng-model="submit.title">
+	<input type="text" placeholder="Title" ng-model="snippet.title">
 
 	<div id="codeEditor" ng-click="codeEditorOnClick($event)">
-		<textarea ng-model="submit.codeSnippet" class="ng-hide" ng-show="codeEditorClicked"></textarea>
+		<textarea id="code-editor-textarea" ng-model="snippet.codeSnippet" class="ng-hide" ng-show="codeEditorClicked"></textarea>
 		<h2 ng-hide="codeEditorClicked">&#60;Code&#62;</h2>
 	</div>
 
-	<input type="text" placeholder="Description" ng-model="submit.description" >
+	<input type="text" placeholder="Description" ng-model="snippet.description" >
 
 	<div class="twoColumn">
 		<div class="tagsBox">
-			<input type="text" ng-keyup="tagKeyUp($event)" placeholder="Tags" ng-model="submit.tagText">
-
+			<input on-focus="setTagTextFocused(true)" on-blur="setTagTextFocused(false)" type="text" ng-keyup="tagKeyUp($event)" placeholder="Tags" ng-model="$parent.tagText">
 			<div id="tags-list-box">
 				<ul>
-					<li ng-repeat = "tag in submit.tagsArray">
+					<li ng-repeat="tag in snippet.tags">
 						<span ng-click="tagClick($event, $index)"> {{tag}} </span>
 					</li>	
 				</ul>
@@ -38,6 +36,7 @@ ng-show="AddFunctionFailed" ng-include=""src=" 'partials/modalFail.html' ">
 			</select>
 		</div>	
 	</div>
-	<input type="text" placeholder="Stack Overflow URL" ng-model="submit.stackOverflowUrl">
+
+	<input type="text" placeholder="Stack Overflow URL" ng-model="snippet.stackOverflowUrl">
 	<button class="btn btn-large btn-primary" ng-click="createCodeSnippet()">Add</button>
 </form>

@@ -3,18 +3,18 @@
 angular.module('codesnipzApp')
 	.controller('HomeCtrl', function($scope, $http, $timeout, $location) {
 		
-			$scope.submit = {
-				title:"",category:"",
-				description:"",
-				stackOverflowUrl:"",
-				codeSnippet:"",
-				tagsArray:['#test', '#test2k']
-			};
-	
+		$scope.snippet = {
+			title:"",
+			category:"",
+			description:"",
+			stackOverflowUrl:"",
+			codeSnippet:"",
+			tags:[],
+		};
 
 		$scope.codeEditorClicked = false;
+		var tagTextFocused = false;
 		var timeOut;
-
 
 		$scope.init = function() {
 			$('#categorySelect').chosen({
@@ -23,6 +23,10 @@ angular.module('codesnipzApp')
 			$scope.modalDisplayed = false;
 			$scope.AddFunctionFailed = false;
 			$scope.showForm = true;
+		};
+
+		$scope.setTagTextFocused = function(isFocused) {
+			tagTextFocused = isFocused;
 		};
 
 		$scope.addClicked = function() {
@@ -52,25 +56,43 @@ angular.module('codesnipzApp')
 			}
 		};
 
-		$scope.searchFieldKeyUp = function($event){
+		$scope.resetForm = function() {
+			$scope.snippet = {
+				title:"",
+				category:"",
+				description:"",
+				stackOverflowUrl:"",
+				codeSnippet:"",
+				tags:[],
+			};
+		};
+
+		$scope.searchFieldKeyUp = function($event) {
 			if($event.keyCode === 13){
 				 $location.path('/library').search( {'q' : $scope.searchField});
 			}
 		};
 
 		$scope.tagKeyUp = function($event) {
-			if ($event.keyCode === 13) {
-				$scope.tagsArray.push("#" + $scope.tagText)
+			if ($event.keyCode === 13 /* enter */ && $scope.tagText !== undefined && $scope.tagText.length > 0) {
+				var tag = $scope.tagText;
+				if (tag.charAt(0) != "#") {
+					tag = "#" + tag;
+				}
+				if ($scope.snippet.tags.indexOf(tag) == -1) {
+					$scope.snippet.tags.push(tag);
+				}
 				$scope.tagText = "";
 			}
 		};
 
 		$scope.tagClick = function($event, index) {
-			$scope.tagsArray.splice(index, 1);
+			$scope.snippet.tags.splice(index, 1);
 		};
 
 		$scope.codeEditorOnClick = function($event) {
 			$($event.currentTarget).css('background-color', 'white');
+			document.getElementById('code-editor-textarea').focus();
 			$scope.codeEditorClicked = true;
 		};
 
@@ -83,15 +105,20 @@ angular.module('codesnipzApp')
 		};
 
 		$scope.createCodeSnippet = function() {
+			if (tagTextFocused) {
+				return; // prevent enter-key to submit form when tag-field is focused
+			}
+
 			var snippet = {
 				owner: $scope.modal.username,
-				title: $scope.submit.title,
-				description: $scope.submit.description,
+				title: $scope.snippet.title,
+				description: $scope.snippet.description,
 				category: $('#categorySelect').val(),
-				stackOverflowUrl: $scope.submit.stackOverflowUrl,
-				code: $scope.submit.codeSnippet,
-				tags: $scope.submit.tagsArray
+				stackOverflowUrl: $scope.snippet.stackOverflowUrl,
+				code: $scope.snippet.codeSnippet,
+				tags: $scope.snippet.tags,
 			};
+
 			$http({
 				method: 'POST',
 				url: '/snippets/',
@@ -101,6 +128,7 @@ angular.module('codesnipzApp')
 				$scope.modalDisplayed = true;
 				$scope.showForm = false;
 				$scope.closeModal();
+				$scope.resetForm();
 			}).error(function(data, status) {
 				$scope.AddFunctionFailed = true;
 				$scope.showForm = false;
