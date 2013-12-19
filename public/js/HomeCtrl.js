@@ -119,5 +119,5 @@ angular.module('codesnipzApp')
 
 			}, 3000);
 
-		}
+		};
 	});

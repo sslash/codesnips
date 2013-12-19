@@ -5,16 +5,13 @@ var mongoose = require('mongoose'),
 
 exports.index = function(req, res) {
 	var userObject;
+	console.log(req.profile);
 	if (req.session.passport) {
 		var userId = req.session.passport.user;
-
 		User.findById(userId, function(err, user) {
 			if (err) {
 				throw new Error(err);
 			} else {
-				if (user) {
-					gravatar(user);
-				}
 				res.render('index', {
 					user: user
 				});
@@ -46,21 +43,16 @@ exports.register = function(req, res) {
 		if (err) {
 			console.log("ERROR: " + JSON.stringify(err) + "::" + utils.errors(err.errors));
 			return res.send(utils.errors(err.errors));
-		} else {
-			console.log(user);
-			res.send(user);
+		} else { 
+			if (user) {
+				gravatar(user);
+			}
+			res.send(req.user);
 		}
 	});
 };
 
 var login = function(req, res) {
-	// if (req.session.returnTo) {
-
-	//   res.send(req.session.returnTo)
-	//   console.log("delete and return");
-	//   delete req.session.returnTo
-	//   return;
-	//
 	res.send(req.user);
 
 

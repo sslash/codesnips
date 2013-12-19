@@ -9,7 +9,7 @@ angular.module('codesnipzApp', [
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'partials/home.html',
+        templateUrl: '/partials/home.html',
         controller: 'HomeCtrl'
       })
       .when('/add', {

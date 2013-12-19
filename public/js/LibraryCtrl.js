@@ -13,6 +13,7 @@ angular.module('codesnipzApp')
         $scope.searchField = '';
 
         $scope.init = function() {
+            
             $scope.params = $routeParams;
             if ( $routeParams && $routeParams.q ){
                 $scope.searchField = $routeParams.q;
