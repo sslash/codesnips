@@ -31,9 +31,14 @@ angular.module('codesnipzApp')
 				updateUserInfo(window.user);
 			}
 		};
+
 		$scope.recoverPasswordButton = function() {
 			showRecoveryModal();
 		}
+
+		$scope.CheckAuth = function() {
+			auth($cookies['sessionID']);
+		};
 
 		$scope.openLoginClicked = function() {
 			show();
@@ -227,8 +232,5 @@ angular.module('codesnipzApp')
 				$scope.closeClicked();
 
 			}, 2000);
-
 		};
-
-
 	});

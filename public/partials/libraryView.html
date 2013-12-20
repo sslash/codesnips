@@ -38,7 +38,8 @@
 	</div>
 
 	<ul>
-		<li ng-repeat = "snippet in snippetsCollection" ng-click="expandSnippet(snippet)">
+		<li ng-repeat = "snippet in snippetsCollection" 
+			ng-click="expandSnippet(snippet)">
 			<div class="row snippets-list">
 			<div class="col-lg-3">
 				<h5>{{snippet.title}}<br>
@@ -59,8 +60,10 @@
 				<p>{{snippet.owner.username}}</p>
 			</div>
 			</div>
-			<div class="row expand-code" ng-show="snippet.expandCode">	
-			<p class="lead">{{snippet.code}}</p>
+			<div class="row expand-code" ng-show="snippet.expandCode">
+					<div class="editor" id="editor_{{snippet._id}}">	
+						<p class="lead">{{snippet.code}}</p>
+					</div>
 			</div>
 		</li>
 	</ul>

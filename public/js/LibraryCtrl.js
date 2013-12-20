@@ -21,7 +21,10 @@ angular.module('codesnipzApp')
         };
 
         $scope.expandSnippet = function(snippet){
-            snippet.expandCode = snippet.expandCode ? false : true;            
+            snippet.expandCode = snippet.expandCode ? false : true;
+            var editor = ace.edit('editor_' + snippet._id);
+            editor.setTheme('ace/theme/monokai');
+            editor.getSession().setMode('ace/mode/javascript');
         };
 
         $scope.searchFieldKeyUp = function($event){
