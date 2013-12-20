@@ -104,11 +104,11 @@ p.exitModal {
   text-align: center;
   position: absolute;
   width: 500px;
-  height: 540px;
+  height: 560px;
   background-color: #c4d4da;
   z-index: 69;
   left: 40%;
-  top: -540px;
+  top: -560px;
   border-radius: 10px;
   border: 2px solid #2ABBFF;
   -webkit-box-shadow: 0px 0px 29px #050B0E;
@@ -149,6 +149,7 @@ p.exitModal {
 #main #addCodesnip form #codeEditor h2 {
   padding-top: 14%;
   color: #596569;
+  margin-top: 0;
 }
 #main #addCodesnip form input {
   -webkit-border-radius: 5px;
@@ -165,7 +166,7 @@ p.exitModal {
 #main #addCodesnip form .twoColumn .tagsBox {
   float: left;
   display: inline;
-  width: 50%;
+  width: 100%;
 }
 #main #addCodesnip form .twoColumn .tagsBox #tags-list-box {
   background-color: white;
@@ -174,6 +175,7 @@ p.exitModal {
   border-radius: 10px;
 }
 #main #addCodesnip form .twoColumn .tagsBox #tags-list-box ul {
+  padding: 0;
   list-style: none;
 }
 #main #addCodesnip form .twoColumn .tagsBox #tags-list-box ul li {
@@ -196,6 +198,14 @@ p.exitModal {
 #main #addCodesnip form .twoColumn .categoryDropdown label[for="categorySelect"] {
   display: block;
   padding-top: 10px;
+}
+#main #addCodesnip form .twoColumn .categoryDropdown label {
+  float: left;
+}
+#main #addCodesnip form .twoColumn .categoryDropdown select {
+  float: left;
+  margin-top: 11px;
+  margin-left: 10px;
 }
 #main #banner {
   text-align: center;
