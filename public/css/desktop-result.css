@@ -443,3 +443,15 @@ input[type="color"],
   -moz-box-shadow: -1px 1px 6px #73777a;
   box-shadow: -1px 1px 6px #73777a;
 }
+.new-password-form {
+  padding-left: 40%;
+}
+.new-password-form .error {
+  padding: 0% 16% 0% 15%;
+}
+.new-password-form #password {
+  width: 50%;
+}
+.new-password-form #submit-button {
+  width: 50%;
+}

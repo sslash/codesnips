@@ -2,69 +2,75 @@
 
 angular.module('codesnipzApp')
 	.controller('MainCtrl', function($scope, $http, $location, $timeout) {
-			var counter = 0;
-			var timeOut;
-			$scope.showLogin = false;
-			$scope.modal = {
-				email: '',
-				sessionId: '',
-				gravatar: '',
-				showerror: false,
-				showRegister: false,
-				showAvatar: false,
-				showRecovery: false,
-				showErrorMessage: false,
-				showSuccessMessage: false
-			};
-			$scope.user = {
-				username: '',
-				gravatar: '',
-				email: ''
+		var counter = 0;
+		var timeOut;
+		$scope.showLogin = false;
+		$scope.modal = {
+			email: '',
+			sessionId: '',
+			gravatar: '',
+			showerror: false,
+			showRegister: false,
+			showAvatar: false,
+			showRecovery: false,
+			showErrorMessage: false,
+			showSuccessMessage: false
+		};
+		$scope.user = {
+			username: '',
+			gravatar: '',
+			email: ''
+		}
+
+		$scope.init = function() {
+			/* setting username on site*/
+			if (window.user !== null) {
+				updateUserInfo(window.user);
 			}
+		};
+		$scope.recoverPasswordButton = function() {
+			showRecoveryModal();
+		}
 
-			$scope.init = function() {
-				/* setting username on site*/
-				if (window.user !== null) {
-					updateUserInfo(window.user);
-				}
-			};
-			$scope.recoverPasswordButton = function() {
-				showRecoveryModal();
-			}
+		$scope.openLoginClicked = function() {
+			show();
+		};
 
-			$scope.openLoginClicked = function() {
-				show();
-			};
+		$scope.loginClicked = function() {
+			loginUser();
+		};
 
-			$scope.loginClicked = function() {
-				loginUser();
-			};
+		$scope.logOff = function() {
+			terminateUserSession();
+		};
+		$scope.authUser = function(username, password) {
+			authenticateToServer({
+				username: username,
+				password: password
+			});
+		}
 
-			$scope.logOff = function() {
-				terminateUserSession();
-			};
+		var loginUser = function() {
+			authenticateToServer({
+				username: $scope.user.username,
+				password: $scope.user.password
+			});
+		}
 
-			var loginUser = function() {
-				authenticateToServer({
-					username: $scope.user.username,
-					password: $scope.user.password
-				});
-			}
-
-			var terminateUserSession = function() {
-				$http({
-					method: 'GET',
-					url: '/logout'
-				}).success(function(data, status) {
-					updateUserInfo(false);
-				}).error(function(data, status) {
-					console.log("Failed to end session! " + status);
-				});
+		var terminateUserSession = function() {
+			$http({
+				method: 'GET',
+				url: '/logout'
+			}).success(function(data, status) {
+				updateUserInfo(false);
+			}).error(function(data, status) {
+				console.log("Failed to end session! " + status);
+			});
 
 
-			}
+		}
 
-			$scope.registerClicked = function(formInfo){
+		$scope.registerClicked = function(formInfo) {
 			console.log(formInfo);
 			if (!$scope.modal.showRegister) {
 				$scope.modal.showRegister = true;
@@ -74,7 +80,6 @@ angular.module('codesnipzApp')
 				return;
 			}
 
-			console.log("register");
 			$scope.errorMessage = "";
 
 
@@ -89,7 +94,6 @@ angular.module('codesnipzApp')
 			if (!validateFormInfo(formInfo, true)) {
 				return;
 			}
-			console.log("mail " + $scope.user.email);
 			sendRecoveryMail({
 				email: $scope.user.email
 			});
@@ -198,7 +202,6 @@ angular.module('codesnipzApp')
 		}
 
 		var sendRecoveryMail = function(recoverInfo) {
-			console.log(recoverInfo);
 			$http({
 				method: 'POST',
 				url: '/users/recoverPassword',
@@ -222,4 +225,4 @@ angular.module('codesnipzApp')
 		};
 
 
-});
+	});

@@ -25,8 +25,10 @@ exports.newPassword = function(req, res) {
 			console.log(err);
 		} else {
 			user.password = req.body.password;
+			//user.recoverPassword = "";
 			user.save();
-			res.send({}, 200);
+			console.log(user.username);
+			res.send(user.username, 200);
 
 		}
 	});
@@ -180,7 +182,7 @@ var sendRecoverymail = function(userArray, res) {
 	var user = userArray[0];
 	var url = "http://localhost:3000/#/newPassword/"
 	var cipher = crypto.createCipher('aes-256-cbc', 'd6F3Efeq');
-	var crypted = cipher.update(user.username + user.password, 'utf8', 'hex');
+	var crypted = cipher.update(user.username + Math.random(), 'utf8', 'hex');
 	crypted += cipher.final('hex');
 	user.recoverPassword = crypted;
 	user.save();
@@ -201,7 +203,7 @@ var sendRecoverymail = function(userArray, res) {
 		from: "Codesnippets <noreply@codesnippets.com>", // sender address
 		to: user.email, // list of receivers
 		subject: "Reset password for codesnippet", // Subject line
-		text: "Hello " + user.username + "/n Please follow this link: " + url + crypted + " in order to set a new password for codesnippet", // plaintext body
+		text: "Hello " + user.username+"\r\n\r\nPlease follow this link: " + url + crypted + " in order to set a new password for codesnippet", // plaintext body
 		//html: "<h1> Hello " + user.username + "</h1> <p> Please follow this link: " +crypted+ " in order to set a new password for codesnippet" // html body
 	}
 
