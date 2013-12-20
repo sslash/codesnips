@@ -1,89 +1,80 @@
 'use strict';
 
 angular.module('codesnipzApp')
-	.controller('MainCtrl', function($scope, $http, $location) {
-		var counter = 0;
-		$scope.showLogin = false;
-		$scope.modal = {
-			email: '',
-			sessionId: '',
-			gravatar: '',
-			showerror: false,
-			showRegister: false,
-			showAvatar: false
-		};
-		$scope.user = {
-			username: '',
-			gravatar: '',
-			email: ''
-		}
-
-		$scope.init = function() {
-			/* setting username on site*/
-			if (window.user !== null) {
-				updateUserInfo(window.user);
+	.controller('MainCtrl', function($scope, $http, $location, $timeout) {
+			var counter = 0;
+			var timeOut;
+			$scope.showLogin = false;
+			$scope.modal = {
+				email: '',
+				sessionId: '',
+				gravatar: '',
+				showerror: false,
+				showRegister: false,
+				showAvatar: false,
+				showRecovery: false,
+				showErrorMessage: false,
+				showSuccessMessage: false
+			};
+			$scope.user = {
+				username: '',
+				gravatar: '',
+				email: ''
 			}
-		};
+
+			$scope.init = function() {
+				/* setting username on site*/
+				if (window.user !== null) {
+					updateUserInfo(window.user);
+				}
+			};
+			$scope.recoverPasswordButton = function() {
+				showRecoveryModal();
+			}
+
+			$scope.openLoginClicked = function() {
+				show();
+			};
+
+			$scope.loginClicked = function() {
+				loginUser();
+			};
+
+			$scope.logOff = function() {
+				terminateUserSession();
+			};
+
+			var loginUser = function() {
+				authenticateToServer({
+					username: $scope.user.username,
+					password: $scope.user.password
+				});
+			}
+
+			var terminateUserSession = function() {
+				$http({
+					method: 'GET',
+					url: '/logout'
+				}).success(function(data, status) {
+					updateUserInfo(false);
+				}).error(function(data, status) {
+					console.log("Failed to end session! " + status);
+				});
 
 
-		$scope.openLoginClicked = function() {
-			show();
-		};
+			}
 
-		$scope.loginClicked = function() {
-			loginUser();
-		};
-
-		$scope.logOff = function() {
-			terminateUserSession();
-		};
-
-		var loginUser = function() {
-			authenticateToServer({
-				username: $scope.user.username,
-				password: $scope.user.password
-			});
-		}
-
-		var terminateUserSession = function() {
-			$http({
-				method: 'GET',
-				url: '/logout'
-			}).success(function(data, status) {
-				updateUserInfo(false);
-			}).error(function(data, status) {
-				console.log("Failed to end session! " + status);
-			});
-
-
-		}
-
-		$scope.registerClicked = function(formInfo) {
+			$scope.registerClicked = function(formInfo){
+			console.log(formInfo);
 			if (!$scope.modal.showRegister) {
 				$scope.modal.showRegister = true;
-				console.log("show register");
+				return;
+			}
+			if (!validateFormInfo(formInfo, false)) {
 				return;
 			}
 
-			console.log(formInfo.username.$error.required);
-			if (formInfo.username.$error.required) {
-				$scope.errorMessage = "Username is required";
-				return;
-			}
-			if (formInfo.password.$error.required) {
-				$scope.errorMessage = "Password is required";
-				return;
-			}
-
-			if (formInfo.email.$error.required) {
-				$scope.errorMessage = "Email is required";
-				return;
-			}
-			if (formInfo.email.$error.email) {
-				$scope.errorMessage = "Please write a vaild email";
-				return;
-			}
-
+			console.log("register");
 			$scope.errorMessage = "";
 
 
@@ -94,9 +85,46 @@ angular.module('codesnipzApp')
 			});
 		};
 
+		$scope.recoverPassword = function(formInfo) {
+			if (!validateFormInfo(formInfo, true)) {
+				return;
+			}
+			console.log("mail " + $scope.user.email);
+			sendRecoveryMail({
+				email: $scope.user.email
+			});
+		}
+		var validateFormInfo = function(formInfo, OnlyEmail) {
+
+
+			if (!OnlyEmail) {
+				if (formInfo.username.$error.required) {
+					$scope.errorMessage = "Username is required";
+					$scope.modal.showErrorMessage = true;
+					return false;
+				}
+				if (formInfo.password.$error.required) {
+					$scope.errorMessage = "Password is required";
+					$scope.modal.showErrorMessage = true;
+					return false;
+				}
+			}
+			if (formInfo.email.$error.required) {
+				$scope.errorMessage = "Email is required";
+				$scope.modal.showErrorMessage = true;
+				return false;
+			}
+			if (formInfo.email.$error.email) {
+				$scope.errorMessage = "Please write a vaild email";
+				$scope.modal.showErrorMessage = true;
+				return false;
+			}
+			return true;
+
+		}
 		$scope.closeClicked = function() {
 			hide();
-			$scope.modal.showRegister = false;
+			$timeout.cancel(timeOut);
 		};
 
 
@@ -106,10 +134,25 @@ angular.module('codesnipzApp')
 			$scope.showLogin = true;
 		};
 
-		var hide = function() {
-			$('#main-overlay').hide();
-			$scope.showLogin = false;
+		var showRecoveryModal = function() {
+			$('#main-overlay').show();
+			$scope.modal.showRecovery = true;
 		};
+
+		var hide = function() {
+			if ($scope.showLogin) {
+				$('#main-overlay').hide();
+				$scope.showLogin = false;
+				$scope.modal.showRegister = false;
+
+			} else {
+				$('#main-overlay').hide();
+				$scope.modal.showRecovery = false;
+			}
+			$scope.modal.showErrorMessage = false;
+			$scope.modal.showSuccessMessage = false;
+		};
+
 
 
 		var authenticateToServer = function(authData) {
@@ -124,6 +167,7 @@ angular.module('codesnipzApp')
 				hide();
 			}).error(function(data, status) {
 				$scope.modal.showerror = true;
+				$scope.errorMessage = "Wrong username or password!"
 				console.log("Failed to Auth! " + status);
 			});
 		};
@@ -140,7 +184,6 @@ angular.module('codesnipzApp')
 			}).error(function(data, status) {});
 		};
 		var updateUserInfo = function(login) {
-			console.log(login);
 			if (!login) {
 				$scope.modal.showAvatar = false;
 				$scope.user.username = "";
@@ -154,5 +197,29 @@ angular.module('codesnipzApp')
 
 		}
 
+		var sendRecoveryMail = function(recoverInfo) {
+			console.log(recoverInfo);
+			$http({
+				method: 'POST',
+				url: '/users/recoverPassword',
+				data: recoverInfo,
+			}).success(function(data, status) {
+				$scope.errorMessage = "You will recive a recovery mail in a few moments";
+				$scope.modal.showSuccessMessage = true;
+				closeModal();
+			}).error(function(data, status) {
+				$scope.errorMessage = "Wrong mail, please try with a another mail";
+				$scope.modal.showErrorMessage = true;
 
-	});
+			});
+		};
+		var closeModal = function() {
+			timeOut = $timeout(function() {
+				$scope.closeClicked();
+
+			}, 2000);
+
+		};
+
+
+});

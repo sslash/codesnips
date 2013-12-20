@@ -20,6 +20,7 @@
  	hashed_password: { type: String, default: '' },
  	salt: { type: String, default: '' },
   gravatar: { type: String, default: '' },
+  recoverPassword: { type: String, default: '' },
  	facebook: {},
 	twitter: {},
 	github: {},

@@ -1,0 +1,13 @@
+<form name="recoverForm" novalidate>
+  <p class="exitModal" ng-click="closeClicked()"> X </p> 
+  <h1>Recover Password</h1>
+   
+  <div class="form-group">
+  	<input type="email" name ="email" class="form-control" ng-model="user.email" placeholder="E-mail"  id="submitMail"required>
+    <span class="error" ng-model="error" ng-show="modal.showErrorMessage">{{errorMessage}}</span>
+    <span class="label label-success" ng-show="modal.showSuccessMessage">{{errorMessage}}</span>
+    </div>
+ <input type="button" ng-click="recoverPassword(recoverForm)" class="btn btn-primary" value="Sumbit">
+</form>
+
+

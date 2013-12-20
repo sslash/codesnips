@@ -1,11 +1,13 @@
 var mongoose = require('mongoose'),
 	User = mongoose.model('User'),
-	utils = require('../../lib/utils');
+	utils = require('../../lib/utils'),
+	nodemailer = require("nodemailer"),
+	crypto = require('crypto');
+
 
 
 exports.index = function(req, res) {
 	var userObject;
-	console.log(req.profile);
 	if (req.session.passport) {
 		var userId = req.session.passport.user;
 		User.findById(userId, function(err, user) {
@@ -38,6 +40,7 @@ var gravatar = function(user) {
 
 exports.register = function(req, res) {
 	var user = new User(req.body)
+	//verifyUser(user, function(err, result) {
 	user.provider = 'local'
 	user.save(function(err) {
 		if (err) {
@@ -50,7 +53,33 @@ exports.register = function(req, res) {
 			res.send(req.user);
 		}
 	});
+	//});
 };
+
+var verifyUser = function(user, res) {
+	var username = user.username.trim();
+	console.log(user.username.trim());
+	User.find({
+		'email': user.email
+	}, function(err, user) {
+		if (user.length < 1) {
+			User.find({
+				'username': username
+			}, function(err, user) {
+				console.log("user length " + user.length);
+				if (user.length < 1) {
+					console.log("sucess, user can register");
+				} else {
+					console.log("fail");
+				}
+
+			});
+		} else {
+			console.log("not register");
+		}
+	});
+
+}
 
 var login = function(req, res) {
 	res.send(req.user);
@@ -63,30 +92,30 @@ var login = function(req, res) {
 
 exports.temp = function(req, res) {
 
-	User.find({
-			'username': req.user.username
-		},
-		function(err, u) {
 
-			if (err) {
-				throw new Error(err);
-				console.log("ERR: " + err);
-			} else {
-				if (req.params.id === req.user.authToken) {
-					return res.send(req.user.authToken);
-				} else {
-					console.log("error");
-					return res.send(401, err);
-				}
-			}
-
-		});
 }
 
 exports.login = function(req, res) {
 
 }
+exports.recoverPassword = function(req, res) {
+	verifyEmail(req.body.email, res, function(err, result) {
+		if (err) {
+			res.send('Mail not found', 500);
 
+		} else {
+			sendRecoverymail(email, function(err, result) {
+				if (err) {
+					res.send({}, 500);
+				} else {
+					res.send({}, 200);
+
+				}
+			});
+		}
+	});
+
+}
 exports.logout = function(req, res) {
 	req.session.destroy();
 	res.send({}, 200);
@@ -114,5 +143,68 @@ exports.authCallback = function(req, res) {
 }
 
 exports.user = function(req, res) {
+
+}
+
+
+var sendRecoverymail = function(userArray, res) {
+	var user = userArray[0];
+	var url = "localhost:3000";
+	/*dette burde i egen funksjone*/
+	var cipher = crypto.createCipher('aes-256-cbc', 'd6F3Efeq');
+	var crypted = cipher.update(user.username+user.password, 'utf8', 'hex');
+	crypted += cipher.final('hex');
+	user.recoverPassword = crypted;
+	user.save();
+
+
+
+	// create reusable transport method (opens pool of SMTP connections)
+	var smtpTransport = nodemailer.createTransport("SMTP", {
+		service: "Gmail",
+		auth: {
+			user: "noreplycodesnippets@gmail.com",
+			pass: "codesnippets"
+		}
+	});
+
+	// setup e-mail data with unicode symbols
+	var mailOptions = {
+		from: "Codesnippets <noreply@codesnippets.com>", // sender address
+		to: user.email, // list of receivers
+		subject: "Reset password for codesnippet", // Subject line
+		text: "Hello "+user.username + "/n Please follow this link: " +crypted+ " in order to set a new password for codesnippet", // plaintext body
+		//html: "<h1> Hello " + user.username + "</h1> <p> Please follow this link: " +crypted+ " in order to set a new password for codesnippet" // html body
+	}
+
+	// send mail with defined transport object
+	smtpTransport.sendMail(mailOptions, function(error, response) {
+		if (error) {
+			console.log(error);
+		} else {
+			console.log("Message sent: " + response.message);
+		}
+
+		smtpTransport.close(); // shut down the connection pool, no more messages
+		res.send({}, 200);
+	});
+
+
+}
+
+
+var verifyEmail = function(email, res) {
+	User.find({
+		'email': email
+	}, function(err, user) {
+		if (user.length < 1) {
+			res.send({
+				'err': 'Mail not found'
+			}, 404);
+		} else {
+			sendRecoverymail(user, res);
+
+		}
+	});
 
 }

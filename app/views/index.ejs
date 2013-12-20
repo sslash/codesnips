@@ -22,6 +22,9 @@
         <section id="modal-area" ng-include src="'/partials/loginModal.html'" ng-show="showLogin">
         </section>
 
+        <section id="modal-area" ng-include src="'/partials/recoveryModal.html'" ng-show="modal.showRecovery">
+        </section>
+
         <header data-role="header">
             <nav>
 
@@ -40,6 +43,7 @@
                     <div ng-click="openLoginClicked()" ng-show="modal.showAvatar"> <img id = "profil-picture" ng-src="{{user.gravatar}}"></div>
                     <p ng-click="openLoginClicked()" class="lead" ng-hide="modal.showAvatar">Login</p>
                     <p ng-click="logOff()" ng-show="modal.showAvatar" class="lead"> Log off </p>
+                    <p ng-click="recoverPasswordButton()" ng-hide="modal.showAvatar" class="lead"> Forgott password? </p>
                 </section>
             </nav>
                   
