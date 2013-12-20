@@ -4,6 +4,33 @@ var mongoose = require('mongoose'),
 	nodemailer = require("nodemailer"),
 	crypto = require('crypto');
 
+exports.getUserByHash = function(req, res) {
+	console.log(req.body.hash);
+	User.find({
+		'recoverPassword': req.body.hash
+	}, function(err, user) {
+		if (err) {
+			console.log(err);
+		} else {
+			res.send({}, 200);
+
+		}
+	});
+}
+exports.newPassword = function(req, res) {
+	User.findOne({
+		'recoverPassword': req.body.hash
+	}, function(err, user) {
+		if (err) {
+			console.log(err);
+		} else {
+			user.password = req.body.password;
+			user.save();
+			res.send({}, 200);
+
+		}
+	});
+}
 
 
 exports.index = function(req, res) {
@@ -148,11 +175,12 @@ exports.user = function(req, res) {
 
 
 var sendRecoverymail = function(userArray, res) {
-	var user = userArray[0];
-	var url = "localhost:3000";
 	/*dette burde i egen funksjone*/
+
+	var user = userArray[0];
+	var url = "http://localhost:3000/#/newPassword/"
 	var cipher = crypto.createCipher('aes-256-cbc', 'd6F3Efeq');
-	var crypted = cipher.update(user.username+user.password, 'utf8', 'hex');
+	var crypted = cipher.update(user.username + user.password, 'utf8', 'hex');
 	crypted += cipher.final('hex');
 	user.recoverPassword = crypted;
 	user.save();
@@ -173,7 +201,7 @@ var sendRecoverymail = function(userArray, res) {
 		from: "Codesnippets <noreply@codesnippets.com>", // sender address
 		to: user.email, // list of receivers
 		subject: "Reset password for codesnippet", // Subject line
-		text: "Hello "+user.username + "/n Please follow this link: " +crypted+ " in order to set a new password for codesnippet", // plaintext body
+		text: "Hello " + user.username + "/n Please follow this link: " + url + crypted + " in order to set a new password for codesnippet", // plaintext body
 		//html: "<h1> Hello " + user.username + "</h1> <p> Please follow this link: " +crypted+ " in order to set a new password for codesnippet" // html body
 	}
 

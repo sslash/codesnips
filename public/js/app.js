@@ -21,6 +21,11 @@ angular.module('codesnipzApp', [
         controller: 'LibraryCtrl'
 
       })
+      .when('/newPassword/:hash', {
+        templateUrl: 'partials/newPasswordModal.html',
+        controller: 'newPasswordCtrl'
+
+      })
       .otherwise({
         redirectTo: '/'
       });
