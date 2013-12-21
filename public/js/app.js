@@ -8,7 +8,7 @@ angular.module('codesnipzApp', [
 ])
   .config(function($routeProvider) {
     $routeProvider
-      .when('/', {
+      .when('/home', {
         templateUrl: '/partials/home.html',
         controller: 'HomeCtrl'
       })
@@ -27,6 +27,6 @@ angular.module('codesnipzApp', [
 
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: ''
       });
   });

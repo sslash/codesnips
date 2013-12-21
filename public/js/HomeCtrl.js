@@ -15,7 +15,6 @@ angular.module('codesnipzApp')
 		$scope.codeEditorClicked = false;
 		var timeOut;
 
-
 		$scope.init = function() {
 			$('#categorySelect').chosen({
 				'width': '126px'

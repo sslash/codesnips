@@ -18,6 +18,8 @@
     
 </head>
 <body>
+    <div id="main-overlay">
+    </div>
     <div ng-controller="MainCtrl" ng-init="init()">
         <section id="modal-area" ng-include src="'/partials/loginModal.html'" ng-show="showLogin">
         </section>
@@ -27,7 +29,6 @@
 
         <header data-role="header">
             <nav>
-
                 <ul class ="bar">
                     <li><a href="#/add">Add</a></li>
                     <li><a href="#/library">Library</a></li>
@@ -46,7 +47,7 @@
                     <p ng-click="recoverPasswordButton()" ng-hide="modal.showAvatar" class="lead"> Forgott password? </p>
                 </section>
             </nav>
-                  
+
 
             <footer id="footer">
                 <p>Michael. Truls.</p>
@@ -68,45 +69,41 @@
                 <div class="col-lg-4">
                     <input type="search" placeholder="Search" ng-model="searchField" ng-keyup="searchFieldKeyUp($event)">
                 </div>
-
-            </div>
-        </nav>
--->
-
-        <div id="main-overlay">
+            -->
         </div>
+    </nav>
+</div>
 
-        <section id="main" class="container" data-role="content">        
-            <div ng-view></div>
-        </section>
-    </div>
-    <script>
-    window.user = <%- JSON.stringify(user) %>;
-    </script>
+<section id="main" class="container" data-role="content">        
+    <div ng-view></div>
+</section>
+
+<script>
+window.user = <%- JSON.stringify(user) %>;
+</script>
 
 
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/jquery/jquery.js"></script>
-    <script src="bower_components/chosen/public/chosen.jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/jquery/jquery.js"></script>
+<script src="bower_components/chosen/public/chosen.jquery.js"></script>
 
-    <!-- build:js scripts/modules.js -->
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <!-- endbuild -->
+<!-- build:js scripts/modules.js -->
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<!-- endbuild -->
 
-    <!-- build:js({.tmp,app}) scripts/scripts.js -->
-    <script src="js/app.js"></script>
-    <script src="js/services/CodeSnippet.js"></script>
-    <script src="js/services/User.js"></script>
-    <script src="js/LibraryCtrl.js"></script>
-    <script src="js/HomeCtrl.js"></script>
-    <script src="js/MainCtrl.js"></script>
-    <script src="js/AddCtrl.js"></script>
-    <script src="js/newPasswordCtrl.js"></script>
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+<script src="js/app.js"></script>
+<script src="js/services/CodeSnippet.js"></script>
+<script src="js/services/User.js"></script>
+<script src="js/LibraryCtrl.js"></script>
+<script src="js/HomeCtrl.js"></script>
+<script src="js/MainCtrl.js"></script>
+<script src="js/AddCtrl.js"></script>
+<script src="js/newPasswordCtrl.js"></script>
 
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.3/angular.min.js"></script>
-    <!-- endbuild -->
+<!-- endbuild -->
 </body>
 </html>

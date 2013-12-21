@@ -30,7 +30,10 @@
     "passport-google-oauth": "latest",
     "passport-linkedin": "latest",
     "underscore": "latest",
-    "async": "latest"
+    "async": "latest",
+    "q": "~0.9.7",
+    "nodemailer": "~0.5.15",
+    "crypto": "0.0.3"
   },
   "devDependencies": {
     "express": "3.x",

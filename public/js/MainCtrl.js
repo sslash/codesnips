@@ -14,7 +14,8 @@ angular.module('codesnipzApp')
 			showAvatar: false,
 			showRecovery: false,
 			showErrorMessage: false,
-			showSuccessMessage: false
+			showSuccessMessage: false,
+			warningMessage: false
 		};
 		$scope.user = {
 			username: '',
@@ -94,6 +95,8 @@ angular.module('codesnipzApp')
 			if (!validateFormInfo(formInfo, true)) {
 				return;
 			}
+			$scope.errorMessage = "Sending e-post";
+			$scope.modal.warningMessage = true;
 			sendRecoveryMail({
 				email: $scope.user.email
 			});
@@ -207,10 +210,12 @@ angular.module('codesnipzApp')
 				url: '/users/recoverPassword',
 				data: recoverInfo,
 			}).success(function(data, status) {
+				$scope.modal.warningMessage = false;
 				$scope.errorMessage = "You will recive a recovery mail in a few moments";
 				$scope.modal.showSuccessMessage = true;
 				closeModal();
 			}).error(function(data, status) {
+				$scope.modal.warningMessage = false;
 				$scope.errorMessage = "Wrong mail, please try with a another mail";
 				$scope.modal.showErrorMessage = true;
 
