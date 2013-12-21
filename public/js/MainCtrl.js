@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('codesnipzApp')
-	.controller('MainCtrl', function($scope, $http, $location, $timeout) {
+	.controller('MainCtrl', function($scope, $http, $location, $timeout, UserInfo) {
 		var counter = 0;
 		var timeOut;
 		$scope.showLogin = false;
@@ -24,8 +24,10 @@ angular.module('codesnipzApp')
 		}
 
 		$scope.init = function() {
+			
 			/* setting username on site*/
 			if (window.user !== null) {
+				UserInfo.setProperty(window.user);
 				updateUserInfo(window.user);
 			}
 		};

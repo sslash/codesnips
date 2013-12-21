@@ -27,6 +27,6 @@ angular.module('codesnipzApp', [
 
       })
       .otherwise({
-        redirectTo: ''
+        redirectTo: '/home'
       });
   });
