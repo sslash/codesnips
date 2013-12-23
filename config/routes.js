@@ -28,6 +28,10 @@ var auth = require('./middlewares/authorization');
 	app.get('/signup', userController.signup);
 	app.get('/logout', auth.requiresLogin, userController.logout);
 	app.post('/users', userController.register);
+	app.post('/users/recoverPassword', userController.recoverPassword);
+	app.post('/users/getUserByHash', userController.getUserByHash);
+	app.post('/users/setNewPassword', userController.newPassword);
+
 	app.post('/users/session',
 		passport.authenticate('local', {
 			//failureRedirect: '/login',

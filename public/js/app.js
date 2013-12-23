@@ -6,10 +6,10 @@ angular.module('codesnipzApp', [
   'ngSanitize',
   'ngRoute'
 ])
-  .config(function ($routeProvider) {
+  .config(function($routeProvider) {
     $routeProvider
-      .when('/', {
-        templateUrl: 'partials/home.html',
+      .when('/home', {
+        templateUrl: '/partials/home.html',
         controller: 'HomeCtrl'
       })
       .when('/add', {
@@ -21,7 +21,12 @@ angular.module('codesnipzApp', [
         controller: 'LibraryCtrl'
 
       })
+      .when('/newPassword/:hash', {
+        templateUrl: 'partials/newPasswordModal.html',
+        controller: 'newPasswordCtrl'
+
+      })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/home'
       });
   });

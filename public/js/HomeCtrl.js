@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('codesnipzApp')
-	.controller('HomeCtrl', function($scope, $http, $timeout, $location) {
+	.controller('HomeCtrl', function($scope, $http, $timeout, $location, UserInfo) {
 		
 			$scope.submit = {
 				title:"",category:"",
@@ -14,7 +14,7 @@ angular.module('codesnipzApp')
 
 		$scope.codeEditorClicked = false;
 		var timeOut;
-
+		var user = {};
 
 		$scope.init = function() {
 			$('#categorySelect').chosen({
@@ -23,6 +23,7 @@ angular.module('codesnipzApp')
 			$scope.modalDisplayed = false;
 			$scope.AddFunctionFailed = false;
 			$scope.showForm = true;
+			user = UserInfo.getProperty();
 		};
 
 		$scope.addClicked = function() {
@@ -83,8 +84,9 @@ angular.module('codesnipzApp')
 		};
 
 		$scope.createCodeSnippet = function() {
+			 
 			var snippet = {
-				owner: $scope.modal.username,
+				owner: user.username,
 				title: $scope.submit.title,
 				description: $scope.submit.description,
 				category: $('#categorySelect').val(),
@@ -119,5 +121,5 @@ angular.module('codesnipzApp')
 
 			}, 3000);
 
-		}
+		};
 	});
