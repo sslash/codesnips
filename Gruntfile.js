@@ -35,7 +35,8 @@ module.exports = function (grunt) {
   },
   css: {
       files: [
-        'public/css/*'
+        'public/css/*',
+        '!public/css/desktop-result.css'
       ],
       tasks: ['less']
   },

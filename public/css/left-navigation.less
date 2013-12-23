@@ -1,0 +1,50 @@
+header{
+	width: 250px;
+	background-color: @left-blue;
+	min-height: 600px;
+	height: 100%;
+	margin-top: 50px;
+	position: absolute;
+
+	ul {
+		text-align: center;
+		padding:0;
+		margin-top:50%;
+	}
+
+	li {
+		list-style: none;
+		margin-top:10px;
+		a {
+			color:white;
+			font-size:16px;
+			text-transform: uppercase;
+			font-weight:200;
+			line-height:1.4;
+
+		}
+	}
+
+	#login-area{
+		text-align: center;
+		margin-top: 36%;
+		color: rgba(255, 255, 255, 0.81);
+
+		i, p , #profil-picture{
+			border-radius:50px;
+			cursor: pointer;
+			&:hover{
+				-webkit-transform: scale(1.2);
+				-moz-transform:    scale(1.2);
+				-ms-transform:     scale(1.2);
+				-o-transform:      scale(1.2);
+				transform:         scale(1.2);
+			}
+		}
+	}
+}
+
+footer {
+	position:absolute;
+	bottom:100px;
+}
