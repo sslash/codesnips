@@ -1,29 +1,68 @@
 <div ng-init ="init()">
+	<nav id="library-nav">
+		<div class="row">
+		<div class="col-lg-4">
+			<i class="fa fa-align-justify fa-2x" ng-click="menu()"></i> 
+			<ul id="library-menu-ul" ng-show="libraryBoolean.showMenu">
+				<li >Swag </li>
+				<li > Lol </li>
+				<li > Test </li>
+				<li > Test 2</li>		
+			</ul>
+		</div>
+		<div class="col-lg-4">
+			<input type="search" placeholder="Search" ng-model="searchField" ng-keyup="searchFieldKeyUp($event)">
+		</div>
+		<div class="col-lg-4">
+			<p>Codesnippets</p>
+		</div>
+		</div>
+	</nav>
 	
-
-<div id="library-sort">
-	<i class="fa fa-sort-asc" ng-click="sort()" ></i>
-	<ul  id="library-sort-list"ng-show="libraryBoolean.showSort"</ul>
-		<li > Sort by time </li>
-		<li > Sort by Category </li>
-		<li > Sort by Swag </li>
-	</ul>
-</div>
-<ul id="library-ul" ng-repeat = "snippet in snippetsCollection">
-	<div class="col-lg-2"> Title: {{snippet.title}} </div>
-	<div class="col-lg-2"> Code: {{snippet.code}} </div>	
-	<div class="col-lg-2"> Created: {{snippet.timeCreated | date:'MM/dd/yyyy @ h:mma'}} 
+	<div id="library-sort">
+		<i class="fa fa-sort-asc" ng-click="sort()" ></i>
+		<ul  id="library-sort-list"ng-show="libraryBoolean.showSort"</ul>
+			<li > Sort by time </li>
+			<li > Sort by Category </li>
+			<li > Sort by Swag </li>
+		</ul>
 	</div>
-	<div class="col-lg-1"> Category: {{snippet.category}}</div>
-	<div class="col-lg-2">	<i class="fa fa-user fa-2x picture"> </i></div>
 
 
-	<div class="col-lg-1"> User: {{snippet.owner.username}} </div>
+<section class="listArea">
+	<div class="row">
+		<div class="col-lg-3 lead">Title</div>
+		<div class="col-lg-3 lead">Category</div>
+		<div class="col-lg-3 lead">Created At</div>
+		<div class="col-lg-3 lead">Creator</div>
+	</div>
 
-	<div class="col-lg-2">  <p ng-click="closeOnClick($index)">x</p></div>
-
-	<div id="library-split"></div>
-	<div id="library-split"></div>
-</ul>
-
+	<ul>
+		<li ng-repeat = "snippet in snippetsCollection" ng-click="expandSnippet(snippet)">
+			<div class="row snippets-list">
+			<div class="col-lg-3">
+				<h5>{{snippet.title}}<br>
+				<small>{{snippet.description}}<small>
+				<h5>
+			</div>
+			<div class="col-lg-3">
+				<h5>{{snippet.category}}</h5>
+				<div ng-repeat = "tag in snippet.tags">
+				{{tag}},
+				</div>
+			</div>
+			<div class="col-lg-3">
+				<h5>{{snippet.timeCreated | date:'MM/dd/yyyy @ h:mma'}}</h5>
+			</div>
+			<div class="col-lg-3">
+				<img src="img/yoda.jpeg">
+				<p>{{snippet.owner.username}}</p>
+			</div>
+			</div>
+			<div class="row expand-code" ng-show="snippet.expandCode">	
+			<p class="lead">{{snippet.code}}</p>
+			</div>
+		</li>
+	</ul>
+</section>
 </div>

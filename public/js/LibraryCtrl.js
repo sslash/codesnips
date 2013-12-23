@@ -20,6 +20,10 @@ angular.module('codesnipzApp')
             $scope.fetchSnippetsCollection();
         };
 
+        $scope.expandSnippet = function(snippet){
+            snippet.expandCode = snippet.expandCode ? false : true;            
+        };
+
         $scope.searchFieldKeyUp = function($event){
             if($event.keyCode === 13){
                  $location.path('/library').search( {'q' : $scope.searchField});
