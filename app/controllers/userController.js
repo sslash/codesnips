@@ -5,7 +5,6 @@ var mongoose = require('mongoose'),
 	crypto = require('crypto');
 
 exports.getUserByHash = function(req, res) {
-	console.log(req.body.hash);
 	User.find({
 		'recoverPassword': req.body.hash
 	}, function(err, user) {
@@ -27,7 +26,6 @@ exports.newPassword = function(req, res) {
 			user.password = req.body.password;
 			//user.recoverPassword = "";
 			user.save();
-			console.log(user.username);
 			res.send(user.username, 200);
 
 		}
@@ -69,7 +67,6 @@ var gravatar = function(user) {
 
 exports.register = function(req, res) {
 	var user = new User(req.body)
-	//verifyUser(user, function(err, result) {
 	user.provider = 'local'
 	user.save(function(err) {
 		if (err) {
@@ -82,12 +79,11 @@ exports.register = function(req, res) {
 			res.send(req.user);
 		}
 	});
-	//});
+
 };
 
 var verifyUser = function(user, res) {
 	var username = user.username.trim();
-	console.log(user.username.trim());
 	User.find({
 		'email': user.email
 	}, function(err, user) {
@@ -176,17 +172,15 @@ exports.user = function(req, res) {
 }
 
 
-var sendRecoverymail = function(userArray, res) {
-	/*dette burde i egen funksjone*/
-
-	var user = userArray[0];
+var sendRecoverymail = function(user, res) {
+	/*should be put in a own local function*/
 	var url = "http://localhost:3000/#/newPassword/"
 	var cipher = crypto.createCipher('aes-256-cbc', 'd6F3Efeq');
 	var crypted = cipher.update(user.username + Math.random(), 'utf8', 'hex');
 	crypted += cipher.final('hex');
 	user.recoverPassword = crypted;
 	user.save();
-
+/*												*/
 
 
 	// create reusable transport method (opens pool of SMTP connections)
@@ -224,7 +218,7 @@ var sendRecoverymail = function(userArray, res) {
 
 
 var verifyEmail = function(email, res) {
-	User.find({
+	User.findOne({
 		'email': email
 	}, function(err, user) {
 		if (user.length < 1) {

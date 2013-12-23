@@ -74,7 +74,6 @@ angular.module('codesnipzApp')
 		}
 
 		$scope.registerClicked = function(formInfo) {
-			console.log(formInfo);
 			if (!$scope.modal.showRegister) {
 				$scope.modal.showRegister = true;
 				return;
