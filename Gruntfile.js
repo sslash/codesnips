@@ -13,17 +13,17 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     develop: {
-      server: {
-        file: 'app.js'
-    }
-  },
+        server: {
+            file: 'app.js'
+        }
+    },
 
-watch: {
-  options: {
-    nospawn: true,
-    livereload: reloadPort
-  },
-  js: {
+    watch: {
+      options: {
+        nospawn: false,
+        livereload: reloadPort
+    },
+    js: {
       files: [
       'app.js',
       'app/**/*.js',
@@ -35,7 +35,7 @@ watch: {
   },
   css: {
       files: [
-      'public/css/*'
+        'public/css/*'
       ],
       tasks: ['less']
   },

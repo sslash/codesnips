@@ -1,7 +1,7 @@
 <div ng-init ="init()">
 	<nav id="library-nav">
 		<div class="row">
-		<div class="col-lg-4">
+		<div class="col-lg-2">
 			<i class="fa fa-align-justify fa-2x" ng-click="menu()"></i> 
 			<ul id="library-menu-ul" ng-show="libraryBoolean.showMenu">
 				<li >Swag </li>
@@ -10,6 +10,12 @@
 				<li > Test 2</li>		
 			</ul>
 		</div>
+
+		<div class="col-lg-2">
+			<button type="submit" class="btn btn-sm btn-default" ng-click="filterYours()">Yours</button>
+			<button type="submit" class="btn btn-sm btn-default" ng-click="filterAll()">All</button>
+		</div>
+
 		<div class="col-lg-4">
 			<input type="search" placeholder="Search" ng-model="searchField" ng-keyup="searchFieldKeyUp($event)">
 		</div>
