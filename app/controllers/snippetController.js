@@ -1,3 +1,4 @@
+'use strict'
 var mongoose = require('mongoose'),
   Snippet = mongoose.model('snippets'),
   User = mongoose.model('User');
@@ -14,18 +15,20 @@ exports.index = function(req, res) {
   var query = {};
 
   if (req.query.q){
-      query.title = new RegExp(req.query.q, 'ig');
-  };
+    query.title = new RegExp(req.query.q, 'ig');
+  } else if (req.query.by) {
+    query.owner = req.query.by;
+  }
 
   Snippet
     .find(query)
     .populate('owner')
     .exec(function(err, snippets) {
-      if (err) {
-        throw new Error(err);
+      if (err) { 
+        res.send(err); 
+      } else {
+        return res.send(snippets);
       }
-      
-      return res.send(snippets);
     });
 };
 
