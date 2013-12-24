@@ -26,10 +26,7 @@
         <header data-role="header">
             <nav>
                 <ul class ="bar">
-                    <li><a href="#/add">Add</a></li>
-                    <li><a href="#/library">Library</a></li>
-                    <li><a href="#">Search</a></li>
-                    <li><a href="#">List</a></li>
+                    <li><a href="#/library">Home</a></li>
                     <li><a href="#">About</a></li>
                     <li><a href="#">Contact</a></li>
 
@@ -40,7 +37,6 @@
                     <div ng-click="openLoginClicked()" ng-show="modal.showAvatar"> <img id = "profil-picture" ng-src="{{user.gravatar}}"></div>
                     <p ng-click="openLoginClicked()" class="lead" ng-hide="modal.showAvatar">Login</p>
                     <p ng-click="logOff()" ng-show="modal.showAvatar" class="lead"> Log off </p>
-                    <p ng-click="recoverPasswordButton()" ng-hide="modal.showAvatar" class="lead"> Forgott password? </p>
                 </section>
             </nav>
 

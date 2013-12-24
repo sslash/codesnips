@@ -33,6 +33,7 @@ angular.module('codesnipzApp')
 		};
 
 		$scope.recoverPasswordButton = function() {
+			$scope.showLogin = false;
 			showRecoveryModal();
 		}
 
