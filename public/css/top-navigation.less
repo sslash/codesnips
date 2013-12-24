@@ -1,18 +1,45 @@
-#top-nav{
+#top-nav {
 	background-color: @left-blue;
-	border-radius: 0;
-	border: 0;
+	line-height: 48px;
+	position: relative;
+	min-height: 51px;
 
-	.logo {
+	a { 
+		text-decoration: none;
+		color: #333333;
+	} 
+
+	input {
+		line-height: initial;
+		border-radius: 1px;
+		height: 25px;
+		border: 1px solid #02070A;
+		border-left: 0;
+		padding: 7px;
+		font-size: 12px;
+		.border-right-radius(4px);
+	}
+
+	.add-btn {
+		color: @orange;
+		cursor: pointer;
+		margin: 0 30px;
+
+		&:hover{ .scale(1.3); }
+		.fa-plus { color: #333333; }
+		.fa-circle { text-shadow: 2px 2px 20px #000; }
+	}
+
+	.nav-logo {
 		width: 250px;
 		text-align: center;
 		background: @orange;
 		padding-bottom: 3px;
+		float: left;
 
 		.navbar-brand {
-			line-height: 48px;
-			float:none;
-			color: black;
+			font-size: 20px;
+			margin: 0 10px;
 		}
 
 		i {
@@ -20,4 +47,7 @@
 			top: 3px;
 		}
 	}
+
+
+	.nav-right {float:right;}
 }
