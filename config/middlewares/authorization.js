@@ -7,8 +7,7 @@ exports.requiresLogin = function (req, res, next) {
   if (!req.isAuthenticated()) {
     req.session.returnTo = req.originalUrl
     res.statusCode = 401;
-    return res.render();
-    
+    return res.render();    
   }
   next()
 }

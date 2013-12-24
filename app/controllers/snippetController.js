@@ -13,7 +13,6 @@ var mongoose = require('mongoose'),
 */
 exports.index = function(req, res) {
   var query = {};
-
   if (req.query.q){
     query.title = new RegExp(req.query.q, 'ig');
   } else if (req.query.by) {
