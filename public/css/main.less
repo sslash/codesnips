@@ -12,41 +12,50 @@
    border: none;
    box-shadow: 0px 0px 1px 1px rgba(11, 50, 68, 0.76);
    padding: 0px 7px 0px 7px;
-  }
-  .add-button-settings {
-    padding-left:27%;
-  
-    #add-button {
-    width:100px;
-    }
-  }
  }
+ .add-button-settings {
+  padding-left:27%;
+  
+  #add-button {
+    width:100px;
+  }
+}
+}
 #nav-search {
   padding-left: 490px;
   position: relative;
 
 }
 
-  #nav-menu-ul {
+#nav-menu-ul {
   list-style-type: none;
   margin-left: 0;
   width: 20%;
   position: relative;
   left: 5px;
   padding-left:80px;
-  
   li {
-  cursor: pointer;
+    cursor: pointer;
   }
 
-  }
+}
 
-  p{
+p{
   text-align:center;
+}
+
+
+#profil-picture{
+  border-radius:50px;
+  cursor: pointer;
+  &:hover{
+    -webkit-transform: scale(1.2);
+    -moz-transform:    scale(1.2);
+    -ms-transform:     scale(1.2);
+    -o-transform:      scale(1.2);
+    transform:         scale(1.2);
   }
-
-  
-
+}
 
 
 
@@ -72,7 +81,7 @@ p.exitModal {
 }
 
 .mailError {
-border-color: red;
+  border-color: red;
 }
 .mailVerified {
   border-color:#4F8A10;
@@ -82,11 +91,11 @@ border-color: red;
 	height:100%;
 	width:100%;
 	position:fixed;
-	left:22%;
-	top:0;
-	z-index:1;
-	background-color:rgba(9, 31, 43, 0.89);
-	display:none;
+  left: 250px;
+  top:0;
+  z-index:1;
+  background-color:rgba(9, 31, 43, 0.89);
+  display:none;
 }
 #main{
 	margin-left: 22%;
@@ -245,7 +254,7 @@ border-color: red;
   }
   
   #form {
-    
+
     .fa-thumbs-up {
       padding: 70px;
       font-size: 20em;

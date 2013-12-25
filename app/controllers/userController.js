@@ -182,7 +182,7 @@ var sendRecoverymail = function(user, res) {
 	crypted += cipher.final('hex');
 	user.recoverPassword = crypted;
 	user.save();
-/*												*/
+	/*												*/
 
 
 	// create reusable transport method (opens pool of SMTP connections)
@@ -199,7 +199,7 @@ var sendRecoverymail = function(user, res) {
 		from: "Codesnippets <noreply@codesnippets.com>", // sender address
 		to: user.email, // list of receivers
 		subject: "Reset password for codesnippet", // Subject line
-		text: "Hello " + user.username+"\r\n\r\nPlease follow this link: " + url + crypted + " in order to set a new password for codesnippet", // plaintext body
+		text: "Hello " + user.username + "\r\n\r\nPlease follow this link: " + url + crypted + " in order to set a new password for codesnippet", // plaintext body
 		//html: "<h1> Hello " + user.username + "</h1> <p> Please follow this link: " +crypted+ " in order to set a new password for codesnippet" // html body
 	}
 
@@ -223,7 +223,7 @@ var verifyEmail = function(email, res) {
 	User.findOne({
 		'email': email
 	}, function(err, user) {
-		if (user.length < 1) {
+		if (user === null) {
 			res.send({
 				'err': 'Mail not found'
 			}, 404);

@@ -23,6 +23,9 @@
         <section id="modal-area" ng-include src="'/partials/recoveryModal.html'" ng-show="modal.showRecovery">
         </section>
 
+        <section id="modal-area" ng-include src="'/partials/userInfomodal.html'" ng-show="modal.showUserInfo">
+        </section>
+
         <header data-role="header">
             <nav>
                 <ul class ="bar">
@@ -34,7 +37,7 @@
 
                 <section id="login-area">
                     <i class="fa fa-user fa-5x" ng-click="openLoginClicked()" ng-hide="modal.showAvatar"></i>
-                    <div ng-click="openLoginClicked()" ng-show="modal.showAvatar"> <img id = "profil-picture" ng-src="{{user.gravatar}}"></div>
+                    <div ng-click="openUserInfo()" ng-show="modal.showAvatar"> <img id = "profil-picture" ng-src="{{user.gravatar}}"></div>
                     <p ng-click="openLoginClicked()" class="lead" ng-hide="modal.showAvatar">Login</p>
                     <p ng-click="logOff()" ng-show="modal.showAvatar" class="lead"> Log off </p>
                 </section>
