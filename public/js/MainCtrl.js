@@ -23,7 +23,9 @@ angular.module('codesnipzApp')
 			username: '',
 			gravatar: '',
 			email: '',
-			password:''
+			password: '',
+			firstName: '',
+			lastName: ''
 		}
 
 		$scope.init = function() {
@@ -35,6 +37,13 @@ angular.module('codesnipzApp')
 				updateUserInfo();
 
 			}
+		};
+		$scope.updateUserProfile = function() {
+			profileUpdate({
+				firstName: $scope.user.firstName,
+				lastName: $scope.user.lastName
+			});
+
 		};
 
 		$scope.recoverPasswordButton = function() {
@@ -77,7 +86,6 @@ angular.module('codesnipzApp')
 				url: '/logout'
 			}).success(function(data, status) {
 				stopSession();
-				updateUserInfo();
 			}).error(function(data, status) {
 				console.log("Failed to end session! " + status);
 			});
@@ -179,6 +187,7 @@ angular.module('codesnipzApp')
 			}
 			$scope.modal.showErrorMessage = false;
 			$scope.modal.showSuccessMessage = false;
+			$scope.modal.showUserInfo = false;
 		};
 
 
@@ -194,8 +203,9 @@ angular.module('codesnipzApp')
 				$scope.modal.showAvatar = true;
 				hide();
 			}).error(function(data, status) {
+				$scope.modal.message = "Wrong username or password!";
 				$scope.modal.showErrorMessage = true;
-				$scope.modal.message = "Wrong username or password!"
+
 				console.log("Failed to Auth! " + status);
 			});
 		};
@@ -213,7 +223,6 @@ angular.module('codesnipzApp')
 		};
 		var updateUserInfo = function() {
 			$scope.user = UserInfo.getProperty();
-			console.log($scope.user);
 		}
 
 		var sendRecoveryMail = function(recoverInfo) {
@@ -233,6 +242,25 @@ angular.module('codesnipzApp')
 
 			});
 		};
+
+		var profileUpdate = function(profileInfo) {
+			$http({
+				method: 'POST',
+				url: '/users/updateProfile',
+				data: profileInfo,
+			}).success(function(data, status) {
+				$scope.modal.message = "Information saved";
+				$scope.modal.showSuccessMessage = true;
+
+			}).error(function(data, status) {
+				$scope.modal.message = "Sorry, An error has occurd";
+				$scope.modal.showErrorMessage = true;
+
+			});
+
+		}
+
+
 		var closeModal = function() {
 			timeOut = $timeout(function() {
 				$scope.closeClicked();

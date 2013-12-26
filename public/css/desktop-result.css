@@ -6095,18 +6095,31 @@ body {
 }
 #modal-area {
   position: absolute;
-  background-color: #ecf0f1;
+  background-color: #0e314a;
   z-index: 69;
   border-radius: 10px;
-  border: 2px solid #ffbe3a;
+  border: 3px solid #ffbe3a;
   -webkit-box-shadow: 0px 0px 29px #050B0E;
   -moz-box-shadow: 0px 0px 29px #050B0E;
   box-shadow: 0px 0px 29px #050B0E;
   left: 38%;
-  top: 32%;
+  top: 18%;
   width: 600px;
   padding: 5px 20px;
   text-align: center;
+}
+#modal-area h1 {
+  color: #ffbe3a;
+}
+#modal-area .form-group {
+  padding-top: 5px;
+}
+#modal-area .form-input-style {
+  padding-bottom: 5px;
+}
+#modal-area #profil-picture {
+  border-radius: 50px;
+  border: 2px solid #ffbe3a;
 }
 #modal-area .btn {
   width: 150px;
@@ -6292,17 +6305,6 @@ footer {
 }
 p {
   text-align: center;
-}
-#profil-picture {
-  border-radius: 50px;
-  cursor: pointer;
-}
-#profil-picture:hover {
-  -webkit-transform: scale(1.2);
-  -moz-transform: scale(1.2);
-  -ms-transform: scale(1.2);
-  -o-transform: scale(1.2);
-  transform: scale(1.2);
 }
 p.exitModal {
   display: inline-block;
@@ -6533,7 +6535,7 @@ p.exitModal {
 }
 .listArea .row.snippets-list {
   color: rgba(255, 255, 255, 0.81);
-  background-color: #3B6A7F;
+  background-color: #0e314a;
   margin-top: 10px;
   cursor: pointer;
 }

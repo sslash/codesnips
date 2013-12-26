@@ -5,15 +5,15 @@ var auth = require('./middlewares/authorization');
  * Route middlewares
  */
 
- var snippetsAuth = [auth.requiresLogin, auth.snippet.hasAuthorization]
+var snippetsAuth = [auth.requiresLogin, auth.snippet.hasAuthorization]
 
 
- var snippetController   = require('../app/controllers/snippetController');
- var userController		= require('../app/controllers/userController');
+var snippetController = require('../app/controllers/snippetController');
+var userController = require('../app/controllers/userController');
 
 
 
- module.exports = function(app, passport){
+module.exports = function(app, passport) {
 
 	// controllers
 	app.get('/', userController.index);
@@ -31,7 +31,7 @@ var auth = require('./middlewares/authorization');
 	app.post('/users/recoverPassword', userController.recoverPassword);
 	app.post('/users/getUserByHash', userController.getUserByHash);
 	app.post('/users/setNewPassword', userController.newPassword);
-
+	app.post('/users/updateProfile', auth.requiresLogin, userController.updateProfile);
 	app.post('/users/session',
 		passport.authenticate('local', {
 			//failureRedirect: '/login',
@@ -40,7 +40,7 @@ var auth = require('./middlewares/authorization');
 	app.get('/users/:userId', userController.show)
 	app.get('/auth/facebook',
 		passport.authenticate('facebook', {
-			scope: [ 'email', 'user_about_me'],
+			scope: ['email', 'user_about_me'],
 			failureRedirect: '/login'
 		}), userController.signin)
 	app.get('/auth/facebook/callback',
@@ -67,8 +67,8 @@ var auth = require('./middlewares/authorization');
 		passport.authenticate('google', {
 			failureRedirect: '/login',
 			scope: [
-			'https://www.googleapis.com/auth/userinfo.profile',
-			'https://www.googleapis.com/auth/userinfo.email'
+				'https://www.googleapis.com/auth/userinfo.profile',
+				'https://www.googleapis.com/auth/userinfo.email'
 			]
 		}), userController.signin)
 	app.get('/auth/google/callback',
@@ -78,8 +78,8 @@ var auth = require('./middlewares/authorization');
 	app.get('/auth/linkedin',
 		passport.authenticate('linkedin', {
 			failureRedirect: '/login',
-			scope: [ 
-			'r_emailaddress'
+			scope: [
+				'r_emailaddress'
 			]
 		}), userController.signin)
 	app.get('/auth/linkedin/callback',

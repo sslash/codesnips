@@ -93,7 +93,6 @@ var verifyUser = function(user, res) {
 			User.find({
 				'username': username
 			}, function(err, user) {
-				console.log("user length " + user.length);
 				if (user.length < 1) {
 					console.log("sucess, user can register");
 				} else {
@@ -154,6 +153,21 @@ exports.signup = function(req, res) {
 
 exports.show = function(req, res) {
 
+}
+
+exports.updateProfile = function(req, res) {
+	var userId = req.session.passport.user;
+
+	User.findById(userId, function(err, user) {
+		if (err) {
+			throw new Error(err);
+		} else {
+			user.update({firstName: req.body.firstName});
+			console.log(user);
+			res.send(req.user);
+
+		}
+	});
 }
 
 /**
