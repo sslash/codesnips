@@ -19,7 +19,7 @@ var auth = require('./middlewares/authorization');
 	app.get('/', userController.index);
 	app.get('/snippets', snippetController.index);
 	app.get('/snippets/:id', snippetController.getById);
-	app.post('/snippets/', auth.requiresLogin, snippetController.create);
+	app.post('/snippets', auth.requiresLogin, snippetController.create);
 
 
 	app.post('/users/', userController.register);
