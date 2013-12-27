@@ -9,7 +9,7 @@
 		color: #333333;
 	} 
 
-	input {
+	.nav-search {
 		line-height: initial;
 		border-radius: 1px;
 		height: 25px;
@@ -50,4 +50,29 @@
 
 
 	.nav-right {float:right;}
+}
+
+.control-label { 
+	line-height: initial;
+	font-weight: inherit;
+}
+
+.editor-wrap {
+	position: relative;
+	width: 100%;
+	max-height: 300px;
+	text-align: left;
+	min-height: 150px;
+	margin-bottom: 20px;
+	margin-top: -7px;
+}
+#editor {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	.box-shadow(0 0 3px #000);
+	border-radius: 5px;
+	border: 1px solid @white;
 }
