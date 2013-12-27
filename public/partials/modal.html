@@ -1,63 +1,66 @@
 <div class="modal-inner submitForm" ng-show="modalForm">
-	<section class="modal-header">
-		<h4>Create Codesnippet</h4>
-	</section>
+	<!-- <section class="modal-header">
+		<h1>Create Codesnippet</h1>
+	</section> -->
+	<h1>Create Codesnippet</h1>
 
-	<section class="modal-body">
+	<section>
 		<form class="form-horizontal" role="form">
 
 			<div class="form-group">
 				<label for="title" class="col-lg-2 control-label">Title</label>
-				<div class="col-lg-10">
-						<input id="title" type="text" class="form-control input-sm" placeholder="Title" ng-model="modal.title">
+				<div class="col-lg-9">
+					<input id="title" type="text" class="form-control form-control input-sm" placeholder="Title" ng-model="modal.title">
 				</div>
 
 			</div>
 			<div class="form-group">
 				<label for="desc" class="col-lg-2 control-label">Description</label>
-				<div class="col-lg-10">
+				<div class="col-lg-9">
 					<input type="text" id="desc" class="form-control input-sm" placeholder="Description" ng-model="modal.description">
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label for="desc" class="col-lg-6 control-label">Codesnippet</label>
+				<label for="desc" class="col-lg-2 control-label">Codesnippet</label>
 				<div class="col-lg-4">
 					<input type="text" id="language" ng-blur="languageBlurred($event)" class="form-control input-sm" placeholder="Language">
 				</div>
 			</div>
-			<div class="editor-wrap">
-				<div id="editor"></div>	
-			</div>
-
-			<div class="form-group">
-				<label for="tags" class="col-lg-2 control-label">Tags</label>
-				<div class="col-lg-10">
-					<input type="text" id="tags" class="form-control input-sm" ng-keyup="tagsPressed($event)"placeholder="Tags">
-					<div class="tag-content"></div>
+			<div class="col-lg-12">
+				<div class="editor-wrap form-control">
+					<div id="editor"></div>	
 				</div>
-			</div>
-			<div class="form-group">
-				<label for="category" class="col-lg-2 control-label">Category</label>
-				<div class="col-lg-10">
-					<input type="text" id="category" ng-model="modal.category" class="form-control input-sm" placeholder="Category">
 				</div>
-			</div>
-		</form>
 
-		<button class="btn btn-success" ng-click="submitClicked()">Submit</button>
-		<button class="btn btn-original closeBtn" ng-click="closeClicked()">Close</button>
-	</section>
-</div>
+				<div class="form-group">
+					<label for="tags" class="col-lg-2 control-label">Tags</label>
+					<div class="col-lg-9">
+						<input type="text" id="tags" class="form-control input-sm" ng-keyup="tagsPressed($event)"placeholder="Tags">
+						<div class="tag-content"></div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="category" class="col-lg-2 control-label">Category</label>
+					<div class="col-lg-9">
+						<input type="text" id="category" ng-model="modal.category" class="form-control input-sm" placeholder="Category">
+					</div>
+				</div>
+			</form>
 
-<div class="modal-inner" ng-hide="modalForm">
-	<section class="modal-body">
-		<span class="result-icon">
-			{{modal.form.iconHtml}}
-		</span>
+			<button class="btn btn-success" ng-click="submitClicked()">Submit</button>
+			<button class="btn btn-original closeBtn" ng-click="closeClicked()">Close</button>
+		</section>
+	</div>
 
-		<h3>{{modal.form.result}}</h3>
-		<p>{{modal.form.resultMsg}}</p>
-		<button class="btn btn-original closeBtn" ng-click="closeClicked()">Close</button>
-	</section>
-</div>
+	<div class="modal-inner" ng-hide="modalForm">
+		<section class="modal-body">
+			<span class="result-icon">
+				{{modal.form.iconHtml}}
+			</span>
+
+			<h3>{{modal.form.result}}</h3>
+			<p>{{modal.form.resultMsg}}</p>
+			<button class="btn btn-original closeBtn" ng-click="closeClicked()">Close</button>
+		</section>
+	</div>

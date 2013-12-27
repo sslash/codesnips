@@ -6127,6 +6127,9 @@ body {
   display: inline-block;
   margin: 0px 10px;
 }
+#modal-area .recoverBtn {
+  padding-top: 10px;
+}
 .modal {
   position: fixed;
   left: 32%;
@@ -6141,6 +6144,12 @@ body {
   position: relative;
   background-color: #0e314a;
   border: 3px solid #ffbe3a;
+}
+.modal .form-control {
+  border: 2px solid #ffbe3a;
+}
+.modal h1 {
+  color: #ffbe3a;
 }
 .modal .modal-header {
   background: #ecf0f1;
@@ -6297,6 +6306,7 @@ footer {
 .control-label {
   line-height: initial;
   font-weight: inherit;
+  color: #ffbe3a;
 }
 .editor-wrap {
   position: relative;
