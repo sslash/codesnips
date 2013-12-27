@@ -6081,18 +6081,6 @@ td.visible-print {
 body {
   background-color: #ecf0f1;
 }
-.new-password-form {
-  padding-left: 40%;
-}
-.new-password-form .error {
-  padding: 0% 16% 0% 15%;
-}
-.new-password-form #password {
-  width: 50%;
-}
-.new-password-form #submit-button {
-  width: 50%;
-}
 #modal-area {
   position: absolute;
   background-color: #0e314a;
