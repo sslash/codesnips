@@ -14,6 +14,8 @@
  * User schema
  */
  var UserSchema = new Schema({
+  firstName: { type: String, default: '' },
+  lastName: { type: String, default: '' },
  	email: { type: String, default: '' },
  	username: { type: String, default: '' },
  	provider: { type: String, default: '' },

@@ -1,17 +1,38 @@
 #modal-area{
 	position: absolute;
-	background-color: #E1F2F8;
+	background-color: @left-blue;
 	z-index: 69;
 	border-radius: 10px;
-	border: 2px solid #2ABBFF;
+	border: 3px solid @orange;
 	-webkit-box-shadow: 0px 0px 29px #050B0E;
 	-moz-box-shadow: 0px 0px 29px #050B0E;
 	box-shadow: 0px 0px 29px #050B0E;
 	left: 38%;
-	top: 32%;
+	top: 18%;
 	width: 600px;
 	padding: 5px 20px;
 	text-align: center;
+
+	h1 {
+		color: @orange;
+	}
+	
+	.form-group {
+		padding-top: 5px;
+	}
+	.form-control {
+		border: 2px solid @orange
+	}
+
+	.form-input-style {
+		padding-bottom: 5px;
+
+	}
+	#profil-picture{
+		border-radius:50px;	
+		border: 2px solid @orange;
+	}
+
 
 	.btn {
 		width: 150px;

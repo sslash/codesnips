@@ -8,14 +8,13 @@ angular.module('codesnipzApp')
 
 angular.module('codesnipzApp')
     .service('UserInfo', function () {
-        var user = {};
-
+    var user = {};
         return {
             getProperty: function () {
                 return user;
             },
-            setProperty: function(user) {
-                this.user = user;
+            setProperty: function(u) {
+                user = u;
             }
         };
     });

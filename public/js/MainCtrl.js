@@ -9,39 +9,53 @@ angular.module('codesnipzApp')
 			email: '',
 			sessionId: '',
 			gravatar: '',
+			message: '',
 			showerror: false,
 			showRegister: false,
 			showAvatar: false,
 			showRecovery: false,
 			showErrorMessage: false,
 			showSuccessMessage: false,
-			warningMessage: false
+			warningMessage: false,
+			showUserInfo: false
 		};
 		$scope.user = {
 			username: '',
 			gravatar: '',
-			email: ''
+			email: '',
+			password: '',
+			firstName: '',
+			lastName: ''
 		}
 
 		$scope.init = function() {
-			
+
 			/* setting username on site*/
 			if (window.user !== null) {
 				UserInfo.setProperty(window.user);
-				updateUserInfo(window.user);
+				$scope.modal.showAvatar = true;
+				updateUserInfo();
+
 			}
+		};
+		$scope.updateUserProfile = function() {
+			profileUpdate({
+				firstName: $scope.user.firstName,
+				lastName: $scope.user.lastName
+			});
+
 		};
 
 		$scope.recoverPasswordButton = function() {
 			$scope.showLogin = false;
+			$scope.modal.showErrorMessage = false;
+
 			showRecoveryModal();
 		}
 
-		$scope.CheckAuth = function() {
-			auth($cookies['sessionID']);
-		};
-
 		$scope.openLoginClicked = function() {
+			$scope.modal.showErrorMessage = false;
+			$scope.showLogin = true;
 			show();
 		};
 
@@ -71,13 +85,18 @@ angular.module('codesnipzApp')
 				method: 'GET',
 				url: '/logout'
 			}).success(function(data, status) {
-				updateUserInfo(false);
+				stopSession();
 			}).error(function(data, status) {
 				console.log("Failed to end session! " + status);
 			});
 
 
 		}
+		var stopSession = function() {
+			UserInfo.setProperty("");
+			$scope.modal.showAvatar = false;
+
+		};
 
 		$scope.registerClicked = function(formInfo) {
 			if (!$scope.modal.showRegister) {
@@ -87,8 +106,8 @@ angular.module('codesnipzApp')
 			if (!validateFormInfo(formInfo, false)) {
 				return;
 			}
-
-			$scope.errorMessage = "";
+			$scope.modal.showErrorMessage = false;
+			$scope.modal.message = "";
 
 
 			registerUserToServer({
@@ -102,7 +121,8 @@ angular.module('codesnipzApp')
 			if (!validateFormInfo(formInfo, true)) {
 				return;
 			}
-			$scope.errorMessage = "Sending e-post";
+			$scope.modal.showErrorMessage = false;
+			$scope.modal.message = "Sending e-post";
 			$scope.modal.warningMessage = true;
 			sendRecoveryMail({
 				email: $scope.user.email
@@ -113,23 +133,23 @@ angular.module('codesnipzApp')
 
 			if (!OnlyEmail) {
 				if (formInfo.username.$error.required) {
-					$scope.errorMessage = "Username is required";
+					$scope.modal.message = "Username is required";
 					$scope.modal.showErrorMessage = true;
 					return false;
 				}
 				if (formInfo.password.$error.required) {
-					$scope.errorMessage = "Password is required";
+					$scope.modal.message = "Password is required";
 					$scope.modal.showErrorMessage = true;
 					return false;
 				}
 			}
 			if (formInfo.email.$error.required) {
-				$scope.errorMessage = "Email is required";
+				$scope.modal.message = "Email is required";
 				$scope.modal.showErrorMessage = true;
 				return false;
 			}
 			if (formInfo.email.$error.email) {
-				$scope.errorMessage = "Please write a vaild email";
+				$scope.modal.message = "Please write a vaild email";
 				$scope.modal.showErrorMessage = true;
 				return false;
 			}
@@ -141,11 +161,13 @@ angular.module('codesnipzApp')
 			$timeout.cancel(timeOut);
 		};
 
-
+		$scope.openUserInfo = function() {
+			show();
+			$scope.modal.showUserInfo = true;
+		}
 
 		var show = function() {
 			$('#main-overlay').show();
-			$scope.showLogin = true;
 		};
 
 		var showRecoveryModal = function() {
@@ -165,6 +187,7 @@ angular.module('codesnipzApp')
 			}
 			$scope.modal.showErrorMessage = false;
 			$scope.modal.showSuccessMessage = false;
+			$scope.modal.showUserInfo = false;
 		};
 
 
@@ -180,8 +203,9 @@ angular.module('codesnipzApp')
 				$scope.modal.showAvatar = true;
 				hide();
 			}).error(function(data, status) {
-				$scope.modal.showerror = true;
-				$scope.errorMessage = "Wrong username or password!"
+				$scope.modal.message = "Wrong username or password!";
+				$scope.modal.showErrorMessage = true;
+
 				console.log("Failed to Auth! " + status);
 			});
 		};
@@ -197,18 +221,8 @@ angular.module('codesnipzApp')
 				hide();
 			}).error(function(data, status) {});
 		};
-		var updateUserInfo = function(login) {
-			if (!login) {
-				$scope.modal.showAvatar = false;
-				$scope.user.username = "";
-			} else {
-				$scope.user.username = login.username;
-				$scope.user.gravatar = login.gravatar;
-				$scope.modal.showAvatar = true;
-
-			}
-
-
+		var updateUserInfo = function() {
+			$scope.user = UserInfo.getProperty();
 		}
 
 		var sendRecoveryMail = function(recoverInfo) {
@@ -218,16 +232,35 @@ angular.module('codesnipzApp')
 				data: recoverInfo,
 			}).success(function(data, status) {
 				$scope.modal.warningMessage = false;
-				$scope.errorMessage = "You will recive a recovery mail in a few moments";
+				$scope.modal.message = "You will recive a recovery mail in a few moments";
 				$scope.modal.showSuccessMessage = true;
 				closeModal();
 			}).error(function(data, status) {
 				$scope.modal.warningMessage = false;
-				$scope.errorMessage = "Wrong mail, please try with a another mail";
+				$scope.modal.message = "This email is not registered.";
 				$scope.modal.showErrorMessage = true;
 
 			});
 		};
+
+		var profileUpdate = function(profileInfo) {
+			$http({
+				method: 'POST',
+				url: '/users/updateProfile',
+				data: profileInfo,
+			}).success(function(data, status) {
+				$scope.modal.message = "Information saved";
+				$scope.modal.showSuccessMessage = true;
+
+			}).error(function(data, status) {
+				$scope.modal.message = "Sorry, An error has occurd";
+				$scope.modal.showErrorMessage = true;
+
+			});
+
+		}
+
+
 		var closeModal = function() {
 			timeOut = $timeout(function() {
 				$scope.closeClicked();
