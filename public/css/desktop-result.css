@@ -6139,6 +6139,8 @@ body {
 }
 .modal .modal-inner {
   position: relative;
+  background-color: #0e314a;
+  border: 3px solid #ffbe3a;
 }
 .modal .modal-header {
   background: #ecf0f1;
