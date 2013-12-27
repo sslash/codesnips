@@ -26,7 +26,7 @@ angular.module('codesnipzApp')
 			password: '',
 			firstName: '',
 			lastName: ''
-		}
+		};
 
 		$scope.init = function() {
 
@@ -38,6 +38,7 @@ angular.module('codesnipzApp')
 
 			}
 		};
+
 		$scope.updateUserProfile = function() {
 			profileUpdate({
 				firstName: $scope.user.firstName,
@@ -51,7 +52,7 @@ angular.module('codesnipzApp')
 			$scope.modal.showErrorMessage = false;
 
 			showRecoveryModal();
-		}
+		};
 
 		$scope.openLoginClicked = function() {
 			$scope.modal.showErrorMessage = false;
@@ -71,14 +72,14 @@ angular.module('codesnipzApp')
 				username: username,
 				password: password
 			});
-		}
+		};
 
 		var loginUser = function() {
 			authenticateToServer({
 				username: $scope.user.username,
 				password: $scope.user.password
 			});
-		}
+		};
 
 		var terminateUserSession = function() {
 			$http({
@@ -91,7 +92,7 @@ angular.module('codesnipzApp')
 			});
 
 
-		}
+		};
 		var stopSession = function() {
 			UserInfo.setProperty("");
 			$scope.modal.showAvatar = false;
