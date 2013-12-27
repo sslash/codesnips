@@ -6114,6 +6114,9 @@ body {
 #modal-area .form-group {
   padding-top: 5px;
 }
+#modal-area .form-control {
+  border: 2px solid #ffbe3a;
+}
 #modal-area .form-input-style {
   padding-bottom: 5px;
 }
