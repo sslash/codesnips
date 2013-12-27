@@ -22,35 +22,35 @@
 
 	<ul>
 		<li ng-repeat = "snippet in snippetsCollection" 
-			ng-click="expandSnippet(snippet)">
-			<div class="row snippets-list">
+		ng-click="expandSnippet(snippet)">
+		<div class="row snippets-list">
 			<div class="col-lg-3">
 				<h5>{{snippet.title}}<br>
-				<small>{{snippet.description}}<small>
-				<h5>
-			</div>
-			<div class="col-lg-3">
-				<h5>{{snippet.category}}</h5>
-				<div ng-repeat = "tag in snippet.tags">
-				{{tag}},
-				</div>
-			</div>
-			<div class="col-lg-3">
-				<h5>{{snippet.timeCreated | date:'MM/dd/yyyy @ h:mma'}}</h5>
-			</div>
-			<div class="col-lg-3">
-				<img ng-src={{snippet.owner.gravatar}}>
-				<p>{{snippet.owner.username}}</p>
-			</div>
-			</div>
-			<div class="row expand-code" ng-show="snippet.expandCode">
-					<div class="editor" id="editor_{{snippet._id}}">	
-						<p class="lead">{{snippet.code}}</p>
+					<small>{{snippet.description}}<small>
+						<h5>
+						</div>
+						<div class="col-lg-3">
+							<h5>{{snippet.category}}</h5>
+							<div ng-repeat = "tag in snippet.tags">
+								{{tag}},
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<h5>{{snippet.timeCreated | date:'MM/dd/yyyy @ h:mma'}}</h5>
+						</div>
+						<div class="col-lg-3">
+							<img ng-src={{snippet.owner.gravatar}}>
+							<p>{{snippet.owner.username}}</p>
+						</div>
 					</div>
-			</div>
-		</li>
-	</ul>
-	<p class="lead error" ng-hide="libraryBoolean.login"> Log in to get your own library </p>
+					<div class="row expand-code" ng-show="snippet.expandCode">
+						<div class="editor" id="editor_{{snippet._id}}">	
+							<p class="lead">{{snippet.code}}</p>
+						</div>
+					</div>
+				</li>
+			</ul>
+			<p class="lead error" ng-hide="libraryBoolean.login"> Log in to get your own library </p>
 
-</section>
-</div>
+		</section>
+	</div>

@@ -1,17 +1,19 @@
-<div id="top-nav" role="navigation">
+<div id="top-nav" role="navigation" ng-controller="NavCtrl" ng-init ="init()">
   <div class="nav-logo">
     <a class="navbar-brand" href="#">CODESNIPS</a>
     <i class="fa fa-code fa-2x"></i>
   </div>  
 
   <div class="nav-right">
-      <span class="inline-search"><i class="fa fa-search fa-fw"></i></span>
-      <input type="search" placeholder="Search">
+    <span class="inline-search"><i class="fa fa-search fa-fw"></i></span>
+    <input class="nav-search" type="search" placeholder="Search" ng-model="searchField" ng-keyup="searchFieldKeyUp($event)">
 
-    <span class="fa-stack add-btn">
-		<i class="fa fa-circle fa-stack-2x"></i>
-		<i class="fa fa-plus fa-stack-1x"></i>
-	</span>
+    <span class="fa-stack add-btn" ng-click="showPopup = true">
+      <i class="fa fa-circle fa-stack-2x"></i>
+      <i class="fa fa-plus fa-stack-1x"></i>
+    </span>
 
+    <section modal when="showPopup" class="modal">
+    </section>
   </div>
 </div>

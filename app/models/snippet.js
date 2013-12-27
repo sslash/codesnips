@@ -8,6 +8,7 @@ var Snippet = mongoose.model('snippets', new mongoose.Schema({
 	title: String,
 	code: String,
 	tags: [],
+	language : String,
 	category: String,
 	description: String,
 	stackOverflowUrl: String,

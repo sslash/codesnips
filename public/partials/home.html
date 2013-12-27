@@ -1,17 +1,45 @@
 <div ng-init="init()">
-	<!--
-	<div ng-keyup="AddFormUp($event)">
-	<section id="addButton">
-			<input ng-click="addClicked()" class="btn btn-large btn-primary" type="submit" value="Add">
-		</section>
-		<section ng-include="" src=" 'partials/submitForm.html' "  id="addCodesnip">			
-		</section>
-	</div>
-	-->
 	<section id="banner">
 		<h1>Codesnips</h1>
 		<p class="lead">Your own personalized Code snippet library</p>
-		<input type="text" class="form-control" placeholder="Search" ng-model="searchField" ng-keyup="searchFieldKeyUp($event)">
+	</section>
+
+	<section id="snippets">
+		<div class="content">
+
+			<section class="listArea">
+				<ul>
+					<li ng-repeat = "snippet in snippetsCollection"	ng-click="expandSnippet(snippet)">
+						<div class="row snippets-list-home">
+							<div class="col-lg-1">
+								<img ng-if="!snippet.owner.gravatar"class="rounded" src="img/yoda.jpeg">
+								<img ng-if="snippet.owner.gravatar" class="rounded" src="{{snippet.owner.gravatar}}">
+								<p>{{snippet.owner.username}}</p>
+							</div>
+
+							<div class="col-lg-6">
+								<h5>{{snippet.title}}</h5>
+								<p>{{snippet.description}}</p>
+								<p class="font-xsmall">Created: {{snippet.timeCreated | date:'MM/dd/yyyy @ h:mma'}}</p>
+							</div>
+							<div class="col-lg-5">
+								<h5>{{snippet.category}}</h5>
+								<span class="tags font-xsmall" ng-repeat="tag in snippet.tags">
+									{{tag}},
+								</span>
+							</div>
+						</div>
+						<div class="row expand-code" ng-show="snippet.expandCode">
+							<div class="editor" id="editor_{{snippet._id}}">	
+							</div>
+						</div>
+					</li>
+				</ul>
+			</section>
+
+
+
+		</div>
 	</section>
 
 </div>
