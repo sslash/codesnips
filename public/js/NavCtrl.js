@@ -28,6 +28,7 @@ angular.module('codesnipzApp')
     };
 
     $scope.closeClicked = function() {
+        console.log("INIW)");
         initModal();
     };
 

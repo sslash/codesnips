@@ -14,14 +14,13 @@ var userController = require('../app/controllers/userController');
 
 
 module.exports = function(app, passport) {
+	'use strict'
 
 	// controllers
 	app.get('/', userController.index);
 	app.get('/snippets', auth.requiresLogin, snippetController.index);
 	app.get('/snippets/:id', snippetController.getById);
 	app.post('/snippets', auth.requiresLogin, snippetController.create);
-
-
 	app.post('/users/', userController.register);
 
 	app.get('/login', userController.login);
