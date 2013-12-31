@@ -252,7 +252,7 @@ angular.module('codesnipzApp')
 			}).success(function(data, status) {
 				$scope.modal.message = "Information saved";
 				$scope.modal.showSuccessMessage = true;
-
+				 closeModal();
 			}).error(function(data, status) {
 				$scope.modal.message = "Sorry, An error has occurd";
 				$scope.modal.showErrorMessage = true;
