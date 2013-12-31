@@ -27,6 +27,7 @@ angular.module('codesnipzApp')
         initModal();
     };
 
+
     $scope.closeClicked = function() {
         console.log("INIW)");
         initModal();
@@ -34,7 +35,7 @@ angular.module('codesnipzApp')
 
     $scope.searchFieldKeyUp = function($event){
         if($event.keyCode === 13){
-            $location.path('/library').search( {'q' : $scope.searchField});
+            $location.path('/home').search( {'q' : $scope.searchField});
         }
     };
 

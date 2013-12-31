@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('codesnipzApp')
-.controller('HomeCtrl', function($scope, $http, $timeout, $location, UserInfo, CodeSnippet) {
+.controller('HomeCtrl', function($scope, $http, $timeout, $location, $routeParams, UserInfo, CodeSnippet) {
 
 	$scope.snippetsCollection = [];
 
@@ -15,6 +15,15 @@ angular.module('codesnipzApp')
 		$scope.AddFunctionFailed = false;
 		$scope.showForm = true;
 		user = UserInfo.getProperty();
+
+
+		$scope.params = $routeParams;
+        if ($routeParams) {
+            if ($routeParams.q) {
+                $scope.query = { q: $routeParams.q };
+            }
+        }
+
 		$scope.fetchSnippetsCollection();
 	};
 
@@ -29,7 +38,7 @@ angular.module('codesnipzApp')
 	};
 
 	$scope.fetchSnippetsCollection = function() {
-		CodeSnippet.query(function(snips){
+		CodeSnippet.query($scope.query, function(snips){
 			$scope.snippetsCollection = snips;
 		});
 	};

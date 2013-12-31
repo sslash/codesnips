@@ -15,8 +15,6 @@ exports.index = function(req, res) {
   var query = {};
   if (req.query.q){
     query.title = new RegExp(req.query.q, 'ig');
-  } else if (req.query.by) {
-    query.owner = req.query.by;
   }
 
   Snippet
@@ -30,6 +28,21 @@ exports.index = function(req, res) {
       }
     });
 };
+
+exports.byUser = function(req, res) {
+  var query = {};
+  query.owner = req.params.id;
+  Snippet
+    .find(query)
+    .populate('owner')
+    .exec(function(err, snippets) {
+      if (err) { 
+        res.send(err); 
+      } else {
+        return res.send(snippets);
+      }
+    });
+}
 
 exports.getById = function(req, res) {
   Snippet.findById(req.params.id,
