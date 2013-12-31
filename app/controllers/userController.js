@@ -241,8 +241,6 @@ var sendRecoverymail = function(user, res) {
 		smtpTransport.close(); // shut down the connection pool, no more messages
 		res.send({}, 200);
 	});
-
-
 }
 var verifyEmailRegistration = function(username, email, res) {
 	User.findOne({
