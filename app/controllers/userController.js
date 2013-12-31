@@ -76,7 +76,7 @@ exports.register = function(req, res) {
 		if (err) {
 			console.log("ERROR: " + JSON.stringify(err) + "::" + utils.errors(err.errors));
 			return res.send(utils.errors(err.errors));
-		} else { 
+		} else { 
 			if (user) {
 				gravatar(user);
 			}
@@ -170,7 +170,7 @@ exports.updateProfile = function(req, res) {
 				if (err) {
 					console.log("ERROR: " + JSON.stringify(err) + "::" + utils.errors(err.errors));
 					return res.send(utils.errors(err.errors));
-				} else { 
+				} else { 
 					res.send(user);
 				}
 			
