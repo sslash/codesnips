@@ -12,7 +12,7 @@ angular.module('codesnipzApp')
         };
 
         $scope.searchField = '';
-        $scope.query = null;
+        $scope.query = {};
 
         $scope.init = function() {
             $scope.params = $routeParams;
@@ -59,16 +59,17 @@ angular.module('codesnipzApp')
         };
 
         $scope.fetchSnippetsCollection = function() {
-            var query = {};
+            if ( user ){
+                $scope.query.userId = user._id;
 
-            CodeSnippet.query($scope.query, function(snips) {
-                $scope.snippetsCollection = snips;
-                $scope.libraryBoolean.login = true;
-            
-            }, function(error){
-                console.log(error.status);
-            });
-
+                CodeSnippet.query($scope.query, function(snips) {
+                    $scope.snippetsCollection = snips;
+                    $scope.libraryBoolean.login = true;
+                
+                }, function(error){
+                    console.log(error.status);
+                });
+            }
         };
 
         $scope.menu = function() {

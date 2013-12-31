@@ -2,6 +2,6 @@
 
 angular.module('codesnipzApp')
 	.factory('CodeSnippet', function($resource) {
-		return $resource('/snippets/', {
+		return $resource('/snippets/:userId', {
 		});
 	});

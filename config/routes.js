@@ -18,8 +18,8 @@ module.exports = function(app, passport) {
 
 	// controllers
 	app.get('/', userController.index);
-	app.get('/snippets', auth.requiresLogin, snippetController.index);
-	app.get('/snippets/:id', snippetController.getById);
+	app.get('/snippets/:id', auth.requiresLogin, snippetController.byUser);
+	app.get('/snippets', snippetController.index);
 	app.post('/snippets', auth.requiresLogin, snippetController.create);
 	app.post('/users/', userController.register);
 
@@ -36,7 +36,7 @@ module.exports = function(app, passport) {
 			//failureRedirect: '/login',
 			//failureFlash: 'Invalid email or password.'
 		}), userController.session);
-	
+
 	app.get('/users/:userId', userController.show);
 
 	app.param('userId', userController.user);
