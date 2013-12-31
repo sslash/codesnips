@@ -1,9 +1,9 @@
 #modal-area{
 	position: absolute;
-	background-color: @left-blue;
+	background-color: @white;
 	z-index: 69;
 	border-radius: 10px;
-	border: 3px solid @orange;
+	border: 3px solid @left-blue;
 	-webkit-box-shadow: 0px 0px 29px #050B0E;
 	-moz-box-shadow: 0px 0px 29px #050B0E;
 	box-shadow: 0px 0px 29px #050B0E;
@@ -14,14 +14,14 @@
 	text-align: center;
 
 	h1 {
-		color: @orange;
+		color: @left-blue;
 	}
 	
 	.form-group {
 		padding-top: 5px;
 	}
 	.form-control {
-		border: 2px solid @orange
+		border: 1px solid @left-blue
 	}
 
 	.form-input-style {
@@ -30,9 +30,8 @@
 	}
 	#profil-picture{
 		border-radius:50px;	
-		border: 2px solid @orange;
+		border: 1px solid @left-blue;
 	}
-
 
 	.btn {
 		width: 150px;
@@ -54,20 +53,24 @@
 	width: 35%;
 	display: block;
 	z-index: 100;
-	color: @dark;
 	top:50px;
 	text-align: center;
+	color : @left-blue;
 
 	.modal-inner{
 		position:relative;
+		border: 3px solid @left-blue;
+	}
+	.input-field {
+		border: 1px solid @left-blue;
 	}
 
 	.modal-header {
 		background:@white;
 		-moz-box-shadow: 0 0 10px rgba(0,0,0,0.8);   
-	    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.8);   
-	    box-shadow: 0 0 10px rgba(0,0,0,0.8);
-	    padding:1px;
+		-webkit-box-shadow: 0 0 10px rgba(0,0,0,0.8);   
+		box-shadow: 0 0 10px rgba(0,0,0,0.8);
+		padding:1px;
 	}
 
 	.modal-body {

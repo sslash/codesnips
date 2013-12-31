@@ -13,14 +13,21 @@
 }
 
 .tag-content{
-	position: absolute;
-	top: -8px;
-	left: 15px;
+	
 }
 
 .tags{
 	padding: 4px;
-	border: 1px solid #ccc;
+	border: 1px solid @left-blue;
 	margin: 0 2px;
 	border-radius: 3px;
+	cursor:pointer;
+	background-color: @orange;
+
+	&:hover {
+		background-color: @state-danger-text;
+		color:            @white;
+		border-color: 	  @state-danger-border;
+	}
+
 }

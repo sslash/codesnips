@@ -3,7 +3,19 @@
 	color: #000;
 	cursor:pointer;
 	.border-left-radius(4px);
-	padding: 3px 7px 5px 7px;
+	padding: 2px 7px 5px 7px;
 	margin: -3px;
 	border: 1px solid #02070A;
+}
+
+.submit-btn{
+	background-color: @left-blue;
+	color: @white;
+	&:hover {
+		background-color: @light-blue;
+	}
+
+	&:focus, &:hover {
+		color:@white;
+	}
 }

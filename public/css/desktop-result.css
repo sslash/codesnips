@@ -4856,10 +4856,10 @@ body {
 }
 #modal-area {
   position: absolute;
-  background-color: #0e314a;
+  background-color: #ecf0f1;
   z-index: 69;
   border-radius: 10px;
-  border: 3px solid #ffbe3a;
+  border: 3px solid #0e314a;
   -webkit-box-shadow: 0px 0px 29px #050B0E;
   -moz-box-shadow: 0px 0px 29px #050B0E;
   box-shadow: 0px 0px 29px #050B0E;
@@ -4870,20 +4870,20 @@ body {
   text-align: center;
 }
 #modal-area h1 {
-  color: #ffbe3a;
+  color: #0e314a;
 }
 #modal-area .form-group {
   padding-top: 5px;
 }
 #modal-area .form-control {
-  border: 2px solid #ffbe3a;
+  border: 1px solid #0e314a;
 }
 #modal-area .form-input-style {
   padding-bottom: 5px;
 }
 #modal-area #profil-picture {
   border-radius: 50px;
-  border: 2px solid #ffbe3a;
+  border: 1px solid #0e314a;
 }
 #modal-area .btn {
   width: 150px;
@@ -4904,12 +4904,16 @@ body {
   width: 35%;
   display: block;
   z-index: 100;
-  color: #333333;
   top: 50px;
   text-align: center;
+  color: #0e314a;
 }
 .modal .modal-inner {
   position: relative;
+  border: 3px solid #0e314a;
+}
+.modal .input-field {
+  border: 1px solid #0e314a;
 }
 .modal .modal-header {
   background: #ecf0f1;
@@ -4941,9 +4945,20 @@ body {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 4px;
-  padding: 3px 7px 5px 7px;
+  padding: 2px 7px 5px 7px;
   margin: -3px;
   border: 1px solid #02070A;
+}
+.submit-btn {
+  background-color: #0e314a;
+  color: #ecf0f1;
+}
+.submit-btn:hover {
+  background-color: #08a1b1;
+}
+.submit-btn:focus,
+.submit-btn:hover {
+  color: #ecf0f1;
 }
 img.rounded {
   border-radius: 50%;
@@ -4961,16 +4976,18 @@ img.rounded {
 .new-password-form #submit-button {
   width: 50%;
 }
-.tag-content {
-  position: absolute;
-  top: -8px;
-  left: 15px;
-}
 .tags {
   padding: 4px;
-  border: 1px solid #ccc;
+  border: 1px solid #0e314a;
   margin: 0 2px;
   border-radius: 3px;
+  cursor: pointer;
+  background-color: #ffbe3a;
+}
+.tags:hover {
+  background-color: #a94442;
+  color: #ecf0f1;
+  border-color: #ebccd1;
 }
 /* Page/views */
 header {
@@ -5107,7 +5124,6 @@ footer {
   left: 0;
   -webkit-box-shadow: 0 0 3px #000000;
   box-shadow: 0 0 3px #000000;
-  border-radius: 5px;
   border: 1px solid #ecf0f1;
 }
 #library-nav {
