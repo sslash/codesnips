@@ -212,15 +212,21 @@ angular.module('codesnipzApp')
 		};
 
 		var registerUserToServer = function(authData) {
+			console.log("ok2k");
 			$http({
 				method: 'POST',
 				url: '/users',
 				data: authData,
 			}).success(function(data, status) {
+				console.log(data);
+				console.log(status);
 				$scope.modal.showRegister = false;
 				loginUser();
 				hide();
-			}).error(function(data, status) {});
+			}).error(function(data, status) {
+				$scope.modal.message = "Username or email is already taken";
+				$scope.modal.showErrorMessage = true;
+			});
 		};
 		var updateUserInfo = function() {
 			$scope.user = UserInfo.getProperty();

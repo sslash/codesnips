@@ -68,6 +68,7 @@ var gravatar = function(user) {
 };
 
 exports.register = function(req, res) {
+	verifyEmailRegistration(req.body.username, req.body.email, res);
 	var user = new User(req.body)
 	user.provider = 'local'
 	user.save(function(err) {
@@ -159,104 +160,129 @@ exports.updateProfile = function(req, res) {
 	var userId = req.session.passport.user;
 
 	User.findById(userId, function(err, user) {
-			if (err) {
-				throw new Error(err);
-			} else {
-				console.log(req.body.firstName + " " + req.body.lastName);
-				user.firstName = req.body.firstName;
-				user.lastName = req.body.lastName;
-				user.save(function(err) {
-					if (err) {
-						console.log("ERROR: " + JSON.stringify(err) + "::" + utils.errors(err.errors));
-						return res.send(utils.errors(err.errors));
-					} else { 
-						res.send(user);
-					}
-					// user.save({firstName:req.body.firstName, lastName:req.body.lastName});
-					// console.log(req.user);	
-					// res.send(user);
+		if (err) {
+			throw new Error(err);
+		} else {
+			console.log(req.body.firstName + " " + req.body.lastName);
+			user.firstName = req.body.firstName;
+			user.lastName = req.body.lastName;
+			user.save(function(err) {
+				if (err) {
+					console.log("ERROR: " + JSON.stringify(err) + "::" + utils.errors(err.errors));
+					return res.send(utils.errors(err.errors));
+				} else { 
+					res.send(user);
+				}
+				// user.save({firstName:req.body.firstName, lastName:req.body.lastName});
+				// console.log(req.user);	
+				// res.send(user);
 
-				});
-			}
-		});
-	};
+			});
+		}
+	});
+};
 
 
-	/**
-	 * Session
-	 */
-	exports.session = login;
+/**
+ * Session
+ */
+exports.session = login;
 
-	exports.signin = function(req, res) {
+exports.signin = function(req, res) {
 
+}
+
+exports.authCallback = function(req, res) {
+
+}
+
+exports.user = function(req, res) {
+
+}
+
+
+var sendRecoverymail = function(user, res) {
+	/*should be put in a own local function*/
+	var localUrl = "http://localhost:3000/#/newPassword/";
+	var url = "http://codesnipz.herokuapp.com//#/newPassword/";
+
+	var cipher = crypto.createCipher('aes-256-cbc', 'd6F3Efeq');
+	var crypted = cipher.update(user.username + Math.random(), 'utf8', 'hex');
+	crypted += cipher.final('hex');
+	user.recoverPassword = crypted;
+	user.save();
+	/*												*/
+
+
+	// create reusable transport method (opens pool of SMTP connections)
+	var smtpTransport = nodemailer.createTransport("SMTP", {
+		service: "Gmail",
+		auth: {
+			user: "noreplycodesnippets@gmail.com",
+			pass: "codesnippets"
+		}
+	});
+
+	// setup e-mail data with unicode symbols
+	var mailOptions = {
+		from: "Codesnippets <noreply@codesnippets.com>", // sender address
+		to: user.email, // list of receivers
+		subject: "Reset password for codesnippet", // Subject line
+		text: "Hello " + user.username + "\r\n\r\nPlease follow this link: " + url + crypted + " in order to set a new password for codesnippet", // plaintext body
+		//html: "<h1> Hello " + user.username + "</h1> <p> Please follow this link: " +crypted+ " in order to set a new password for codesnippet" // html body
 	}
 
-	exports.authCallback = function(req, res) {
-
-	}
-
-	exports.user = function(req, res) {
-
-	}
-
-
-	var sendRecoverymail = function(user, res) {
-		/*should be put in a own local function*/
-		var url = "http://localhost:3000/#/newPassword/"
-		var cipher = crypto.createCipher('aes-256-cbc', 'd6F3Efeq');
-		var crypted = cipher.update(user.username + Math.random(), 'utf8', 'hex');
-		crypted += cipher.final('hex');
-		user.recoverPassword = crypted;
-		user.save();
-		/*												*/
-
-
-		// create reusable transport method (opens pool of SMTP connections)
-		var smtpTransport = nodemailer.createTransport("SMTP", {
-			service: "Gmail",
-			auth: {
-				user: "noreplycodesnippets@gmail.com",
-				pass: "codesnippets"
-			}
-		});
-
-		// setup e-mail data with unicode symbols
-		var mailOptions = {
-			from: "Codesnippets <noreply@codesnippets.com>", // sender address
-			to: user.email, // list of receivers
-			subject: "Reset password for codesnippet", // Subject line
-			text: "Hello " + user.username + "\r\n\r\nPlease follow this link: " + url + crypted + " in order to set a new password for codesnippet", // plaintext body
-			//html: "<h1> Hello " + user.username + "</h1> <p> Please follow this link: " +crypted+ " in order to set a new password for codesnippet" // html body
+	// send mail with defined transport object
+	smtpTransport.sendMail(mailOptions, function(error, response) {
+		if (error) {
+			console.log(error);
+		} else {
+			console.log("Message sent: " + response.message);
 		}
 
-		// send mail with defined transport object
-		smtpTransport.sendMail(mailOptions, function(error, response) {
-			if (error) {
-				console.log(error);
-			} else {
-				console.log("Message sent: " + response.message);
-			}
-
-			smtpTransport.close(); // shut down the connection pool, no more messages
-			res.send({}, 200);
-		});
+		smtpTransport.close(); // shut down the connection pool, no more messages
+		res.send({}, 200);
+	});
 
 
-	}
+}
+var verifyEmailRegistration = function(username, email, res) {
+	User.findOne({
+		'email': email
+	}, function(err, user) {
+		if (user != null) {
+			res.send({
+				'err': 'Mail found'
+			}, 404);
+		} else {
+			verifyUserRegistration(username, res);
+		}
+	});
+}
+var verifyUserRegistration = function(username, res) {
+	User.findOne({
+		'username': username
+	}, function(err, user) {
+		if (user != null) {
+			res.send({
+				'err': 'Username found'
+			}, 404);
+		}
+	});
+}
 
+var verifyEmail = function(email, res) {
+	User.findOne({
+		'email': email
+	}, function(err, user) {
+		if (user === null) {
+			res.send({
+				'err': 'Mail not found'
+			}, 404);
+		} else {
+			sendRecoverymail(user, res);
 
-	var verifyEmail = function(email, res) {
-		User.findOne({
-			'email': email
-		}, function(err, user) {
-			if (user === null) {
-				res.send({
-					'err': 'Mail not found'
-				}, 404);
-			} else {
-				sendRecoverymail(user, res);
+		}
+	});
 
-			}
-		});
-
-	}
+}
