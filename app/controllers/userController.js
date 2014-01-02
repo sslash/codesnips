@@ -4,7 +4,8 @@ var mongoose = require('mongoose'),
 	User = mongoose.model('User'),
 	utils = require('../../lib/utils'),
 	nodemailer = require("nodemailer"),
-	crypto = require('crypto');
+	crypto = require('crypto'),
+	Q = require('q');
 
 exports.getUserByHash = function(req, res) {
 	User.find({
@@ -68,6 +69,7 @@ var gravatar = function(user) {
 };
 
 exports.register = function(req, res) {
+	verifyEmailRegistration(req.body.username, req.body.email, res);
 	var user = new User(req.body)
 	user.provider = 'local'
 	user.save(function(err) {
@@ -114,14 +116,13 @@ var login = function(req, res) {
 
 }
 
-
-
 exports.temp = function(req, res) {
 
 
 }
 
 exports.login = function(req, res) {
+
 
 }
 exports.recoverPassword = function(req, res) {
@@ -143,6 +144,7 @@ exports.recoverPassword = function(req, res) {
 
 }
 exports.logout = function(req, res) {
+	var deferred = Q.defer();
 	req.session.destroy();
 	res.send({}, 200);
 }
@@ -162,13 +164,22 @@ exports.updateProfile = function(req, res) {
 		if (err) {
 			throw new Error(err);
 		} else {
-			user.update({firstName: req.body.firstName});
-			console.log(user);
-			res.send(req.user);
+			user.firstName = req.body.firstName;
+			user.lastName = req.body.lastName;
+			user.save(function(err) {
+				if (err) {
+					console.log("ERROR: " + JSON.stringify(err) + "::" + utils.errors(err.errors));
+					return res.send(utils.errors(err.errors));
+				} else { 
+					res.send(user);
+				}
+			
 
+			});
 		}
 	});
-}
+};
+
 
 /**
  * Session
@@ -190,7 +201,9 @@ exports.user = function(req, res) {
 
 var sendRecoverymail = function(user, res) {
 	/*should be put in a own local function*/
-	var url = "http://localhost:3000/#/newPassword/"
+	var localUrl = "http://localhost:3000/#/newPassword/";
+	var url = "http://codesnipz.herokuapp.com//#/newPassword/";
+
 	var cipher = crypto.createCipher('aes-256-cbc', 'd6F3Efeq');
 	var crypted = cipher.update(user.username + Math.random(), 'utf8', 'hex');
 	crypted += cipher.final('hex');
@@ -231,7 +244,30 @@ var sendRecoverymail = function(user, res) {
 
 
 }
-
+var verifyEmailRegistration = function(username, email, res) {
+	User.findOne({
+		'email': email
+	}, function(err, user) {
+		if (user != null) {
+			res.send({
+				'err': 'Mail found'
+			}, 404);
+		} else {
+			verifyUserRegistration(username, res);
+		}
+	});
+}
+var verifyUserRegistration = function(username, res) {
+	User.findOne({
+		'username': username
+	}, function(err, user) {
+		if (user != null) {
+			res.send({
+				'err': 'Username found'
+			}, 404);
+		}
+	});
+}
 
 var verifyEmail = function(email, res) {
 	User.findOne({

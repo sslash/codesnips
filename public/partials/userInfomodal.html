@@ -9,13 +9,15 @@
 			<div class="form-input-style"><input name ="passwordOne" type="password" class="form-control" ng-model="user.passwordOne" placeholder="Set new password" > </div>
 			<div class="form-input-style"><input name ="passwordTwo" type="password" class="form-control" ng-model="user.passwordTwo" placeholder="Repeat new password" > </div>
 		</div> 
+	</div>
+
+
+	<div class="form-group">
 		<span class="error" ng-show="modal.showErrorMessage">{{modal.message}}</span>
 		<span class="label label-success" ng-show="modal.showSuccessMessage">{{modal.message}}</span>
 		<span class="label label-warning" ng-show="modal.warningMessage">{{modal.message}}</span>
 	</div>
-
-
-	<input type="button" ng-click="updateUserProfile()" class="btn btn-primary" value="Update">
+	<input type="button" ng-click="updateUserProfile()" class="btn submit-btn" value="Update">
 </div>
 
 

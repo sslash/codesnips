@@ -2,8 +2,10 @@ var express = require('express');
 var mongoStore = require('connect-mongo')(express);
 var mongoConfig = require('./mongoConfig');
 var pkg = require('../package');
+var engine = require('ejs-locals');
 
 module.exports = function (app, config, passport) {
+  'use strict'
   app.set('showStackError', true);
 
   // use express favicon
@@ -14,7 +16,9 @@ module.exports = function (app, config, passport) {
 
   // views config
   app.set('views', config.root + '/app/views');
-  app.set('view engine', 'ejs');
+
+app.engine('ejs', engine);
+app.set('view engine', 'ejs');
 
   app.configure(function () {
     // bodyParser should be above methodOverride
@@ -38,9 +42,9 @@ module.exports = function (app, config, passport) {
     // routes should be at the last
     app.use(app.router);
 
-    app.use(function (req, res, next) {
-      res.status(404).render('404', { url: req.originalUrl });
-    });
+    // app.use(function (req, res, next) {
+    //   res.status(404).render('404', { url: req.originalUrl });
+    // });
   });
 
   // development specific stuff

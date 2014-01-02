@@ -10,17 +10,12 @@
   <div class="form-group">
   	<input type="email" name ="email" class="form-control" ng-model="user.email" placeholder="E-mail" ng-show="modal.showRegister" id="submitMail"required>
     <span class="error" ng-model="error" ng-show="modal.showErrorMessage">{{modal.message}}</span>
-  </div>
-  <ul>
-   <li><i class="fa fa-twitter fa-2x"></i></li>
-   <li><i class="fa fa-github-alt fa-2x"></i></li>
-   <li><i class="fa fa-facebook fa-2x"></i></li>
-   <li><i class="fa fa-google-plus fa-2x"></i></li>
- </ul>
+ </div>
+ 
+ <input type="button" ng-click="loginClicked()" class="btn submit-btn" value="Login">
+ <input type="submit" ng-click="registerClicked(loginForm)" class="btn submit-btn" value="Register"> 
+ <input type="submit" ng-click="recoverPasswordButton()" class="btn submit-btn" value="Forgott password?"> 
 
- <input type="button" ng-click="loginClicked()" class="btn btn-primary" value="Login">
- <input type="submit" ng-click="registerClicked(loginForm)" class="btn btn-primary" value="Register"> 
- <input type="submit" ng-click="recoverPasswordButton()" class="btn btn-primary" value="Forgott password?"> 
 </form>
 
 

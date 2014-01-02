@@ -71,28 +71,18 @@ angular.module('codesnipzApp')
         $scope.modal.language = lang;
     };
 
+    $scope.removeTag = function(index){
+        $scope.modal.tags.splice(index, 1);
+    }
+
     $scope.tagsPressed = function(e) {
         if( e.keyCode !== 13 && e.keyCode !== 8) {
             return true;
         }
 
         var $currTarget = $(e.currentTarget);
-        var $searchContent = $currTarget.siblings('.tag-content');
-
-        // Backspace
-        if ( e.keyCode === 8 ) {
-            $searchContent.children().last().remove();
-            $scope.modal.tags.pop();
-        } else {
-            var tagTxt = $currTarget.val();
-            $currTarget.val('');
-            var tagHtml = '<span class="tags">'+tagTxt+'</span>';
-            $searchContent.append(tagHtml);
-            $scope.modal.tags.push(tagTxt);
-        }
-
-        var searchWidth = $searchContent.width() + 12;
-        $(e.currentTarget).css('padding-left',searchWidth);
+        $scope.modal.tags.push($currTarget.val());
+        $currTarget.val('');
     }
 
     function createFormResultMsg (data) {
