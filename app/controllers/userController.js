@@ -4,7 +4,8 @@ var mongoose = require('mongoose'),
 	User = mongoose.model('User'),
 	utils = require('../../lib/utils'),
 	nodemailer = require("nodemailer"),
-	crypto = require('crypto');
+	crypto = require('crypto'),
+	Q = require('q');
 
 exports.getUserByHash = function(req, res) {
 	User.find({
@@ -115,14 +116,13 @@ var login = function(req, res) {
 
 }
 
-
-
 exports.temp = function(req, res) {
 
 
 }
 
 exports.login = function(req, res) {
+
 
 }
 exports.recoverPassword = function(req, res) {
@@ -144,6 +144,7 @@ exports.recoverPassword = function(req, res) {
 
 }
 exports.logout = function(req, res) {
+	var deferred = Q.defer();
 	req.session.destroy();
 	res.send({}, 200);
 }
@@ -163,7 +164,6 @@ exports.updateProfile = function(req, res) {
 		if (err) {
 			throw new Error(err);
 		} else {
-			console.log(req.body.firstName + " " + req.body.lastName);
 			user.firstName = req.body.firstName;
 			user.lastName = req.body.lastName;
 			user.save(function(err) {
@@ -173,9 +173,7 @@ exports.updateProfile = function(req, res) {
 				} else { 
 					res.send(user);
 				}
-				// user.save({firstName:req.body.firstName, lastName:req.body.lastName});
-				// console.log(req.user);	
-				// res.send(user);
+			
 
 			});
 		}
