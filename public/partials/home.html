@@ -12,7 +12,6 @@
 					<li ng-repeat = "snippet in snippetsCollection"	ng-click="expandSnippet(snippet)">
 						<div class="row snippets-list-home">
 							<div class="col-lg-1">
-								<img ng-if="!snippet.owner.gravatar"class="rounded" src="img/yoda.jpeg">
 								<img ng-if="snippet.owner.gravatar" class="rounded" src="{{snippet.owner.gravatar}}">
 								<p>{{snippet.owner.username}}</p>
 							</div>

@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('codesnipzApp')
-.controller('NavCtrl', function ($scope, CodeSnippet, $location, UserInfo) {
+.controller('NavCtrl', function ($scope, CodeSnippet, $location, UserInfo, $timeout) {
+    var timeOut;
 
     var initModal = function() {
         $scope.showPopup = false;
@@ -32,6 +33,7 @@ angular.module('codesnipzApp')
 
     $scope.closeClicked = function() {
         initModal();
+        $timeout.cancel(timeOut);
     };
 
     $scope.searchFieldKeyUp = function($event){
@@ -99,7 +101,7 @@ angular.module('codesnipzApp')
         $('.result-icon').append(data.iconHtml);
         $scope.modalForm = false;
 
-        setTimeout(function(){
+        timeOut = $timeout(function() {
             $('.closeBtn').trigger('click');
         }, 3000);
     }
