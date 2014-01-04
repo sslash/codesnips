@@ -212,7 +212,6 @@ angular.module('codesnipzApp')
 		};
 
 		var registerUserToServer = function(authData) {
-			console.log("ok2k");
 			$http({
 				method: 'POST',
 				url: '/users',
