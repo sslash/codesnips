@@ -69,22 +69,27 @@ var gravatar = function(user) {
 };
 
 exports.register = function(req, res) {
-	verifyEmailRegistration(req.body.username, req.body.email, res);
-	var user = new User(req.body)
-	user.provider = 'local'
-	user.save(function(err) {
+	verifyEmailRegistration(req.body.username, req.body.email, res,function(err, result) {
 		if (err) {
-			console.log("ERROR: " + JSON.stringify(err) + "::" + utils.errors(err.errors));
-			return res.send(utils.errors(err.errors));
-		} else { 
-			if (user) {
-				gravatar(user);
-			}
-			res.send(req.user);
+			console.log(err);
+
+		} else {
+			var user = new User(req.body)
+			user.provider = 'local'
+			user.save(function(err) {
+				if (err) {
+					console.log("ERROR: " + JSON.stringify(err) + "::" + utils.errors(err.errors));
+					return res.send(utils.errors(err.errors));
+				} else {
+					if (user) {
+						gravatar(user);
+					}
+					res.send(req.user);
+				}
+			});
 		}
 	});
-
-};
+}
 
 var verifyUser = function(user, res) {
 	var username = user.username.trim();
@@ -170,10 +175,10 @@ exports.updateProfile = function(req, res) {
 				if (err) {
 					console.log("ERROR: " + JSON.stringify(err) + "::" + utils.errors(err.errors));
 					return res.send(utils.errors(err.errors));
-				} else { 
+				} else {
 					res.send(user);
 				}
-			
+
 
 			});
 		}
