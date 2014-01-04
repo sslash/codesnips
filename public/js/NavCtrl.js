@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('codesnipzApp')
-.controller('NavCtrl', function ($scope, CodeSnippet, $location) {
+.controller('NavCtrl', function ($scope, CodeSnippet, $location, UserInfo) {
 
     var initModal = function() {
         $scope.showPopup = false;
@@ -12,6 +12,8 @@ angular.module('codesnipzApp')
             language : '',
             tags : [],
             category : '',
+            showErrorMessage: false,
+            errorMsg : '',
 
             // Form submit results
             form : {
@@ -29,7 +31,6 @@ angular.module('codesnipzApp')
 
 
     $scope.closeClicked = function() {
-        console.log("INIW)");
         initModal();
     };
 
@@ -40,6 +41,12 @@ angular.module('codesnipzApp')
     };
 
     $scope.submitClicked = function() {
+        var user = UserInfo.getProperty();
+        if ( !user.hasOwnProperty('_id') ) {
+            $scope.modal.errorMsg = 'Please login in order to add a snippet';
+            $scope.modal.showErrorMessage = true;
+            return false;
+        }
 
         var snippet = new CodeSnippet({
             title       : $scope.modal.title,
