@@ -2,12 +2,15 @@
   "name": "codesnips",
   "title": "Codesnips",
   "description": "Put all your code snippets in one place",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "homepage": "https://github.com/sslash/codesnips",
   "author": {
     "name": "Michael Gunnulfsen",
-    "email": "michaelgunnulfsen@gmail.com",
-    "url": "http://www.shredrapp.com"
+    "email": "michaelgunnulfsen@gmail.com"
+  },
+  "contributors" : {
+    "name": "Truls Skeie",
+    "email": "trulsske@iterate.no"
   },
   "scripts": {
     "start": "app.js"

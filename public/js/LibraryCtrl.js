@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('codesnipzApp')
-    .controller('LibraryCtrl', function($scope, $http, $routeParams, $location, CodeSnippet) {
+    .controller('LibraryCtrl', function($scope, $http, $routeParams, $location, CodeSnippet, UserInfo) {
         $scope.snippetsCollection = [];
         $scope.snippetUser = [];
         $scope.test = [];
@@ -31,14 +31,6 @@ angular.module('codesnipzApp')
             $scope.fetchSnippetsCollection();
         };
 
-        $scope.filterYours = function() {
-            if (user) {
-                $location.path('/library').search({
-                    'by': user._id
-                });
-            }
-        };
-
         $scope.filterAll = function() {
             $location.path('/library').search({});
         };
@@ -46,7 +38,7 @@ angular.module('codesnipzApp')
         $scope.expandSnippet = function(snippet) {
             snippet.expandCode = snippet.expandCode ? false : true;
             var editor = ace.edit('editor_' + snippet._id);
-            editor.setTheme('ace/theme/monokai');
+            editor.setTheme('ace/theme/textmate');
             editor.getSession().setMode('ace/mode/javascript');
         };
 
@@ -59,17 +51,18 @@ angular.module('codesnipzApp')
         };
 
         $scope.fetchSnippetsCollection = function() {
-            if ( user ){
-                $scope.query.userId = user._id;
+            var user = UserInfo.getProperty();
+            if ( !user.hasOwnProperty('_id') ) {return false;}
+            
+            $scope.query.userId = user._id;
 
-                CodeSnippet.query($scope.query, function(snips) {
-                    $scope.snippetsCollection = snips;
-                    $scope.libraryBoolean.login = true;
-                
-                }, function(error){
-                    console.log(error.status);
-                });
-            }
+            CodeSnippet.query($scope.query, function(snips) {
+                $scope.snippetsCollection = snips;
+                $scope.libraryBoolean.login = true;
+            
+            }, function(error){
+                console.log(error.status);
+            });
         };
 
         $scope.menu = function() {

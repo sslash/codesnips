@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('codesnipzApp')
-	.controller('MainCtrl', function($scope, $http, $location, $timeout, UserInfo) {
+	.controller('MainCtrl', function($scope, $http, $location, $timeout, UserInfo, $route) {
 		var counter = 0;
 		var timeOut;
 		$scope.showLogin = false;
@@ -203,6 +203,7 @@ angular.module('codesnipzApp')
 				$scope.modal.showerror = false;
 				$scope.modal.showAvatar = true;
 				hide();
+				UserInfo.setProperty($scope.user);
 			}).error(function(data, status) {
 				$scope.modal.message = "Wrong username or password!";
 				$scope.modal.showErrorMessage = true;
