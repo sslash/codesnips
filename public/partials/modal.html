@@ -48,6 +48,9 @@
 			</div>
 		</form>
 
+		 <div class="form-group">
+		  	<span class="error" ng-model="error" ng-show="modal.showErrorMessage">{{modal.errorMsg}}</span>
+ 		</div>
 		<button class="btn submit-btn" ng-click="submitClicked()">Submit</button>
 		<button class="btn btn-original closeBtn" ng-click="closeClicked()">Close</button>
 	</section>

@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('codesnipzApp')
-.controller('NavCtrl', function ($scope, CodeSnippet, $location) {
+.controller('NavCtrl', function ($scope, CodeSnippet, $location, UserInfo, $timeout) {
+    var timeOut;
 
     var initModal = function() {
         $scope.showPopup = false;
@@ -12,6 +13,8 @@ angular.module('codesnipzApp')
             language : '',
             tags : [],
             category : '',
+            showErrorMessage: false,
+            errorMsg : '',
 
             // Form submit results
             form : {
@@ -29,8 +32,8 @@ angular.module('codesnipzApp')
 
 
     $scope.closeClicked = function() {
-        console.log("INIW)");
         initModal();
+        $timeout.cancel(timeOut);
     };
 
     $scope.searchFieldKeyUp = function($event){
@@ -40,6 +43,12 @@ angular.module('codesnipzApp')
     };
 
     $scope.submitClicked = function() {
+        var user = UserInfo.getProperty();
+        if ( !user.hasOwnProperty('_id') ) {
+            $scope.modal.errorMsg = 'Please login in order to add a snippet';
+            $scope.modal.showErrorMessage = true;
+            return false;
+        }
 
         var snippet = new CodeSnippet({
             title       : $scope.modal.title,
@@ -92,7 +101,7 @@ angular.module('codesnipzApp')
         $('.result-icon').append(data.iconHtml);
         $scope.modalForm = false;
 
-        setTimeout(function(){
+        timeOut = $timeout(function() {
             $('.closeBtn').trigger('click');
         }, 3000);
     }

@@ -9,12 +9,12 @@ angular.module('codesnipzApp')
 angular.module('codesnipzApp')
     .service('UserInfo', function () {
     var user = {};
-        return {
-            getProperty: function () {
-                return user;
-            },
-            setProperty: function(u) {
-                user = u;
-            }
-        };
-    });
+    return {
+        getProperty: function () {
+            return user;
+        },
+        setProperty: function(u) {
+            user = u;
+        }
+    };
+});

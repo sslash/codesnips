@@ -7,9 +7,10 @@ exports.requiresLogin = function (req, res, next) {
   if (!req.isAuthenticated()) {
     req.session.returnTo = req.originalUrl
     res.statusCode = 401;
-    return res.statusCode;
+    return res.send({'err' : 'Login required'}, res.statusCode);
+  }else{
+    next();
   }
-  next()
 }
 
 /*
