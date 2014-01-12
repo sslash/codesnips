@@ -5451,3 +5451,28 @@ p.exitModal {
   bottom: 0;
   left: 0;
 }
+.autocompl-hover {
+  background-color: #191a20;
+  color: #fff;
+}
+.autocomplete {
+  display: none;
+  list-style: none;
+  border: 1px solid;
+  text-align: left;
+  padding: 0;
+  position: absolute;
+  z-index: 10000;
+  background: #fff;
+  max-height: 100px;
+  overflow-y: scroll;
+}
+.autocomplete li {
+  padding: 5px;
+  line-height: 15px;
+  cursor: pointer;
+}
+.autocomplete li:hover {
+  background-color: #191a20;
+  color: #fff;
+}
