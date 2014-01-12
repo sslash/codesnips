@@ -58,6 +58,7 @@ angular.module('codesnipzApp')
 			$scope.modal.showErrorMessage = false;
 			$scope.showLogin = true;
 			show();
+
 		};
 
 		$scope.loginClicked = function() {
