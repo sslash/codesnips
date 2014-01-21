@@ -5,7 +5,7 @@ angular.module('codesnipzApp')
 
 			$scope.modal = {
 				errorMessage: "",
-				showErrorMessage: false,
+				showErrorMessage: false
 			}
 			$scope.user = {
 				passwordOne: "",
