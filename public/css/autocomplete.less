@@ -1,0 +1,30 @@
+
+.autocompl-hover {
+	background-color: @dark-blue;
+	color: #fff;
+}
+.autocomplete {
+	display:none;
+	list-style: none;
+	border: 1px solid;
+	text-align: left;
+	padding: 0;
+	position: absolute;
+	z-index: 10000;
+	background: #fff;
+	max-height: 100px;
+	overflow-y: scroll;
+
+	li {
+		padding: 5px;
+		line-height: 15px;
+		cursor: pointer;
+		&:hover {
+			.autocompl-hover;
+		}
+
+		&.focus {
+			.autocompl-hover;	
+		}
+	}
+}

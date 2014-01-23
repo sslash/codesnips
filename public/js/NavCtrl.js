@@ -6,6 +6,9 @@ angular.module('codesnipzApp')
 
     var initModal = function() {
         $scope.showPopup = false;
+        $scope.autocomplete = {
+            keys : []
+        };
         $scope.modalForm = true;
         $scope.modal = {
             title : '',
@@ -72,13 +75,6 @@ angular.module('codesnipzApp')
                 iconHtml : '<i class="fa fa-thumbs-down fa-5x"></i>'
             });
         });
-    };
-
-    $scope.languageBlurred = function($event) {
-        var lang = $event.target.value;
-        var mode = 'ace/mode/' + lang;
-        $scope.editor.getSession().setMode(mode);
-        $scope.modal.language = lang;
     };
 
     $scope.removeTag = function(index){
