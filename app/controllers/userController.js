@@ -4,21 +4,21 @@ var mongoose = require('mongoose'),
 	User = mongoose.model('User'),
 	utils = require('../../lib/utils'),
 	nodemailer = require("nodemailer"),
-	crypto = require('crypto'),
-	Q = require('q');
+	crypto = require('crypto')
 
-exports.getUserByHash = function(req, res) {
-	User.find({
-		'recoverPassword': req.body.hash
-	}, function(err, user) {
-		if (err) {
-			console.log(err);
-		} else {
-			res.send({}, 200);
 
-		}
-	});
-}
+	exports.getUserByHash = function(req, res) {
+		User.find({
+			'recoverPassword': req.body.hash
+		}, function(err, user) {
+			if (err) {
+				console.log(err);
+			} else {
+				res.send({}, 200);
+
+			}
+		});
+	}
 exports.newPassword = function(req, res) {
 	User.findOne({
 		'recoverPassword': req.body.hash
@@ -34,7 +34,6 @@ exports.newPassword = function(req, res) {
 		}
 	});
 }
-
 
 exports.index = function(req, res) {
 	var userObject;
@@ -69,30 +68,11 @@ var gravatar = function(user) {
 };
 
 exports.register = function(req, res) {
-	verifyEmailRegistration(req.body.username, req.body.email, res,function(err, result) {
-		if (err) {
-			console.log(err);
-
-		} else {
-			var user = new User(req.body)
-			user.provider = 'local'
-			user.save(function(err) {
-				if (err) {
-					console.log("ERROR: " + JSON.stringify(err) + "::" + utils.errors(err.errors));
-					return res.send(utils.errors(err.errors));
-				} else {
-					if (user) {
-						gravatar(user);
-					}
-					res.send(req.user);
-				}
-			});
-		}
-	});
+	verifyEmailRegistration(req.body.username, req.body.email, res, req);
 }
 
 var verifyUser = function(user, res) {
-	var username = user.username.trim();
+	var username = user.username;
 	User.find({
 		'email': user.email
 	}, function(err, user) {
@@ -149,7 +129,6 @@ exports.recoverPassword = function(req, res) {
 
 }
 exports.logout = function(req, res) {
-	var deferred = Q.defer();
 	req.session.destroy();
 	res.send({}, 200);
 }
@@ -164,28 +143,46 @@ exports.show = function(req, res) {
 
 exports.updateProfile = function(req, res) {
 	var userId = req.session.passport.user;
-
 	User.findById(userId, function(err, user) {
 		if (err) {
 			throw new Error(err);
 		} else {
 			user.firstName = req.body.firstName;
 			user.lastName = req.body.lastName;
-			user.save(function(err) {
-				if (err) {
-					console.log("ERROR: " + JSON.stringify(err) + "::" + utils.errors(err.errors));
-					return res.send(utils.errors(err.errors));
-				} else {
-					res.send(user);
-				}
+			verifyPassword(res, req.body.oldPassword, user, req.body.newPassword, function() {
+				user.save(function(err) {
+					if (err) {
+						console.log("ERROR: " + JSON.stringify(err) + "::" + utils.errors(err.errors));
+						return res.send(utils.errors(err.errors));
+					} else {
+						res.send(user);
+					}
 
 
-			});
+				});
+			})
 		}
+
 	});
 };
 
+var verifyPassword = function(res, oldPassword, user, newPassword) {
+	var hashed_password = crypto.createHmac('sha1', user.salt).update(oldPassword).digest('hex');
+	if (!newPassword) {
+		res.send('Password empty', 500);
+	}
+	if (user.hashed_password === hashed_password) {
+		user.password = newPassword;
+		user.save();
+		console.log("password changed");
+		res.send(user);
 
+	} else {
+		console.log("wrong pw");
+		res.send('Wrong password', 500);
+
+	}
+}
 /**
  * Session
  */
@@ -247,7 +244,7 @@ var sendRecoverymail = function(user, res) {
 		res.send({}, 200);
 	});
 }
-var verifyEmailRegistration = function(username, email, res) {
+var verifyEmailRegistration = function(username, email, res, req) {
 	User.findOne({
 		'email': email
 	}, function(err, user) {
@@ -255,12 +252,11 @@ var verifyEmailRegistration = function(username, email, res) {
 			res.send({
 				'err': 'Mail found'
 			}, 404);
-		} else {
-			verifyUserRegistration(username, res);
-		}
+		}else verifyUserRegistration(username, res, req);
 	});
+	
 }
-var verifyUserRegistration = function(username, res) {
+var verifyUserRegistration = function(username, res, req) {
 	User.findOne({
 		'username': username
 	}, function(err, user) {
@@ -268,9 +264,28 @@ var verifyUserRegistration = function(username, res) {
 			res.send({
 				'err': 'Username found'
 			}, 404);
+		} else registerUser(req, res);
+	});
+	
+}
+
+var registerUser = function(req, res) {
+	var user = new User(req.body)
+	user.provider = 'local'
+	user.save(function(err) {
+		if (err) {
+			console.log("ERROR: " + JSON.stringify(err) + "::" + utils.errors(err.errors));
+			return res.send(utils.errors(err.errors));
+		} else {
+			if (user) {
+				gravatar(user);
+			}
+			res.send(req.user);
 		}
 	});
 }
+
+
 
 var verifyEmail = function(email, res) {
 	User.findOne({

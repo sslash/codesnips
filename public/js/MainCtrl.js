@@ -17,7 +17,10 @@ angular.module('codesnipzApp')
 			showErrorMessage: false,
 			showSuccessMessage: false,
 			warningMessage: false,
-			showUserInfo: false
+			showUserInfo: false,
+			passwordOk: false,
+			newPasswordOk: false,
+			newPasswordTwoOk: false
 		};
 		$scope.user = {
 			username: '',
@@ -25,7 +28,10 @@ angular.module('codesnipzApp')
 			email: '',
 			password: '',
 			firstName: '',
-			lastName: ''
+			lastName: '',
+			passwordOne: ' ',
+			passwordTwo: '',
+			currentPassword: ''
 		};
 
 		$scope.init = function() {
@@ -40,9 +46,22 @@ angular.module('codesnipzApp')
 		};
 
 		$scope.updateUserProfile = function() {
+
+			if ($scope.user.passwordOne != $scope.user.passwordTwo) {
+				$scope.modal.message = "The passwords don't match!";
+				$scope.modal.showErrorMessage = true;
+				return;
+			}
+			$scope.modal.warningMessage = false;
+
+
+
 			profileUpdate({
 				firstName: $scope.user.firstName,
-				lastName: $scope.user.lastName
+				lastName: $scope.user.lastName,
+				oldPassword: $scope.user.currentPassword,
+				newPassword: $scope.user.passwordOne
+
 			});
 
 		};
@@ -259,7 +278,8 @@ angular.module('codesnipzApp')
 			}).success(function(data, status) {
 				$scope.modal.message = "Information saved";
 				$scope.modal.showSuccessMessage = true;
-				 closeModal();
+				$scope.modal.showErrorMessage = false;
+				closeModal();
 			}).error(function(data, status) {
 				$scope.modal.message = "Sorry, An error has occurd";
 				$scope.modal.showErrorMessage = true;
