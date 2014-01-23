@@ -5,6 +5,7 @@ angular.module('codesnipzApp')
         $scope.snippetsCollection = [];
         $scope.snippetUser = [];
         $scope.test = [];
+        $scope.tagsList = [];
         $scope.libraryBoolean = {
             showMenu: false,
             showSort: false,
@@ -43,6 +44,11 @@ angular.module('codesnipzApp')
             }
         };
 
+        $scope.tagClicked = function($event) {
+            var text = $event.currentTarget.textContent;
+            $scope.snippetsCollection = CodeSnippet.filterByTag($scope.orgSnippetsCollection, text);
+        };
+
         $scope.expandSnippet = function(snippet) {
             console.log(snippet.expandCode);
             if ( !snippet.expandCode ) {
@@ -70,7 +76,9 @@ angular.module('codesnipzApp')
             $scope.query.userId = user._id;
 
             CodeSnippet.query($scope.query, function(snips) {
+                $scope.tagsList = CodeSnippet.getTags(snips);
                 $scope.snippetsCollection = snips;
+                $scope.orgSnippetsCollection = snips;
                 $scope.libraryBoolean.login = true;
             
             }, function(error){

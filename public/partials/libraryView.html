@@ -1,5 +1,17 @@
 <div ng-init ="init()">
-	<p class="lead"> Your Own Code Library</p>
+	
+	<div class="small-gap"></div>
+	<div class="row">
+		<div class="col-sm-8">
+			<p class="lead"> Your Own Code Library</p>
+		</div>
+		<div class="col-sm-4">
+			<div class="small-padding border-light inline">
+			<span class="arrow_box tags font-xsmall list" ng-click="tagClicked($event)" ng-repeat="tag in tagsList"><i class="fa fa-tag"></i>{{tag}}</span>
+			</div>
+		</div>
+	</div>
+
 
 	<section id="snippets">
 		<div class="content">
@@ -19,9 +31,9 @@
 							</div>
 							<div class="col-lg-5">
 								<div class="tags-section">
-								<span class="tags font-xsmall" ng-repeat="tag in snippet.tags">
-									{{tag}},
-								</span>
+									<span class="tags font-xsmall" ng-repeat="tag in snippet.tags">
+										{{tag}},
+									</span>
 								</div>
 								<h3 class="font-xsmall" ng-show="snippet.link.length > 0"><a href="{{snippet.link}}" target="_blank">Url</a></h3>
 							</div>
