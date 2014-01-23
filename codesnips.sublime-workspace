@@ -75,78 +75,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "package.json",
-			"settings":
-			{
-				"buffer_size": 646,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "server/server.js",
-			"settings":
-			{
-				"buffer_size": 659,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "public/js/app/App.js",
-			"settings":
-			{
-				"buffer_size": 822,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/js/app/views/WelcomeView.js",
-			"settings":
-			{
-				"buffer_size": 473,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "public/js/app/templates/welcome.html",
-			"settings":
-			{
-				"buffer_size": 273,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/css/main.less",
-			"settings":
-			{
-				"buffer_size": 502,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "public/css/navigation.less",
-			"settings":
-			{
-				"buffer_size": 396,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "public/index.html",
-			"settings":
-			{
-				"buffer_size": 7484,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/css/commonstyles.less",
-			"settings":
-			{
-				"buffer_size": 38,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -171,7 +99,18 @@
 	},
 	"console":
 	{
-		"height": 125.0
+		"height": 125.0,
+		"history":
+		[
+			"jslint",
+			"jshint",
+			"node",
+			"tern_command",
+			"tern",
+			"import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())",
+			"TernJS",
+			"TernJS: Reload"
+		]
 	},
 	"distraction_free":
 	{
@@ -184,6 +123,15 @@
 	},
 	"file_history":
 	[
+		"/Users/micgunnu/code/sap/codesnips/package.json",
+		"/Users/micgunnu/code/sap/codesnips/public/css/main.less",
+		"/Users/micgunnu/code/sap/codesnips/public/css/commonstyles.less",
+		"/Users/micgunnu/code/sap/codesnips/public/index.html",
+		"/Users/micgunnu/code/sap/codesnips/public/css/navigation.less",
+		"/Users/micgunnu/code/sap/codesnips/public/js/app/templates/welcome.html",
+		"/Users/micgunnu/code/sap/codesnips/public/js/app/views/WelcomeView.js",
+		"/Users/micgunnu/code/sap/codesnips/public/js/app/App.js",
+		"/Users/micgunnu/code/sap/codesnips/server/server.js",
 		"/Users/michaelgunnulfsen/code/codesnips/public/js/app/templates/desktopHeader.html",
 		"/Users/michaelgunnulfsen/code/codesnips/public/js/app/controllers/DesktopController.js",
 		"/Users/michaelgunnulfsen/code/codesnips/public/js/app/controllers/MobileController.js",
@@ -302,16 +250,7 @@
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/stylesheets/images.css.less",
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/templates/modals/loginModal.hbs",
 		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/templates/nav/main.hbs",
-		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/views/home.html.erb",
-		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/config/initializers/session_store.rb",
-		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/javascripts/controllers/application_controller.rb",
-		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/index.html",
-		"/Users/michaelgunnulfsen/code/shredhub v0.1/config/routes.rb",
-		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/db/test_data.js",
-		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/sweet notez",
-		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/.gitignore",
-		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/models/fb_user.rb",
-		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/assets/stylesheets/navbar.css.less"
+		"/Users/michaelgunnulfsen/code/Shredhub/Shredhub/app/views/home.html.erb"
 	],
 	"find":
 	{
@@ -501,255 +440,8 @@
 	"groups":
 	[
 		{
-			"selected": 5,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "package.json",
-					"settings":
-					{
-						"buffer_size": 646,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								612,
-								612
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "server/server.js",
-					"settings":
-					{
-						"buffer_size": 659,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								657,
-								657
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "public/js/app/App.js",
-					"settings":
-					{
-						"buffer_size": 822,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								410,
-								410
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "public/js/app/views/WelcomeView.js",
-					"settings":
-					{
-						"buffer_size": 473,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								453,
-								453
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "public/js/app/templates/welcome.html",
-					"settings":
-					{
-						"buffer_size": 273,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								201,
-								206
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "public/css/main.less",
-					"settings":
-					{
-						"buffer_size": 502,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								412,
-								412
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "public/css/navigation.less",
-					"settings":
-					{
-						"buffer_size": 396,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								224,
-								224
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "public/index.html",
-					"settings":
-					{
-						"buffer_size": 7484,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								7425,
-								7425
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "public/css/commonstyles.less",
-					"settings":
-					{
-						"buffer_size": 38,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								38,
-								38
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LESS/LESS.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
 			]
 		},
 		{
@@ -800,6 +492,7 @@
 	{
 		"height": 100.0
 	},
+	"project": "codesnips.sublime-project",
 	"replace":
 	{
 		"height": 64.0
@@ -1333,10 +1026,24 @@
 		],
 		"width": 0.0
 	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+		],
+		"width": 661.0
+	},
+	"settings":
+	{
+	},
 	"show_minimap": true,
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
 	"side_bar_width": 236.0,
-	"status_bar_visible": true
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
 }

@@ -5476,3 +5476,7 @@ p.exitModal {
   background-color: #191a20;
   color: #fff;
 }
+.autocomplete li.focus {
+  background-color: #191a20;
+  color: #fff;
+}
