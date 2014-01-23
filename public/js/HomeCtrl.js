@@ -27,14 +27,24 @@ angular.module('codesnipzApp')
 		$scope.fetchSnippetsCollection();
 	};
 
-	$scope.expandSnippet = function(snippet){
-		snippet.expandCode = snippet.expandCode ? false : true;
-		var editor = ace.edit('editor_' + snippet._id);
-		editor.setTheme('ace/theme/textmate');
-		editor.getSession().setMode('ace/mode/' + snippet.language);
-		editor.getSession().setValue('');
-		editor.getSession().setValue(snippet.code);
-		editor.setReadOnly(true);
+	$scope.hideSnippet = function(snippet, $event) {
+		$event.preventDefault();
+		$event.stopPropagation();
+		if ( snippet.expandCode ) {
+			snippet.expandCode = false;
+		}
+	};
+
+	$scope.expandSnippet = function(snippet) {
+		console.log(snippet.expandCode);
+		if ( !snippet.expandCode ) {
+			snippet.expandCode = true;
+			var editor = ace.edit('editor_' + snippet._id);
+			editor.setTheme('ace/theme/textmate');
+			editor.getSession().setMode('ace/mode/javascript');
+			editor.getSession().setValue(snippet.code);
+			editor.setReadOnly(true);
+		}
 	};
 
 	$scope.fetchSnippetsCollection = function() {

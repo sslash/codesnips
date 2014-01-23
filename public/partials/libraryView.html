@@ -18,17 +18,27 @@
 								<p class="font-xsmall">Created: {{snippet.timeCreated | date:'MM/dd/yyyy @ h:mma'}}</p>
 							</div>
 							<div class="col-lg-5">
-								<h5>{{snippet.category}}</h5>
+								<div class="tags-section">
 								<span class="tags font-xsmall" ng-repeat="tag in snippet.tags">
 									{{tag}},
 								</span>
+								</div>
+								<h3 class="font-xsmall" ng-show="snippet.link.length > 0"><a href="{{snippet.link}}" target="_blank">Url</a></h3>
 							</div>
 						</div>
-						<div class="row expand-code" ng-show="snippet.expandCode">
-							<div class="editor" id="editor_{{snippet._id}}">	
-								<p class="lead">{{snippet.code}}</p>
+
+
+						<section class="show-hide-code" ng-show="snippet.expandCode">
+							<div class="row expand-code">
+								<div class="editor" id="editor_{{snippet._id}}">	
+									<p class="lead">{{snippet.code}}</p>
+								</div>
 							</div>
-						</div>
+
+							<div class="center-block">
+								<i class="cursor expand fa fa-long-arrow-up fa-1x" ng-click="hideSnippet(snippet, $event)"></i>
+							</div>
+						</section>
 					</li>
 				</ul>
 				<p class="lead error" ng-hide="libraryBoolean.login"> Log in to get to your own library </p>

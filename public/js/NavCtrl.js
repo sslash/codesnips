@@ -12,10 +12,10 @@ angular.module('codesnipzApp')
         $scope.modalForm = true;
         $scope.modal = {
             title : '',
+            link : '',
             description : '',
             language : '',
             tags : [],
-            category : '',
             showErrorMessage: false,
             errorMsg : '',
 
@@ -58,7 +58,7 @@ angular.module('codesnipzApp')
             description : $scope.modal.description,
             language    : $scope.modal.language,
             tags        : $scope.modal.tags,
-            category    : $scope.modal.category,
+            link        : $scope.modal.link,
             code        : $scope.editor.getValue()
         })
         .$save()
