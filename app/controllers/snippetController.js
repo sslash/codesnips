@@ -72,6 +72,20 @@ exports.create = function(req, res) {
 
 };
 
+exports.edit = function(req, res) {
+  Snippet.findById(req.body.id,
+    function(err, snippet) {
+      if (err) {
+        throw new Error(err);
+      } else {
+        snippet.code = req.body.code;
+        snippet.save();
+        res.send(snippet.toJSON());
+      }
+        
+   });
+};
+
 var findUser = function(id, next) {
   User.findById(id,
     function(err, user) {

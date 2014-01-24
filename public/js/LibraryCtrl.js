@@ -44,7 +44,6 @@ angular.module('codesnipzApp')
         };
 
         $scope.expandSnippet = function(snippet) {
-            console.log(snippet.expandCode);
             if ( !snippet.expandCode ) {
                 snippet.expandCode = true;
                 var editor = ace.edit('editor_' + snippet._id);
