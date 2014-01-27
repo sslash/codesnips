@@ -5,15 +5,15 @@ var mongoose = require('mongoose'),
 
 
 /*
-* Searching for snippets
-*
-* TODO: add support for searching for tags,
-* desription, codesnip, user 
-*
-*/
+ * Searching for snippets
+ *
+ * TODO: add support for searching for tags,
+ * desription, codesnip, user
+ *
+ */
 exports.index = function(req, res) {
   var query = {};
-  if (req.query.q){
+  if (req.query.q) {
     query.title = new RegExp(req.query.q, 'ig');
   }
 
@@ -21,8 +21,8 @@ exports.index = function(req, res) {
     .find(query)
     .populate('owner')
     .exec(function(err, snippets) {
-      if (err) { 
-        res.send(err); 
+      if (err) {
+        res.send(err);
       } else {
         return res.send(snippets);
       }
@@ -36,8 +36,8 @@ exports.byUser = function(req, res) {
     .find(query)
     .populate('owner')
     .exec(function(err, snippets) {
-      if (err) { 
-        res.send(err); 
+      if (err) {
+        res.send(err);
       } else {
         return res.send(snippets);
       }
@@ -78,12 +78,18 @@ exports.edit = function(req, res) {
       if (err) {
         throw new Error(err);
       } else {
-        snippet.code = req.body.code;
-        snippet.save();
-        res.send(snippet.toJSON());
+        if (req.body.id === snippet.owner) {
+          snippet.code = req.body.code;
+          snippet.save();
+          res.send(snippet.toJSON());
+        } else {
+          res.send({
+            'err': "You don't own this snippet"
+          }, 401);
+        }
       }
-        
-   });
+
+    });
 };
 
 var findUser = function(id, next) {

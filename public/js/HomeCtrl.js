@@ -3,10 +3,10 @@
 angular.module('codesnipzApp')
 	.controller('HomeCtrl', function($scope, $http, $timeout, $location, $routeParams, UserInfo, CodeSnippet) {
 		$scope.indexOfSnippet = null;
+		var snipp = null;
 		$scope.snippetsCollection = [];
 		var timeOut = null;
 		$scope.homeCtrlVar = {
-			editSave: false,
 			message: ''
 		}
 		var user = {};
@@ -44,11 +44,11 @@ angular.module('codesnipzApp')
 		$scope.saveSnippet = function(snippet) {
 			var editor = ace.edit('editor_' + snippet._id);
 			snippet.code = editor.getSession().getValue();
+			snipp = snippet;
 			updateSnippet({
 				code: snippet.code,
 				id: snippet._id
 			});
-
 		};
 
 		$scope.expandSnippet = function(snippet) {
@@ -76,16 +76,17 @@ angular.module('codesnipzApp')
 			}).success(function(data, status) {
 				$scope.homeCtrlVar.message = "Snippet successfully saved!"
 			}).error(function(data, status) {
-				$scope.homeCtrlVar.message = "Failed change snippet - Try again!"
+				$scope.homeCtrlVar.message = data.err;
 			});
+			snipp.editSave = true;
 			userFeedback();
 
 		};
 
-		var userFeedback = function() {
+		var userFeedback = function(snippet) {
 			$scope.homeCtrlVar.editSave = true;
 			timeOut = $timeout(function() {
-				$scope.homeCtrlVar.editSave = false;
+				snipp.editSave = false;
 			}, 3000);
 
 		};
