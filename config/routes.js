@@ -23,6 +23,7 @@ module.exports = function(app, passport) {
 	app.post('/snippets', auth.requiresLogin, snippetController.create);
 	app.post('/users/', userController.register);
 	app.post('/updateSnippet', auth.requiresLogin, snippetController.edit);
+	app.post('/deleteSnippet', auth.requiresLogin, snippetController.deleteSnippet);
 
 	app.get('/login', userController.login);
 	app.get('/signup', userController.signup);

@@ -24,7 +24,7 @@
 							<p>{{snippet.description}}</p>
 							<p class="font-xsmall">Created: {{snippet.timeCreated | date:'MM/dd/yyyy @ h:mma'}}</p>
 						</div>
-						<div class="col-lg-5">
+						<div class="col-lg-4">
 							<div class="tags-section">
 								<span class="tags font-xsmall" ng-repeat="tag in snippet.tags">
 									{{tag}},
@@ -32,6 +32,7 @@
 							</div>
 							<h3 class="font-xsmall" ng-show="snippet.link.length > 0"><a href="{{snippet.link}}" target="_blank">Url</a></h3>
 						</div>
+						<div class="error col-lg-1" ng-click="deleteSnippet(snippet, $event, $index)"> Delete </div>
 					</div>
 					<section class="show-hide-code" ng-show="snippet.expandCode">
 						<div class="row expand-code">

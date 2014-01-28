@@ -92,6 +92,31 @@ exports.edit = function(req, res) {
     });
 };
 
+exports.deleteSnippet = function(req, res) {
+  Snippet.findById(req.body.snippet._id,
+    function(err, snippet) {
+      if (err) {
+        throw new Error(err);
+      } else {
+ 
+        console.log(req.body.snippet.owner._id);
+        console.log(snippet.owner);
+        if (req.body.snippet.owner._id.localeCompare(snippet.owner) ===0) {
+          console.log("OK");
+          snippet.remove();
+          res.send(snippet.toJSON());
+        } else {
+          res.send({
+            'err': "You don't own this snippet"
+          }, 401);
+        }
+      }
+
+    });
+};
+
+
+
 var findUser = function(id, next) {
   User.findById(id,
     function(err, user) {

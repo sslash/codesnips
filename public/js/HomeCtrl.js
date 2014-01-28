@@ -61,6 +61,17 @@ angular.module('codesnipzApp')
 				editor.setReadOnly(false);
 			}
 		};
+		$scope.deleteSnippet = function(snippet, $event, $index) {
+			$event.preventDefault();
+			$event.stopPropagation();
+			removeSnippet({
+				snippet: snippet,
+				index: $index
+
+			})
+			
+
+		}
 
 		$scope.fetchSnippetsCollection = function() {
 			CodeSnippet.query($scope.query, function(snips) {
@@ -80,6 +91,20 @@ angular.module('codesnipzApp')
 			});
 			snipp.editSave = true;
 			userFeedback();
+
+		};
+		var removeSnippet = function(snippet) {
+			$http({
+				method: 'POST',
+				url: '/deleteSnippet',
+				data: snippet
+			}).success(function(data, status) {
+				$scope.homeCtrlVar.message = "Snippet successfully removed!"
+				$scope.snippetsCollection.splice(snippet.index, 1);
+			}).error(function(data, status) {
+				$scope.homeCtrlVar.message = data.err;
+			});
+			
 
 		};
 
