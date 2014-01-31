@@ -46,7 +46,7 @@ angular.module('codesnipzApp')
 			snippet.code = editor.getSession().getValue();
 			snipp = snippet;
 			updateSnippet({
-				code: snippet.code,
+				snippet: snippet,
 				id: snippet._id
 			});
 		};

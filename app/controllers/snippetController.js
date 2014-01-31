@@ -78,8 +78,8 @@ exports.edit = function(req, res) {
       if (err) {
         throw new Error(err);
       } else {
-        if (req.body.id === snippet.owner) {
-          snippet.code = req.body.code;
+        if (req.body.snippet.owner._id.localeCompare(snippet.owner) ===0) {
+          snippet.code = req.body.snippet.code;
           snippet.save();
           res.send(snippet.toJSON());
         } else {
@@ -97,12 +97,8 @@ exports.deleteSnippet = function(req, res) {
     function(err, snippet) {
       if (err) {
         throw new Error(err);
-      } else {
- 
-        console.log(req.body.snippet.owner._id);
-        console.log(snippet.owner);
+      } else { 
         if (req.body.snippet.owner._id.localeCompare(snippet.owner) ===0) {
-          console.log("OK");
           snippet.remove();
           res.send(snippet.toJSON());
         } else {
