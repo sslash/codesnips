@@ -35,11 +35,23 @@ angular.module('codesnipzApp')
             $location.path('/library').search({});
         };
 
+        $scope.hideSnippet = function(snippet, $event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+             if ( snippet.expandCode ) {
+                snippet.expandCode = false;
+            }
+        };
+
         $scope.expandSnippet = function(snippet) {
-            snippet.expandCode = snippet.expandCode ? false : true;
-            var editor = ace.edit('editor_' + snippet._id);
-            editor.setTheme('ace/theme/textmate');
-            editor.getSession().setMode('ace/mode/javascript');
+            if ( !snippet.expandCode ) {
+                snippet.expandCode = true;
+                var editor = ace.edit('editor_' + snippet._id);
+                editor.setTheme('ace/theme/textmate');
+                editor.getSession().setMode('ace/mode/javascript');
+                editor.getSession().setValue('');
+                editor.getSession().setValue(snippet.code);
+            }
         };
 
         $scope.searchFieldKeyUp = function($event) {

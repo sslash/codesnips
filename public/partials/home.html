@@ -1,44 +1,62 @@
 <div ng-init="init()">
-	<section id="banner">
-		<h1>Codesnips</h1>
-		<p class="lead">Your own personalized Code snippet library</p>
-	</section>
+	<!--<section id="modal-area" ng-include src="'/partials/modalTrue.html'" ng-show="homeCtrlBoolean.editSave"> -->
+</section> 
 
-	<section id="snippets">
-		<div class="content">
 
-			<section class="listArea">
-				<ul>
-					<li ng-repeat = "snippet in snippetsCollection"	ng-click="expandSnippet(snippet)">
-						<div class="row snippets-list-home">
-							<div class="col-lg-1">
-								<img ng-if="snippet.owner.gravatar" class="rounded" src="{{snippet.owner.gravatar}}">
-								<p>{{snippet.owner.username}}</p>
-							</div>
+<section id="banner">
+	<h1>Codesnips</h1>
+	<p class="lead">Your own personalized Code snippet library</p>
+</section>
 
-							<div class="col-lg-6">
-								<h5>{{snippet.title}}</h5>
-								<p>{{snippet.description}}</p>
-								<p class="font-xsmall">Created: {{snippet.timeCreated | date:'MM/dd/yyyy @ h:mma'}}</p>
-							</div>
-							<div class="col-lg-5">
-								<h5>{{snippet.category}}</h5>
+<section id="snippets">
+	<div class="content">
+
+		<section class="listArea">
+			<ul>
+				<li ng-repeat = "snippet in snippetsCollection"	ng-click="expandSnippet(snippet)">
+					<div class="row snippets-list-home">
+						<div class="col-lg-1">
+							<img ng-if="snippet.owner.gravatar" class="rounded" src="{{snippet.owner.gravatar}}">
+							<p>{{snippet.owner.username}}</p>
+						</div>
+						<div class="col-lg-6">
+							<h5>{{snippet.title}}</h5>
+							<p>{{snippet.description}}</p>
+							<p class="font-xsmall">Created: {{snippet.timeCreated | date:'MM/dd/yyyy @ h:mma'}}</p>
+						</div>
+						<div class="col-lg-4">
+							<div class="tags-section">
 								<span class="tags font-xsmall" ng-repeat="tag in snippet.tags">
 									{{tag}},
 								</span>
 							</div>
+							<h3 class="font-xsmall" ng-show="snippet.link.length > 0"><a href="{{snippet.link}}" target="_blank">Url</a></h3>
 						</div>
-						<div class="row expand-code" ng-show="snippet.expandCode">
+						<div class="error col-lg-1" ng-click="deleteSnippet(snippet, $event, $index)"> Delete </div>
+					</div>
+					<section class="show-hide-code" ng-show="snippet.expandCode">
+						<div class="row expand-code">
 							<div class="editor" id="editor_{{snippet._id}}">	
 							</div>
 						</div>
-					</li>
-				</ul>
-			</section>
+						<div class="pull-right">
+							<i class="fa fa-floppy-o cursor expand" ng-click="saveSnippet(snippet)"></i>
+						</div>
+						<div class="center-block">
+							<i class="cursor expand fa fa-long-arrow-up fa-1x" ng-click="hideSnippet(snippet, $event)"></i>
+						</div>
+						<div class="center-block" ng-show="snippet.editSave">
+							<i class="text-warning"> {{homeCtrlVar.message}}</i>
+						</div>
+
+					</section>
+				</li>
+			</ul>
+		</section>
 
 
 
-		</div>
-	</section>
+	</div>
+</section>
 
 </div>
