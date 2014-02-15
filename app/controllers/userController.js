@@ -70,7 +70,7 @@ var gravatar = function(user) {
 exports.register = function(req, res) {
 	verifyEmailRegistration(req.body.username, req.body.email, res, req);
 }
-
+/*change to User.findOne*/
 var verifyUser = function(user, res) {
 	var username = user.username;
 	User.find({

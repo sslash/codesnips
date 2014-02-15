@@ -5,15 +5,15 @@ var mongoose = require('mongoose'),
 
 
 /*
-* Searching for snippets
-*
-* TODO: add support for searching for tags,
-* desription, codesnip, user 
-*
-*/
+ * Searching for snippets
+ *
+ * TODO: add support for searching for tags,
+ * desription, codesnip, user
+ *
+ */
 exports.index = function(req, res) {
   var query = {};
-  if (req.query.q){
+  if (req.query.q) {
     query.title = new RegExp(req.query.q, 'ig');
   }
 
@@ -21,8 +21,8 @@ exports.index = function(req, res) {
     .find(query)
     .populate('owner')
     .exec(function(err, snippets) {
-      if (err) { 
-        res.send(err); 
+      if (err) {
+        res.send(err);
       } else {
         return res.send(snippets);
       }
@@ -36,8 +36,8 @@ exports.byUser = function(req, res) {
     .find(query)
     .populate('owner')
     .exec(function(err, snippets) {
-      if (err) { 
-        res.send(err); 
+      if (err) {
+        res.send(err);
       } else {
         return res.send(snippets);
       }
@@ -71,6 +71,47 @@ exports.create = function(req, res) {
   });
 
 };
+
+exports.edit = function(req, res) {
+  Snippet.findById(req.body.id,
+    function(err, snippet) {
+      if (err) {
+        throw new Error(err);
+      } else {
+        if (req.body.snippet.owner._id.localeCompare(snippet.owner) ===0) {
+          snippet.code = req.body.snippet.code;
+          snippet.save();
+          res.send(snippet.toJSON());
+        } else {
+          res.send({
+            'err': "You don't own this snippet"
+          }, 401);
+        }
+      }
+
+    });
+};
+
+exports.deleteSnippet = function(req, res) {
+  Snippet.findById(req.body.snippet._id,
+    function(err, snippet) {
+      if (err) {
+        throw new Error(err);
+      } else { 
+        if (req.body.snippet.owner._id.localeCompare(snippet.owner) ===0) {
+          snippet.remove();
+          res.send(snippet.toJSON());
+        } else {
+          res.send({
+            'err': "You don't own this snippet"
+          }, 401);
+        }
+      }
+
+    });
+};
+
+
 
 var findUser = function(id, next) {
   User.findById(id,
