@@ -5000,10 +5000,14 @@ img.rounded {
 .tags {
   padding: 4px;
   border: 1px solid #0e314a;
-  margin: 0 2px;
+  margin: 1px 2px;
   border-radius: 3px;
   cursor: pointer;
   background-color: #ffbe3a;
+  float: left;
+}
+.tags.active {
+  background-color: #ffbe3a !important;
 }
 .tags:hover {
   background-color: #a94442;
@@ -5370,7 +5374,7 @@ p.exitModal {
   color: red;
 }
 #snippets {
-  padding: 20px 150px;
+  padding: 20px 10px;
   text-align: center;
 }
 #snippets .content {
@@ -5399,6 +5403,11 @@ p.exitModal {
   border: 1px solid #CC9628;
   background: #FFBE3A;
   display: inline-block;
+}
+#tags-region {
+  position: fixed;
+  width: 15%;
+  margin-top: 50px;
 }
 .tags-section {
   margin-top: 10px;

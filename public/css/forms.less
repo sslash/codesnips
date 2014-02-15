@@ -19,10 +19,15 @@
 .tags {
 	padding: 4px;
 	border: 1px solid @left-blue;
-	margin: 0 2px;
+	margin: 1px 2px;
 	border-radius: 3px;
 	cursor:pointer;
 	background-color: @orange;
+	float: left;
+
+	&.active {
+		background-color: @orange !important;
+	}
 
 	&:hover {
 		background-color: @state-danger-text;

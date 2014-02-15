@@ -21,10 +21,12 @@ angular.module('codesnipzApp')
 		CodeSnippet.filterByTag = function (snips, tagName) {
 			var filtered = [];
 			snips.forEach(function(s) {
-				s.tags.forEach(function(t) {
-					if ( t.indexOf(tagName) !== -1 ) {
+				var found = false;
+				s.tags.forEach(function(t) {					
+					if ( t.indexOf(tagName) !== -1 && !found ) {
 						filtered.push(s);
-						return true;
+						found = true;
+						return false;
 					}
 				});
 			});

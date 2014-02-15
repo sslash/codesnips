@@ -6,6 +6,7 @@ angular.module('codesnipzApp')
         $scope.snippetUser = [];
         $scope.test = [];
         $scope.tagsList = [];
+        $scope.selected = null,
         $scope.libraryBoolean = {
             showMenu: false,
             showSort: false,
@@ -44,13 +45,15 @@ angular.module('codesnipzApp')
             }
         };
 
-        $scope.tagClicked = function($event) {
+        $scope.tagClicked = function($event, tag) {
+            console.log('$event ' + tag);
+            $scope.selected = tag;
             var text = $event.currentTarget.textContent;
+
             $scope.snippetsCollection = CodeSnippet.filterByTag($scope.orgSnippetsCollection, text);
         };
 
         $scope.expandSnippet = function(snippet) {
-            console.log(snippet.expandCode);
             if ( !snippet.expandCode ) {
                 snippet.expandCode = true;
                 var editor = ace.edit('editor_' + snippet._id);
@@ -59,6 +62,10 @@ angular.module('codesnipzApp')
                 editor.getSession().setValue('');
                 editor.getSession().setValue(snippet.code);
             }
+        };
+
+        $scope.itemClass = function(item) {
+            return item === $scope.selected ? 'active' : undefined;
         };
 
         $scope.searchFieldKeyUp = function($event) {
