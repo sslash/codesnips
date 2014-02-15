@@ -48,7 +48,6 @@ angular.module('codesnipzApp')
         $scope.tagClicked = function($event, tag) {
             $scope.selected = tag;
             var text = $event.currentTarget.textContent;
-
             $scope.snippetsCollection = CodeSnippet.filterByTag($scope.orgSnippetsCollection, text);
         };
 
