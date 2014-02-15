@@ -46,7 +46,6 @@ angular.module('codesnipzApp')
         };
 
         $scope.tagClicked = function($event, tag) {
-            console.log('$event ' + tag);
             $scope.selected = tag;
             var text = $event.currentTarget.textContent;
 
@@ -64,7 +63,7 @@ angular.module('codesnipzApp')
             }
         };
 
-        $scope.itemClass = function(item) {
+        $scope.activeClass = function(item) {
             return item === $scope.selected ? 'active' : undefined;
         };
 
